@@ -1,10 +1,10 @@
-package com.ejbs.store;
+package com.ejbs.escuela;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class StoreApplicationTests {
+class escuelaApplicationTests {
 
 	@Test
 	void contextLoads() {
