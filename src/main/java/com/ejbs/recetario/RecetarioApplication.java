@@ -1,4 +1,4 @@
-package com.ejbs.escuela;
+package com.ejbs.recetario;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,14 +8,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import lombok.Getter;
 
 @SpringBootApplication
-public class EscuelaApplication {
+public class RecetarioApplication {
 
     @Getter
     private static final Logger LOGGER = LogManager.getLogger();
 
     public static void main(String[] args) {
-        /* ApplicationContext context = SpringApplication.run(escuelaApplication.class, args); */
-        SpringApplication.run(EscuelaApplication.class, args);
+        /* ApplicationContext context = SpringApplication.run(recetarioApplication.class, args); */
+        SpringApplication.run(RecetarioApplication.class, args);
 
     }
 

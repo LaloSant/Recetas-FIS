@@ -9,13 +9,10 @@
 </head>
 
 <body>
-    <nav class="navbar bg-dark navbar-dark">
+    <nav class="nav bg-dark navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand">CONTROL DE ESTUDIANTES</a>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+            <a class="nav-link active" aria-current="page" th:href="@{/estudiantes}">Control de estudiantes</a>
         </div>
     </nav>
 
@@ -23,6 +20,12 @@
         <div class="row">
             <h1>Lista de estudiantes</h1>
         </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <a th:href="@{/estudiantes/nuevo}" class="btn btn-lg btn-success">Añadir estudiante</a>
+            </div>
+        </div>
+        <br>
         <table class="table table-stripped table-bordered">
             <thead class="table-dark">
                 <tr>
@@ -32,6 +35,7 @@
                     <th>Ap Mat</th>
                     <th>Correo</th>
                     <th>Creditos</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,6 +46,11 @@
                     <td th:text="${estudiante.apMat}">Ap Mat</td>
                     <td th:text="${estudiante.correo}">Correo</td>
                     <td th:text="${estudiante.creditos}">Creditos</td>
+                    <td>
+                        <a th:href="@{/estudiantes/editar/{numControl}(numControl=${estudiante.numControl})}"
+                            class="btn btn-info">Editar</a>
+                        <a th:href="@{/estudiantes/{numControl}(numControl=${estudiante.numControl})}" class="btn btn-danger">Eliminar</a>
+                    </td>
                 </tr>
             </tbody>
         </table>

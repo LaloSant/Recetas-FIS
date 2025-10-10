@@ -1,9 +1,9 @@
-package com.ejbs.escuela.repository;
+package com.ejbs.recetario.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ejbs.escuela.model.entity.Estudiante;
+import com.ejbs.recetario.model.entity.Estudiante;
 
 @Repository
 //<Entidad, id>

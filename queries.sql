@@ -1,42 +1,31 @@
-CREATE TABLE ESTUDIANTE (
-    numControl VARCHAR(9) PRIMARY KEY,
-    nombre VARCHAR(50) CONSTRAINT est_nombre_nn NOT NULL,
-    apPat VARCHAR(50) CONSTRAINT est_apPat_nn NOT NULL,
-    apMat VARCHAR(50) CONSTRAINT est_apMat_nn NOT NULL,
-    correo VARCHAR(50) CONSTRAINT est_correo_nn NOT NULL,
-    creditos INT CONSTRAINT est_creditos_ck CHECK(creditos >= 0)
+CREATE TABLE USUARIOS (
+    ID_USUARIO  NUMBER		 	CONSTRAINT USRS_ID_PK		PRIMARY KEY,
+    NOMBRE      VARCHAR2(50) 	CONSTRAINT USRS_NOMBRE_NN 	NOT NULL,
+    CONTRASENIA VARCHAR2(50)	CONSTRAINT USRS_CONT_NN 	NOT NULL,
+    AP_PAT      VARCHAR2(50) 	CONSTRAINT USRS_APPAT_NN 	NOT NULL,
+    CORREO 		VARCHAR2(50) 	CONSTRAINT USRS_CORREO_NN 	NOT NULL
 );
 
-CREATE TABLE MATERIA (
-    idMateria INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre VARCHAR(50) CONSTRAINT mat_nom_nn NOT NULL
+CREATE TABLE RECETAS (
+    ID_RECETA		NUMBER			CONSTRAINT RECETAS_ID_PK	PRIMARY KEY,
+    ID_USUARIO		NUMBER		    CONSTRAINT RECETAS_IDUSR_NN	NOT NULL,
+    NOMBRE			VARCHAR2(40)	CONSTRAINT RECETAS_NOM_NN	NOT NULL,
+    PROCEDIMIENTO	VARCHAR2(200)	CONSTRAINT RECETAS_PROC_NN	NOT NULL,
+    INGREDIENTES	VARCHAR2(200)	CONSTRAINT RECETAS_ING_NN	NOT NULL,
+    CONSTRAINT RECETAS_IDUSR_FK FOREIGN KEY (ID_USUARIO) REFERENCES USUARIOS(ID_USUARIO)
 );
 
-CREATE TABLE REGISTRO (
-    idRegistro    INTEGER PRIMARY KEY AUTOINCREMENT,
-    idMateria     INTEGER CONSTRAINT reg_idMat_fk REFERENCES MATERIA(idMateria),
-    idEstudiante  VARCHAR(9) CONSTRAINT reg_idEst_fk REFERENCES ESTUDIANTE(numControl)
-);
+DROP TABLE USUARIOS;
+DROP TABLE RECETAS;
 
-DROP TABLE MATERIA;
+INSERT INTO USUARIOS VALUES ( 1,'Juan','pass123','Perez','juan.perez@email.com' );
+INSERT INTO USUARIOS VALUES ( 2,'Maria','maria456','Lopez','maria.lopez@email.com' );
+INSERT INTO USUARIOS VALUES ( 3,'Carlos','car789','Gomez','carlos.gomez@email.com' );
+INSERT INTO USUARIOS VALUES ( 4,'Ana','ana321','Martinez','ana.martinez@email.com' );
+INSERT INTO USUARIOS VALUES ( 5,'Luis','luis654','Ramirez','luis.ramirez@email.com' );
 
-INSERT INTO ESTUDIANTE (numControl, nombre, apPat, apMat, correo, creditos) VALUES
-('23281287', 'Ana', 'Gomez', 'Lopez', 'ana.gomez@email.com', 30),
-('23281288', 'Luis', 'Martinez', 'Perez', 'luis.martinez@email.com', 45),
-('23281289', 'Maria', 'Hernandez', 'Sanchez', 'maria.hernandez@email.com', 60),
-('23281290', 'Carlos', 'Diaz', 'Ramirez', 'carlos.diaz@email.com', 20),
-('23281291', 'Sofia', 'Torres', 'Vega', 'sofia.torres@email.com', 50);
-
-INSERT INTO MATERIA (nombre) VALUES
-('Matematicas'),
-('Fisica'),
-('Quimica'),
-('Historia'),
-('Informatica');
-
-INSERT INTO REGISTRO (idMateria, idEstudiante) VALUES
-(1, '23281287'),
-(2, '23281288'),
-(3, '23281288'),
-(4, '23281287'),
-(5, '23281290');
+INSERT INTO RECETAS VALUES ( 1,1,'Tarta de Manzana','Mezclar ingredientes y hornear 40 minutos.','Manzana, Harina, Azúcar, Huevo');
+INSERT INTO RECETAS VALUES ( 2,2,'Ensalada César','Cortar ingredientes y mezclar con aderezo.','Lechuga, Pollo, Queso, Aderezo César');
+INSERT INTO RECETAS VALUES ( 3,3,'Sopa de Verduras','Cocinar verduras en agua por 30 minutos.','Zanahoria, Papa, Apio, Agua');
+INSERT INTO RECETAS VALUES ( 4,4,'Pizza Casera','Preparar masa, agregar ingredientes y hornear.','Harina, Tomate, Queso, Jamón');
+INSERT INTO RECETAS VALUES ( 5,5,'Arroz con Leche','Cocinar arroz en leche con azúcar y canela.','Arroz, Leche, Azúcar, Canela');

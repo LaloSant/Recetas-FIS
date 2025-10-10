@@ -1,4 +1,4 @@
-package com.ejbs.escuela.model.entity;
+package com.ejbs.recetario.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
