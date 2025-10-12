@@ -16,7 +16,8 @@ public class RecetarioApplication {
     public static void main(String[] args) {
         /* ApplicationContext context = SpringApplication.run(recetarioApplication.class, args); */
         SpringApplication.run(RecetarioApplication.class, args);
-
     }
+
+
 
 }

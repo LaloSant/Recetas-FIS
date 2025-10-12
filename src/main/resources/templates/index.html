@@ -7,7 +7,25 @@
 </head>
 
 <body>
-    <h1>Titulo del index</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+                <h1 class="text-center">Crear prompt</h1>
+                <div class="card-body">
+                    <form th:action="@{/index/{prompt}(numControl=${estudiante.numControl})}" th:object="${estudiante}" method="post">
+                        <div class="form-group">
+                            <label>Pormpt: </label>
+                            <input type="text" name="Prompt" th:field="*{numControl}" class="form-control" placeholder="Ingrese prompt" required>
+                            <br>
+                        </div>
+                        <div class="box-footer">
+                            <button class="btn btn-success btn-lg">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
