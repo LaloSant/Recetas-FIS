@@ -10,12 +10,14 @@ import com.ejbs.recetario.service.UsuarioService;
 @Controller
 public class UsuarioController {
 
+    private static final String RUTA_VISTA = "/vistas/usuarios/";
+
     @Autowired
     UsuarioService servicio;
 
     @GetMapping({"/usuarios"})
     public String listarUsuarios(Model modelo) {
         modelo.addAttribute("usuarios", servicio.listarTodoUsuario());
-        return "usuarios";
+        return RUTA_VISTA + "usuarios";
     }
 }

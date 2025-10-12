@@ -14,38 +14,40 @@ import com.ejbs.recetario.service.RecetaService;
 @Controller
 public class RecetaController {
 
+    private static final String RUTA_VISTA = "/vistas/recetas/";
+
     @Autowired
     RecetaService servicio;
 
     @GetMapping({"/recetas"})
     public String listarRecetas(Model modelo) {
         modelo.addAttribute("recetas", servicio.listarTodaReceta());
-        return "recetas";
+        return RUTA_VISTA + "verRecetas";
     }
 
     @GetMapping({"/recetas/nuevo"})
     public String nuevaReceta(Model modelo) {
         Receta receta = new Receta();
         modelo.addAttribute("receta", receta);
-        return "nuevaReceta";
+        return RUTA_VISTA + "nuevaReceta";
     }
 
     @GetMapping("/recetas/editar/{idReceta}")
     public String editarReceta(Model modelo, @PathVariable Long idReceta) {
         modelo.addAttribute("receta", servicio.obtenerRecetaPorID(idReceta));
-        return "editarReceta";
+        return RUTA_VISTA + "editarReceta";
     }
 
     @GetMapping("/recetas/{idReceta}")
     public String eliminarReceta(@PathVariable Long idReceta) {
         servicio.eliminarReceta(idReceta);
-        return "redirect:/recetas";
+        return RUTA_VISTA + "redirect:/recetas";
     }
 
     @PostMapping("/recetas")
     public String guardarReceta(@ModelAttribute("receta") Receta receta) {
         servicio.guardarReceta(receta);
-        return "redirect:/recetas";
+        return RUTA_VISTA + "redirect:/recetas";
     }
 
     @PostMapping("/recetas/{numControl}")
