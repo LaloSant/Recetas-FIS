@@ -3,10 +3,10 @@ package com.ejbs.recetario.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ejbs.recetario.model.entity.Receta;
+import com.ejbs.recetario.model.entity.Rol;
 
-//<Entidad, id>
 @Repository
-public interface RecetaRepository extends JpaRepository<Receta, Long>{
-    
+//<Entidad, id>
+public interface RolRepository extends JpaRepository<Rol, Long> {
+
 }

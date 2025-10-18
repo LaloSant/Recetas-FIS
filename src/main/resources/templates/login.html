@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head th:replace="~{template :: head}"></head>
+
+<body class="bg-secondary">
+    <header th:replace="~{template :: header}"></header>
+
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+                        <div class="mb-1 mt-md-1 pb-2">
+                            <h2 class="fw-bold mb-2 text-uppercase">Iniciar sesión</h2>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Dirección de correo</label>
+                                <input type="email" class="form-control" id="email" placeholder="Correo electronico">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="password" placeholder="Contraseña">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                        </div>
+                        <div>
+                            <p class="mb-0">¿Aún no tienes cuenta? <a href="/registro" class="text-white-50 fw-bold">Registrarse</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

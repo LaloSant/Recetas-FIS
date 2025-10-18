@@ -12,7 +12,7 @@
 
 <!-- <body> -->
 <header th:fragment="header">
-    <nav class="navbar navbar-expand-md bg-body-secondary" data-bs-theme="dark">
+    <nav class="navbar navbar-dark bg-dark navbar-expand-md sticky-top" >
         <div class="container-fluid">
             <a class="navbar-brand py-2">
                 <img th:src="@{/img/SABOR.jpg}" alt="LOGO" width="50" height="50" class="d-inline-block align-text-middle">
@@ -32,8 +32,8 @@
                             Usuario
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/usuarios}">Usuarios registrados</a></li>
-                            <li><a class="dropdown-item" th:href="@{/usuarios}">Editar usuario</a></li>
+                            <li><a class="dropdown-item" th:href="@{/login}">Ingresar</a></li>
+                            <!-- <li><a class="dropdown-item" th:href="@{/registro}">Registrarse</a></li> -->
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

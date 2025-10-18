@@ -1,0 +1,42 @@
+package com.ejbs.recetario.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.ejbs.recetario.model.entity.Usuario;
+import com.ejbs.recetario.service.RolServiceImpl;
+import com.ejbs.recetario.service.UsuarioServiceImpl;
+
+
+@Controller
+public class RegistroController {
+    
+    @Autowired
+    private UsuarioServiceImpl repositorioUsuario;
+
+    @Autowired
+    private RolServiceImpl repositorioRol;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    
+    @GetMapping(value = "/registro")
+    public String registro(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        return "registro";
+    }
+
+    @PostMapping(value = "/registro")
+    public Usuario guardarUsuario(@ModelAttribute Usuario usuario) {
+        usuario.setRol(repositorioRol.obtenerRolPorID(1l));
+        usuario.setContrasenia(passwordEncoder.encode(usuario.getContrasenia()));
+        return repositorioUsuario.guardarUsuario(usuario);
+    }
+    
+}

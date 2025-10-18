@@ -3,8 +3,6 @@ package com.ejbs.recetario.model.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,11 +22,11 @@ public class Receta {
     @Column(name = "ID_RECETA", nullable = false)
     private Long idReceta;
 
-    @Getter
+/*     @Getter
     @Setter
     @ManyToOne
     @JoinColumn(name = "ID_USUARIO", nullable = false)
-    private Usuario usuario;
+    private Usuario usuario; */
 
     @Getter
     @Setter
@@ -47,7 +45,7 @@ public class Receta {
 
     @Override
     public String toString() {
-        return "Receta [idReceta=" + idReceta + ", usuario=" + usuario + ", nombre=" + nombre + ", procedimiento="
+        return "Receta [idReceta=" + idReceta + ", usuario=" + ", nombre=" + nombre + ", procedimiento="
                 + procedimiento + ", ingredientes=" + ingredientes + "]";
     }
 

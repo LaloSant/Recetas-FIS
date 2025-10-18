@@ -1,12 +1,12 @@
 package com.ejbs.recetario.model.entity;
 
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +23,8 @@ public class Usuario {
     @Getter
     @Setter
     @Id
-    @Column(name = "ID_USUARIO", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Column(name = "ID_USUARIO", nullable = false)
     private Long idUsuario;
 
     @Getter
@@ -33,22 +34,33 @@ public class Usuario {
 
     @Getter
     @Setter
-    @Column(name = "AP_PAT", nullable = false)
-    private String apPat;
-
-    @Getter
-    @Setter
     @Column(name = "CONTRASENIA", nullable = false)
     private String contrasenia;
 
     @Getter
     @Setter
-    @Column(name = "CORREO", nullable = false)
-    private String correo;
+    @Column(name = "EMAIL", nullable = false)
+    private String email;
 
     @Getter
     @Setter
-    @OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, orphanRemoval = true) //mappedBy -> nombre de variable
-    private List<Receta> recetas;
+    @ManyToOne()
+    @JoinColumn(name = "ID_ROL")
+    private Rol rol;
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Usuario{");
+        sb.append("idUsuario=").append(idUsuario);
+        sb.append(", nombre=").append(nombre);
+        sb.append(", contrasenia=").append(contrasenia);
+        sb.append(", email=").append(email);
+        sb.append(", rol=").append(rol);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    
 
 }
