@@ -1,5 +1,6 @@
 package com.ejbs.recetario.model.entity;
 
+import java.sql.Blob;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -18,22 +19,33 @@ import lombok.Setter;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "Rol")
-public class Rol {
-    
+@Table(name = "INGREDIENTES")
+public class Ingrediente {
+
     @Getter
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idRol;
+    private Long idIngrediente;
 
     @Getter
     @Setter
-    @Column(name = "NOMBRE", nullable = false)
+    @Column(name = "NOMBRE", length = 50, nullable = false)
     private String nombre;
 
     @Getter
     @Setter
-    @OneToMany(mappedBy = "idRol")
-    private List<Usuario> usuario;
+    @Column(name = "IMAGEN", nullable = true)
+    private Blob imagen;
+
+    @Getter
+    @Setter
+    @Column(name = "PRECIO_UNITARIO", nullable = true)
+    private Long precioUnitario;
+
+    @Getter
+    @Setter
+    @OneToMany(mappedBy = "idIngrediente")
+    private List<RecetaIngrediente> recetasIngredientes;
+
 }

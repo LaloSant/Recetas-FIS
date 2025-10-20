@@ -33,10 +33,11 @@ public class RegistroController {
     }
 
     @PostMapping(value = "/registro")
-    public Usuario guardarUsuario(@ModelAttribute Usuario usuario) {
-        usuario.setRol(repositorioRol.obtenerRolPorID(1l));
+    public String guardarUsuario(@ModelAttribute Usuario usuario) {
+        usuario.setIdRol((repositorioRol.obtenerRolPorID(1l)));
         usuario.setContrasenia(passwordEncoder.encode(usuario.getContrasenia()));
-        return repositorioUsuario.guardarUsuario(usuario);
+        repositorioUsuario.guardarUsuario(usuario);
+        return "login";
     }
     
 }

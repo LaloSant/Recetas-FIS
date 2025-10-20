@@ -1,13 +1,10 @@
 package com.ejbs.recetario.model.entity;
 
-import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,22 +15,17 @@ import lombok.Setter;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "Rol")
-public class Rol {
-    
+@Table(name = "PEITICION_IA")
+public class PeticionIA {
+
     @Getter
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idRol;
+    private Long idPeiticionIA;
 
     @Getter
     @Setter
-    @Column(name = "NOMBRE", nullable = false)
-    private String nombre;
-
-    @Getter
-    @Setter
-    @OneToMany(mappedBy = "idRol")
-    private List<Usuario> usuario;
+    @Column(name = "ESTATUS", nullable = false)
+    private Character estatus;
 }

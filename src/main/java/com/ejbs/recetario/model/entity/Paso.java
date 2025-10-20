@@ -1,7 +1,6 @@
 package com.ejbs.recetario.model.entity;
 
-import java.sql.Date;
-import java.util.List;
+import java.sql.Blob;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,40 +19,43 @@ import lombok.Setter;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "RECETAS")
-public class Receta {
+@Table(name = "PASOS")
+public class Paso {
 
     @Getter
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idReceta;
-
-    @Getter
-    @Setter
-    @Column(name = "NOMBRE", length = 50, nullable = false)
-    private String nombre;
-
-
-    @Getter
-    @Setter
-    @Column(name = "FECHA_REGISTRO", nullable = true)
-    private Date fechaRegistro;
+    private Long idPaso;
 
     @Getter
     @Setter
     @ManyToOne
-    @JoinColumn(name = "ID_USUARIO")
-    private Usuario idUsuario;
+    @JoinColumn(name = "ID_RECETA")
+    private Receta idReceta;
 
     @Getter
     @Setter
-    @OneToMany(mappedBy = "idReceta")
-    private List<RecetaIngrediente> recetasIngredientes;
+    @Column(name = "INDICE_PASO", nullable = false)
+    private Long indicePaso;
 
     @Getter
     @Setter
-    @OneToMany(mappedBy = "idReceta")
-    private List<Paso> pasos;
+    @Column(name = "NOTAS", nullable = false, length = 200)
+    private String notas;
 
+    @Getter
+    @Setter
+    @Column(name = "IMAGEN", nullable = true)
+    private Blob imagen;
+
+    @Getter
+    @Setter
+    @Column(name = "DESCR_IMAGEN", nullable = true, length = 50)
+    private String descrImagen;
+
+    @Getter
+    @Setter
+    @Column(name = "ID_PET_IA", nullable = true)
+    private Long idPeticionIA;
 }

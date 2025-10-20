@@ -1,5 +1,7 @@
 package com.ejbs.recetario.model.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,12 +22,10 @@ import lombok.Setter;
 @Entity
 @Table(name = "USUARIOS")
 public class Usuario {
-
     @Getter
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@Column(name = "ID_USUARIO", nullable = false)
     private Long idUsuario;
 
     @Getter
@@ -44,9 +45,14 @@ public class Usuario {
 
     @Getter
     @Setter
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "ID_ROL")
-    private Rol rol;
+    private Rol idRol;
+
+    @Getter
+    @Setter
+    @OneToMany(mappedBy = "idUsuario")
+    private List<Receta> recetas;
 
     @Override
     public String toString() {
@@ -56,7 +62,7 @@ public class Usuario {
         sb.append(", nombre=").append(nombre);
         sb.append(", contrasenia=").append(contrasenia);
         sb.append(", email=").append(email);
-        sb.append(", rol=").append(rol);
+        sb.append(", rol=").append(idRol);
         sb.append('}');
         return sb.toString();
     }
