@@ -1,5 +1,7 @@
 package com.ejbs.recetario.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.ejbs.recetario.model.entity.Receta;
-import com.ejbs.recetario.service.RecetaService;
+import com.ejbs.recetario.service.RecetaServiceImpl;
 
 @Controller
 public class RecetaController {
@@ -17,11 +19,12 @@ public class RecetaController {
     private static final String RUTA_VISTA = "/vistas/recetas/";
 
     @Autowired
-    RecetaService servicio;
+    RecetaServiceImpl servicio;
 
     @GetMapping({"/recetas"})
     public String listarRecetas(Model modelo) {
-        modelo.addAttribute("recetas", servicio.listarTodaReceta());
+		List<Receta> recetas = servicio.listarTodaReceta();
+        modelo.addAttribute("recetas", recetas);
         return RUTA_VISTA + "verRecetas";
     }
 

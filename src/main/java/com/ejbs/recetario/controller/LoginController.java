@@ -13,20 +13,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.ejbs.recetario.model.entity.Usuario;
 import com.ejbs.recetario.security.SecurityConfig;
-import com.ejbs.recetario.service.UsuarioServiceImpl;
+import com.ejbs.recetario.service.UsuarioService;
 
 @Controller
 public class LoginController {
 
     @Autowired
-    UsuarioServiceImpl repositorioUsuario;
+    UsuarioService repositorioUsuario;
 
     @Autowired
     PasswordEncoder passwordEncoder;
 
     private static boolean reintento = false;
 
-    @GetMapping("/login")
+    @GetMapping({"/login", "/"})
     public String login(Model model) {
         model.addAttribute("usuario", new Usuario());
         model.addAttribute("reintento", reintento);
