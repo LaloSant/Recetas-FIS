@@ -26,7 +26,7 @@ public class LoginController {
 
     private static boolean reintento = false;
 
-    @GetMapping({"/login", "/"})
+    @GetMapping({"/login"})
     public String login(Model model) {
         model.addAttribute("usuario", new Usuario());
         model.addAttribute("reintento", reintento);

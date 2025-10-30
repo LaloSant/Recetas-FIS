@@ -21,7 +21,7 @@ public class RecetaController {
     @Autowired
     RecetaServiceImpl servicio;
 
-    @GetMapping({"/recetas"})
+    @GetMapping({"/recetas", "/"})
     public String listarRecetas(Model modelo) {
 		List<Receta> recetas = servicio.listarTodaReceta();
         modelo.addAttribute("recetas", recetas);

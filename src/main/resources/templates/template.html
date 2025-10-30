@@ -51,7 +51,7 @@
 </header>
 <!-- </body> -->
 
-<div th:fragment="receta-card (idReceta, nombre, costo)" class="card" style="width: 18rem;">
+<div th:fragment="receta-card (idReceta, nombre, costo)" class="card position-relative m-4" style="width: 300px;">
 	<img th:src="@{/recetas/imagen/{id}(id=${idReceta})}" 
 	class="card-img-top" alt="Imagen no encontrada..." style="max-width: 300px; max-height: 300px;">
 	<div class="card-body">
