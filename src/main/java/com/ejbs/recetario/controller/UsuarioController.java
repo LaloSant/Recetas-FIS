@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.ejbs.recetario.service.UsuarioService;
+import com.ejbs.recetario.service.Usuario.UsuarioService;
 
 @Controller
 public class UsuarioController {

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ejbs.recetario.service.RecetaServiceImpl;
+import com.ejbs.recetario.service.Receta.RecetaServiceImpl;
 
 @Controller
 public class ImagenController {
@@ -22,7 +22,7 @@ public class ImagenController {
     @GetMapping("/recetas/imagen/{id}")
     @ResponseBody
     public ResponseEntity<byte[]> obtenerImagen(@PathVariable("id") Long recetaId) {
-        Blob img = recetaService.obtenerRecetaPorID(recetaId).getImagen();
+        Blob img = recetaService.obtenerRecetaPorID(recetaId).get().getImagen();
         byte[] bytes = null;
         try {
             bytes = img.getBytes(1, (int) img.length());

@@ -17,39 +17,39 @@ import lombok.Setter;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "RECETA_INGRED")
-public class RecetaIngrediente {
+@Table(name = "DETALLES")
+public class Detalle {
 
     @Getter
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idRecetaIngrediente;
+    private Long idDetalle;
 
     @Getter
     @Setter
     @ManyToOne
     @JoinColumn(name = "ID_RECETA")
-    private Receta idReceta;
+    private Receta receta;
 
     @Getter
     @Setter
     @ManyToOne
     @JoinColumn(name = "ID_INGREDIENTE")
-    private Ingrediente idIngrediente;
+    private Ingrediente ingrediente;
 
     @Getter
     @Setter
-    @Column(name = "CANTIDAD", nullable = true)
-    private Long cantidad;
+    @Column(name = "CANTIDAD", nullable = false)
+    private Double cantidad;
 
     @Getter
     @Setter
-    @Column(name = "NOTAS", length = 200, nullable = true)
+    @Column(name = "NOTAS", length = 200, nullable = false)
     private String notas;
 
     @Getter
     @Setter
-    @Column(name = "COSTO", nullable = true)
-    private Long costo;
+    @Column(name = "COSTO", nullable = false)
+    private Double costo;
 }

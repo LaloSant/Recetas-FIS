@@ -1,5 +1,7 @@
 package com.ejbs.recetario.model.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +22,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "USUARIOS")
 public class Usuario {
+
     @Getter
     @Setter
     @Id
@@ -32,25 +36,29 @@ public class Usuario {
 
     @Getter
     @Setter
-    @Column(name = "CONTRASENIA", nullable = false)
-    private String contrasenia;
-
-    @Getter
-    @Setter
     @Column(name = "EMAIL", nullable = false)
     private String email;
 
     @Getter
     @Setter
+    @Column(name = "CONTRASENIA", nullable = false)
+    private String contrasenia;
+
+    @Getter
+    @Setter
     @ManyToOne
     @JoinColumn(name = "ID_ROL")
-    private Rol idRol;
+    private Rol rol;
+	
+	@Getter
+	@Setter
+	@OneToMany(mappedBy = "usuario")
+	private List<Receta> recetas;
 
-/*     @Getter
+    /*     @Getter
     @Setter
     @OneToMany(mappedBy = "idUsuario")
     private List<Receta> recetas; */
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -59,11 +67,9 @@ public class Usuario {
         sb.append(", nombre=").append(nombre);
         sb.append(", contrasenia=").append(contrasenia);
         sb.append(", email=").append(email);
-        sb.append(", rol=").append(idRol);
+        sb.append(", rol=").append(rol);
         sb.append('}');
         return sb.toString();
     }
-
-    
 
 }

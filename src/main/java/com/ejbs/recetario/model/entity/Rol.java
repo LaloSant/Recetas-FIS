@@ -4,28 +4,27 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
 @AllArgsConstructor
 
 @Entity
-@Table(name = "Rol")
+@Table(name = "ROL")
 public class Rol {
-    
+
+    public Rol() {
+        this.idRol = "USER";
+    }
+
     @Getter
     @Setter
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idRol;
+    private String idRol;
 
     @Getter
     @Setter
@@ -34,6 +33,24 @@ public class Rol {
 
     @Getter
     @Setter
-    @OneToMany(mappedBy = "idRol")
+    @Column(name = "DESCRIPCION", nullable = false)
+    private String descripcion;
+
+    @Getter
+    @Setter
+    @OneToMany(mappedBy = "rol")
     private List<Usuario> usuario;
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Rol{");
+        sb.append("idRol=").append(idRol);
+        sb.append(", nombre=").append(nombre);
+        sb.append(", descripcion=").append(descripcion);
+        sb.append(", usuario=").append(usuario);
+        sb.append('}');
+        return sb.toString();
+    }
+
 }

@@ -3,20 +3,40 @@
 
 <head th:replace="~{template :: head}"></head>
 
-<body>
+<body class="bg-secondary">
 	<header th:replace="~{template :: header}"></header>
+	<div class="d-flex justify-content-end m-4">
+		<div class="dropdown">
+			<button th:text=" 'Filtro: '+ ${textoFiltro}" class="btn btn-lg btn-dark dropdown-toggle sticky-top" type="button" data-bs-toggle="dropdown"
+				aria-expanded="false">
+				Filtrar por
+			</button>
+			<ul class="dropdown-menu">
+				<li><a class="dropdown-item" th:href="@{/recetas(ordenarPor='total')}">Visitas totales</a></li>
+				<li><a class="dropdown-item" th:href="@{/recetas(ordenarPor='semana')}">Visitas semanales</a></li>
+			</ul>
+		</div>
+	</div>
 
-	<div class="container-fluid">
-		<div class="container text-center">
-			<div class="row p-2" th:object="${receta}">
-				<div th:each="receta : ${recetas}" class="col">
-					<div th:replace="~{template :: receta-card(${receta.idReceta}, ${receta.nombre}, 50)}"></div>
-				</div>
-				<!-- <div class="col" th:insert="~{template :: receta-card(Chilaquiles, 50)}"></div> 
+	<div class="container-fluid my-4">
+		<div class="row px-0 mx-0" th:object="${receta}">
+			<div th:each="receta : ${recetas}" class="col">
+				<a th:if="${porSemana == true}">
+					<div
+						th:replace="~{template :: receta-card(${receta.idReceta}, ${receta.nombre}, ${receta.visitasSemanales}, ${receta.usuario.nombre}, 'visitas semanales')}">
+					</div>
+				</a>
+				<a th:if="${porTotal == true}">
+					<div
+						th:replace="~{template :: receta-card(${receta.idReceta}, ${receta.nombre}, ${receta.visitasTotales}, ${receta.usuario.nombre}, 'visitas totales')}">
+					</div>
+				</a>
+
+			</div>
+			<!-- <div class="col" th:insert="~{template :: receta-card(Chilaquiles, 50)}"></div> 
 				<div class="col" th:insert="~{template :: receta-card(Pambazos, 100)}"></div>
 				<div class="col" th:insert="~{template :: receta-card(Huaraches, 25)}"></div>
 				<div class="col" th:insert="~{template :: receta-card(Tostadas, 15)}"></div> -->
-			</div>
 		</div>
 	</div>
 

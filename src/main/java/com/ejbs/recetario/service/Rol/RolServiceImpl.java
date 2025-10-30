@@ -1,4 +1,6 @@
-package com.ejbs.recetario.service;
+package com.ejbs.recetario.service.Rol;
+
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +15,8 @@ public class RolServiceImpl implements RolService{
     RolRepository rolRepository;
 
     @Override
-    public Rol obtenerRolPorID(Long idRol) {
-        return rolRepository.findById(idRol).get();
+    public Optional<Rol> obtenerRolPorID(String idRol) {
+        return rolRepository.findById(idRol);
     }
     
 }

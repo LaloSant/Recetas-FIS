@@ -32,7 +32,7 @@ public class Paso {
     @Setter
     @ManyToOne
     @JoinColumn(name = "ID_RECETA")
-    private Receta idReceta;
+    private Receta receta;
 
     @Getter
     @Setter
@@ -51,11 +51,7 @@ public class Paso {
 
     @Getter
     @Setter
-    @Column(name = "DESCR_IMAGEN", nullable = true, length = 50)
-    private String descrImagen;
-
-    @Getter
-    @Setter
-    @Column(name = "ID_PET_IA", nullable = true)
-    private Long idPeticionIA;
+	@ManyToOne
+	@JoinColumn(name = "ID_PET_IA")
+    private PeticionIA peticionIA;
 }

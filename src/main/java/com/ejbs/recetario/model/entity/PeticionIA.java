@@ -1,10 +1,13 @@
 package com.ejbs.recetario.model.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,6 +29,16 @@ public class PeticionIA {
 
     @Getter
     @Setter
-    @Column(name = "ESTATUS", nullable = false)
-    private Character estatus;
+    @Column(name = "ESTATUS", nullable = false, length = 3)
+    private String estatus;
+
+    @Getter
+    @Setter
+    @Column(name = "DESCRIPCION", nullable = false, length = 50)
+    private String descripcion;
+
+	@Getter
+	@Setter
+	@OneToMany(mappedBy="peticionIA")
+	private List<Paso> pasos;
 }

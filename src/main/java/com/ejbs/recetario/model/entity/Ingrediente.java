@@ -1,14 +1,12 @@
 package com.ejbs.recetario.model.entity;
 
 import java.sql.Blob;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,17 +33,17 @@ public class Ingrediente {
 
     @Getter
     @Setter
-    @Column(name = "IMAGEN", nullable = true)
+    @Column(name = "PRECIO_UNITARIO")
+    private Double precioUnitario;
+    
+	@Getter
+    @Setter
+    @Column(name = "IMAGEN")
     private Blob imagen;
 
-    @Getter
-    @Setter
-    @Column(name = "PRECIO_UNITARIO", nullable = true)
-    private Long precioUnitario;
-
-    @Getter
+    /* @Getter
     @Setter
     @OneToMany(mappedBy = "idIngrediente")
-    private List<RecetaIngrediente> recetasIngredientes;
+    private List<RecetaIngrediente> recetasIngredientes; */
 
 }

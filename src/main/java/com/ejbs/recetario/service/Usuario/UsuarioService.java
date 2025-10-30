@@ -1,4 +1,4 @@
-package com.ejbs.recetario.service;
+package com.ejbs.recetario.service.Usuario;
 
 import java.util.List;
 import java.util.Optional;

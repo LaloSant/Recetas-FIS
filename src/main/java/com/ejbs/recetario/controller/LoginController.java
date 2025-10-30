@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.ejbs.recetario.model.entity.Usuario;
 import com.ejbs.recetario.security.SecurityConfig;
-import com.ejbs.recetario.service.UsuarioService;
+import com.ejbs.recetario.service.Usuario.UsuarioService;
 
 @Controller
 public class LoginController {
