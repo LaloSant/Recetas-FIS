@@ -29,7 +29,7 @@
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle border-bottom" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Usuario
+							Usuario: nombre del w
 						</a>
 						<ul class="dropdown-menu fs-5 bg-body-secondary">
 							<li><a class="dropdown-item" th:href="@{/login}">Ingresar</a></li>
@@ -60,8 +60,8 @@
 		<!-- <p class="card-text">Aqui iria la descripcion general</p> -->
 	</div>
 	<ul class="list-group list-group-flush">
-		<li class="list-group-item" th:text="${visitas} + ' ' + ${textoFiltro}">Costo aproximado</li>
-		<li class="list-group-item" th:text="'Usuario: ' + ${usuario}">Porciones</li>
+		<li class="list-group-item" th:text="${visitas} + ' ' + ${textoFiltro}"></li>
+		<li class="list-group-item" th:text="'Subido por: ' + ${usuario}"></li>
 	</ul>
 	<div class="card-body m-3">
 		<div class="container text-center p-0">

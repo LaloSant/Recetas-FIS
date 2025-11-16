@@ -16,28 +16,28 @@ import com.ejbs.recetario.service.Receta.RecetaServiceImpl;
 @Controller
 public class ImagenController {
 
-    @Autowired
-    RecetaServiceImpl recetaService;
+	@Autowired
+	RecetaServiceImpl recetaService;
 
-    @GetMapping("/recetas/imagen/{id}")
-    @ResponseBody
-    public ResponseEntity<byte[]> obtenerImagen(@PathVariable("id") Long recetaId) {
-        Blob img = recetaService.obtenerRecetaPorID(recetaId).get().getImagen();
-        byte[] bytes = null;
-        try {
-            bytes = img.getBytes(1, (int) img.length());
-        } catch (SQLException ex) {
+	@GetMapping("/recetas/imagen/{id}")
+	@ResponseBody
+	public ResponseEntity<byte[]> obtenerImagen(@PathVariable("id") Long recetaId) {
+		Blob img = recetaService.obtenerRecetaPorID(recetaId).get().getImagen();
+		byte[] bytes = null;
+		try {
+			bytes = img.getBytes(1, (int) img.length());
+		} catch (SQLException ex) {
 
-        }
-        String mimeType = "image/jpeg";
-        if (bytes == null || bytes.length == 0) {
-            return ResponseEntity.notFound().build();
-        }
+		}
+		String mimeType = "image/jpeg";
+		if (bytes == null || bytes.length == 0) {
+			return ResponseEntity.notFound().build();
+		}
 
-        return ResponseEntity
-                .ok()
-                .contentType(MediaType.parseMediaType(mimeType))
-                .body(bytes);
-    }
+		return ResponseEntity
+				.ok()
+				.contentType(MediaType.parseMediaType(mimeType))
+				.body(bytes);
+	}
 
 }

@@ -7,9 +7,9 @@
 	<header th:replace="~{template :: header}"></header>
 	<div class="d-flex justify-content-end m-4">
 		<div class="dropdown">
-			<button th:text=" 'Filtro: '+ ${textoFiltro}" class="btn btn-lg btn-dark dropdown-toggle sticky-top" type="button" data-bs-toggle="dropdown"
-				aria-expanded="false">
-				Filtrar por
+			<button th:text=" 'Filtro: '+ ${textoFiltro}" class="btn btn-lg btn-dark dropdown-toggle sticky-top" type="button"
+				data-bs-toggle="dropdown" aria-expanded="false">
+				Ordenar por
 			</button>
 			<ul class="dropdown-menu">
 				<li><a class="dropdown-item" th:href="@{/recetas(ordenarPor='total')}">Visitas totales</a></li>
@@ -31,7 +31,6 @@
 						th:replace="~{template :: receta-card(${receta.idReceta}, ${receta.nombre}, ${receta.visitasTotales}, ${receta.usuario.nombre}, 'visitas totales')}">
 					</div>
 				</a>
-
 			</div>
 			<!-- <div class="col" th:insert="~{template :: receta-card(Chilaquiles, 50)}"></div> 
 				<div class="col" th:insert="~{template :: receta-card(Pambazos, 100)}"></div>

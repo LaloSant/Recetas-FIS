@@ -1,0 +1,17 @@
+package com.ejbs.recetario.service.Detalle;
+
+import java.util.List;
+
+import com.ejbs.recetario.model.entity.Detalle;
+
+public interface DetalleService {
+
+	public List<Detalle> listarTodoDetalle();
+
+	public List<Detalle> detallePorIdReceta(Long idReceta);
+
+	public Detalle guardarDetalle(Detalle detalle);
+
+	public Detalle actualizarDetalle(Detalle detalle);
+
+}

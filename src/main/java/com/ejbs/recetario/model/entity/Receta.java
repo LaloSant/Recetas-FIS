@@ -52,6 +52,11 @@ public class Receta {
 
 	@Getter
 	@Setter
+	@Column(name = "CALIFICACION", columnDefinition = "NUMBER CHECK (CALIFICACION >= 0 AND CALIFICACION <= 5)")
+	private Long calificacion; // Rating from 0 to 5
+
+	@Getter
+	@Setter
 	@ManyToOne
 	@JoinColumn(name = "ID_USUARIO")
 	private Usuario usuario;

@@ -33,8 +33,8 @@ public class Ingrediente {
 
     @Getter
     @Setter
-    @Column(name = "PRECIO_UNITARIO")
-    private Double precioUnitario;
+    @Column(name = "COSTO_UNITARIO")
+    private Double costoUnitario;
     
 	@Getter
     @Setter
