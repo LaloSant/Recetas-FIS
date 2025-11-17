@@ -66,14 +66,9 @@ public class Receta {
 	@OneToMany(mappedBy = "receta")
 	private List<Detalle> detalles;
 
-	/*
-	 * @Getter
-	 * 
-	 * @Setter
-	 * 
-	 * @OneToMany(mappedBy = "idReceta")
-	 * private List<Paso> pasos;
-	 */
+	@Getter
+	@Setter
+	@OneToMany(mappedBy = "receta")
+	private List<Paso> pasos;
 
-	
 }

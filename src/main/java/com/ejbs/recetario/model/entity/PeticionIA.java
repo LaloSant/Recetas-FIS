@@ -18,14 +18,15 @@ import lombok.Setter;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "PEITICION_IA")
+@Table(name = "PETICION_IA")
 public class PeticionIA {
 
     @Getter
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPeiticionIA;
+    @Column(name = "ID_PETICION_IA")
+    private Long idPeticionIA;
 
     @Getter
     @Setter
@@ -34,7 +35,7 @@ public class PeticionIA {
 
     @Getter
     @Setter
-    @Column(name = "DESCRIPCION", nullable = false, length = 50)
+    @Column(name = "DESCRCRIPCION", nullable = false, length = 50)
     private String descripcion;
 
 	@Getter

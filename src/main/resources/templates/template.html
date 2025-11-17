@@ -28,7 +28,7 @@
 						<a class="nav-link active border-bottom border-success" aria-current="page" th:href="@{/recetas}">Pagina principal</a>
 					</li>
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle border-bottom" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<a class="nav-link dropdown-toggle border-bottom text-wrap" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							Usuario: nombre del w
 						</a>
 						<ul class="dropdown-menu fs-5 bg-body-secondary">
@@ -51,7 +51,7 @@
 </header>
 <!-- </body> -->
 
-<div th:fragment="receta-card (idReceta, nombre, visitas, usuario, textoFiltro)" class="card my-1 mx-auto border-4 border-dark-subtle"
+<div th:fragment="receta-card (idReceta, nombre, visitas, usuario, textoFiltro)" class="card my-1 mx-auto border-4 border-dark"
 	style="width: 300px;">
 	<img th:src="@{/recetas/imagen/{id}(id=${idReceta})}" class="card-img-top" alt="Imagen de receta"
 		style="max-width: 300px; max-height: 250px;">

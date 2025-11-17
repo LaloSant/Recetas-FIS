@@ -49,7 +49,6 @@ public class RecetaController {
 			return "redirect:/recetas";
 		}
 		modelo.addAttribute("receta", recetaOpt.get());
-		modelo.addAttribute("detalles", recetaOpt.get().getDetalles());
 		return RUTA_VISTA + "vistaReceta";
 	}
 
