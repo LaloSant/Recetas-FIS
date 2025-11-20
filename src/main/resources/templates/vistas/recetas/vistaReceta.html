@@ -1,36 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head th:replace="~{template :: head}"></head>
 
 <body class="bg-secondary">
-	<header th:replace="~{template :: header (nomUser=null)}"></header>
+	<header th:replace="~{template :: header (${nomUser})}"></header>
 	<div class="m-2 p-4 border border-dark rounded border-3 bg-light">
 		<div class="container mb-3 bg-success-subtle rounded border border-success border-2 rounded">
 			<div class="row align-items-center">
 				<div class="col-lg-4 col-md-12">
 					<div class="row py-2">
-						<h1 class="text-body" th:text="${receta.nombre}"></h1>
+						<h2 class="text-body" th:text="${receta.nombre}"></h2>
 					</div>
 					<div class="row border-top border-dark border-1 py-2">
-						<h2 class="text-body-secondary" th:text="'Receta creada por: ' + ${receta.usuario.nombre}"></h2>
+						<h4 class="text-body-secondary" th:text="'Receta creada por: ' + ${receta.usuario.nombre}"></h4>
 					</div>
 					<div class="row border-top border-dark border-1 py-2">
-						<h3 class="text-body-tertiary">
+						<h4 class="text-body-tertiary">
 							Calificación:
 							<span th:each="i : ${#numbers.sequence(1, 5)}">
 								<span th:if="${i <= receta.calificacion}" style="color: orange;">★</span>
 								<span th:unless="${i <= receta.calificacion}" style="color: orange;">☆</span>
 							</span>
-						</h3>
+						</h4>
 					</div>
 					<div class="row border-top border-dark border-1 py-2">
-						<h4 class="text-body-tertiary" th:text="'Visitas totales: ' + ${receta.visitasTotales}">
-							</h2>
+						<h5 class="text-body-tertiary" th:text="'Visitas totales: ' + ${receta.visitasTotales}"></h5>
 					</div>
 					<div class="row border-top border-dark border-1 py-2">
-						<h4 class="text-body-tertiary" th:text="'Visitas semanales: ' + ${receta.visitasTotales}">
-							</h2>
+						<h5 class="text-body-tertiary" th:text="'Visitas semanales: ' + ${receta.visitasTotales}"></h5>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-12 text-center">
@@ -39,77 +37,34 @@
 				</div>
 			</div>
 		</div>
-<!-- 
-		<div class="container my-2">
-			<div class="row">
-				<div class="col border border-2">
-					<div class="text-center fs-3 fw-bold">
-						INGREDIENTES
-					</div>
-					<ul class="list-group">
-						<li class="list-group-item my-1 " th:each="detalle : ${receta.detalles}">
-							<input class="form-check-input m-1 p-2" type="checkbox" value="" th:id="${detalle.idDetalle}"
-								style="transform: scale(1.2);">
-							<label class="form-check-label stretched-link fs-5 mx-4" th:for="${detalle.idDetalle}"
-								th:text="${detalle.cantidad} + ' ' +${detalle.notas} + ' de ' + ${detalle.ingrediente.nombre}"></label>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-
-		<div class="container my-2">
-			<div class="row">
-				<div class="col border border-2">
-					<div class="text-center fs-3 fw-bold">
-						PASOS
-					</div>
-					<div class="accordion">
-						<div class="accordion-item" th:each="paso : ${receta.pasos}">
-							<h2 class="accordion-header">
-								<button class="accordion-button collapsed fs-3 text-center" type="button" data-bs-toggle="collapse"
-									th:data-bs-target="'#collapse' + ${paso.idPaso}" aria-expanded="false"
-									th:aria-controls="'collapse' + ${paso.idPaso}" th:text="'Paso ' + ${paso.indicePaso}">
-								</button>
-							</h2>
-							<div th:id="'collapse' + ${paso.idPaso}" class="accordion-collapse collapse fs-5">
-								<div class="accordion-body" th:text="${paso.notas}">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> -->
-
 		<div class="container">
 			<div class="row g-1">
-				<div class="col-lg-6 border border-2 rounded">
-					<div class="text-center fs-3 fw-bold">
+				<div class="col-lg-4 border border-2 rounded">
+					<div class="text-center fs-4 fw-bold">
 						INGREDIENTES
 					</div>
 					<ul class="list-group">
 						<li class="list-group-item my-1 " th:each="detalle : ${receta.detalles}">
 							<input class="form-check-input m-1 p-2" type="checkbox" value="" th:id="${detalle.idDetalle}"
 								style="transform: scale(1.2);">
-							<label class="form-check-label stretched-link fs-5 mx-4" th:for="${detalle.idDetalle}"
+							<label class="form-check-label stretched-link fs-6 mx-4" th:for="${detalle.idDetalle}"
 								th:text="${detalle.cantidad} + ' ' +${detalle.notas} + ' de ' + ${detalle.ingrediente.nombre}"></label>
 						</li>
 					</ul>
 				</div>
-				<div class="col-lg-6 border border-2 rounded">
-					<div class="text-center fs-3 fw-bold">
+				<div class="col-lg-8 border border-2 rounded">
+					<div class="text-center fs-4 fw-bold">
 						PASOS
 					</div>
 					<div class="accordion">
 						<div class="accordion-item" th:each="paso : ${receta.pasos}">
-							<h2 class="accordion-header">
-								<button class="accordion-button collapsed fs-4 text-center" type="button" data-bs-toggle="collapse"
+							<h2 class="accordion-header text-center">
+								<button class="accordion-button collapsed fs-6 text-center" type="button" data-bs-toggle="collapse"
 									th:data-bs-target="'#collapse' + ${paso.idPaso}" aria-expanded="false"
 									th:aria-controls="'collapse' + ${paso.idPaso}" th:text="'Paso ' + ${paso.indicePaso}">
 								</button>
 							</h2>
-							<div th:id="'collapse' + ${paso.idPaso}" class="accordion-collapse collapse fs-5">
+							<div th:id="'collapse' + ${paso.idPaso}" class="accordion-collapse collapse fs-6">
 								<div class="accordion-body" th:text="${paso.notas}">
 								</div>
 							</div>
@@ -118,7 +73,9 @@
 				</div>
 			</div>
 		</div>
+	</div>
 
+	<footer th:replace="~{template :: footer}"></footer>
 </body>
 
 </html>

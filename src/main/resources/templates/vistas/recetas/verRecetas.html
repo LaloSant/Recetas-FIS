@@ -1,24 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
 
 <head th:replace="~{template :: head}"></head>
 
 <body class="bg-light">
 	<header th:replace="~{template :: header (${nomUser})}"></header>
-	<div class="d-flex justify-content-end m-4">
-		<div class="dropdown">
-			<button th:text=" 'Ordenar por: ' + ${textoFiltro}" class="btn btn-dark dropdown-toggle sticky-top" type="button"
-				data-bs-toggle="dropdown" aria-expanded="false">
-				Ordenar por
-			</button>
-			<ul class="dropdown-menu">
-				<li><a class="dropdown-item" th:href="@{/recetas(ordenarPor='total')}">Visitas totales</a></li>
-				<li><a class="dropdown-item" th:href="@{/recetas(ordenarPor='semana')}">Visitas semanales</a></li>
-			</ul>
+	<div class="container py-2">
+		<div class="row align-items-center">
+			<div class="col">
+				<h2>BIENVENIDO</h2>
+			</div>
+			<div class="col d-flex justify-content-end m-2">
+				<div class="dropdown">
+					<button th:text=" 'Ordenar por: ' + ${textoFiltro}" class="btn btn-dark dropdown-toggle sticky-top" type="button"
+						data-bs-toggle="dropdown" aria-expanded="false">
+						Ordenar por
+					</button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" th:href="@{/recetas(ordenarPor='total')}">Visitas totales</a></li>
+						<li><a class="dropdown-item" th:href="@{/recetas(ordenarPor='semana')}">Visitas semanales</a></li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 
-	<div class="container-fluid my-4">
+	<div class="container-fluid mb-4">
 		<div class="row px-0 mx-0" th:object="${receta}">
 			<div th:each="receta : ${recetas}" class="col">
 				<a th:if="${porSemana == true}">
@@ -35,7 +42,7 @@
 		</div>
 	</div>
 
-<footer th:replace="~{template :: footer}"></footer>
+	<footer th:replace="~{template :: footer}"></footer>
 </body>
 
 </html>

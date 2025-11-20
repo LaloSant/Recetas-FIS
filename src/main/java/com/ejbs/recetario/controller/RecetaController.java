@@ -56,6 +56,10 @@ public class RecetaController {
 	public String nuevaReceta(Model modelo,
 			@RequestParam(required = false, defaultValue = "1") Long idReceta) {
 		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(idReceta);
+		Usuario user = usuarioRepositorio.getUsuarioSesion();
+		if (user != null) {
+			modelo.addAttribute("nomUser", user.getNombre());
+		}
 		if (!recetaOpt.isPresent()) {
 			return "redirect:/recetas";
 		}
