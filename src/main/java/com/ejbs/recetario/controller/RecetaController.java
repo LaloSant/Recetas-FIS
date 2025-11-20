@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ejbs.recetario.model.entity.Receta;
+import com.ejbs.recetario.model.entity.Usuario;
 import com.ejbs.recetario.service.Receta.RecetaServiceImpl;
+import com.ejbs.recetario.service.Usuario.UsuarioServiceImpl;
 
 @Controller
 public class RecetaController {
@@ -23,16 +25,25 @@ public class RecetaController {
 	@Autowired
 	RecetaServiceImpl recetaRepositorio;
 
+	@Autowired
+	UsuarioServiceImpl usuarioRepositorio;
+
+
+
 	@GetMapping({ "/recetas", "/" })
 	public String listarRecetas(Model modelo,
 			@RequestParam(name = "ordenarPor", required = false, defaultValue = "semana") String ordenarPor) {
+		
+		Usuario user = usuarioRepositorio.getUsuarioSesion();
+		if (user != null) {
+			modelo.addAttribute("nomUser", user.getNombre());
+		}
 		List<Receta> recetas;
 		if ("semana".equals(ordenarPor)) {
 			recetas = recetaRepositorio.obtenerTopSemana();
 			modelo.addAttribute("textoFiltro", "Visitas semanales");
 			modelo.addAttribute("porSemana", true);
 		} else {
-			// if("total".equals(ordenarPor))
 			recetas = recetaRepositorio.obtenerTopTotal();
 			modelo.addAttribute("textoFiltro", "Visitas totales");
 			modelo.addAttribute("porTotal", true);

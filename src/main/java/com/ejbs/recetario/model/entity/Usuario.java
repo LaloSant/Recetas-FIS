@@ -65,9 +65,9 @@ public class Usuario {
         sb.append("Usuario{");
         sb.append("idUsuario=").append(idUsuario);
         sb.append(", nombre=").append(nombre);
-        sb.append(", contrasenia=").append(contrasenia);
+        sb.append(", contrasenia=").append("[PROTEGIDO]");
         sb.append(", email=").append(email);
-        sb.append(", rol=").append(rol);
+        sb.append(", rol=").append(rol.getIdRol());
         sb.append('}');
         return sb.toString();
     }

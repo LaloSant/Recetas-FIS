@@ -4,10 +4,10 @@
 <head th:replace="~{template :: head}"></head>
 
 <body class="bg-light">
-	<header th:replace="~{template :: header}"></header>
+	<header th:replace="~{template :: header (${nomUser})}"></header>
 	<div class="d-flex justify-content-end m-4">
 		<div class="dropdown">
-			<button th:text=" 'Ordenar por: '+ ${textoFiltro}" class="btn btn-dark dropdown-toggle sticky-top" type="button"
+			<button th:text=" 'Ordenar por: ' + ${textoFiltro}" class="btn btn-dark dropdown-toggle sticky-top" type="button"
 				data-bs-toggle="dropdown" aria-expanded="false">
 				Ordenar por
 			</button>
@@ -32,49 +32,10 @@
 					</div>
 				</a>
 			</div>
-			<!-- <div class="col" th:insert="~{template :: receta-card(Chilaquiles, 50)}"></div> 
-				<div class="col" th:insert="~{template :: receta-card(Pambazos, 100)}"></div>
-				<div class="col" th:insert="~{template :: receta-card(Huaraches, 25)}"></div>
-				<div class="col" th:insert="~{template :: receta-card(Tostadas, 15)}"></div> -->
 		</div>
 	</div>
 
-	<!-- <div class="container">
-		<div class="row">
-			<h1>Recetas disponibles</h1>
-		</div>
-		<div class="row">
-			<div class="col-lg-3">
-				<a th:href="@{/recetas/nuevo}" class="btn btn-lg btn-success">Añadir receta</a>
-			</div>
-		</div>
-		<br>
-		<table class="table table-stripped table-bordered">
-			<thead class="table-dark">
-				<tr>
-					<th>ID_RECETA</th>
-					<th>NOMBRE</th>
-					<th>PROCEDIMIENTO</th>
-					<th>INGREDIENTES</th>
-					<th>CHEF</th>
-					<th>OPCIONES</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="receta : ${recetas}">
-					<td th:text="${receta.idReceta}">Id_Receta</td>
-					<td th:text="${receta.nombre}">Nombre</td>
-					<td th:text="${receta.procedimiento}">Procedimiento</td>
-					<td th:text="${receta.ingredientes}">Ingredientes</td>
-					<td th:text="${receta.usuario.nombre}">Nombre usuario</td>
-					<td>
-						<a th:href="@{/recetas/editar/{idReceta}(idReceta=${receta.idReceta})}" class="btn btn-info">Editar</a>
-						<a th:href="@{/recetas/{idReceta}(idReceta=${receta.idReceta})}" class="btn btn-danger">Eliminar</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div> -->
+<footer th:replace="~{template :: footer}"></footer>
 </body>
 
 </html>

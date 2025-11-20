@@ -4,7 +4,7 @@
 <head th:replace="~{template :: head}"></head>
 
 <body class="bg-secondary">
-    <header th:replace="~{template :: header}"></header>
+    <header th:replace="~{template :: header (nomUser=null)}"></header>
 
     <div class="container py-1 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -14,6 +14,11 @@
                         Usuario y/o contraseña incorrectos!
                     </div>
                 </td>
+				<td th:if="${logout == true}">
+					<div class="alert alert-success" role="alert">
+						Sesion cerrada correctamente!
+					</div>
+				</td>
                 <form th:action="@{/login}" method="post" th:object="${usuario}">
                     <div class="card bg-dark text-white" style="border-radius: 1rem;">
                         <div class="card-body p-5 text-center">
@@ -25,7 +30,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="contrasenia" class="form-label">Contraseña</label>
-                                    <input th:field="*{contrasenia}" type="password" class="form-control" placeholder="Contraseña">
+                                    <input th:field="*{contrasenia}" type="password" name="contrasenia" class="form-control" placeholder="Contraseña">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Iniciar sesión</button>
                             </div>

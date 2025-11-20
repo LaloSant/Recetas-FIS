@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.ejbs.recetario.model.entity.Usuario;
@@ -44,5 +46,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     public void eliminarUsuario(Long idUsuario) {
         repositorio.deleteById(idUsuario);
     }
+
+	public Usuario getUsuarioSesion() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Optional<Usuario> optional = obtenerUsuario(auth.getName());
+		return (optional.isPresent()) ? optional.get() : null;
+	}
 
 }

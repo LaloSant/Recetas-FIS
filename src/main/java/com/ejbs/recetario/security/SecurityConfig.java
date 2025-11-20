@@ -1,13 +1,19 @@
 package com.ejbs.recetario.security;
 
+import java.util.Optional;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.ejbs.recetario.model.entity.Usuario;
+import com.ejbs.recetario.service.Usuario.UsuarioService;
 
 import lombok.AllArgsConstructor;
 
@@ -15,7 +21,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class SecurityConfig {
 
-    public static Usuario usuarioSesion = new Usuario();
+    private final UsuarioService usuarioService;
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -23,13 +29,45 @@ public class SecurityConfig {
     }
 
     @Bean
+    public UserDetailsService userDetailsService() {
+        return username -> {
+            Optional<Usuario> usuarioOpt = usuarioService.obtenerUsuario(username);
+            if (usuarioOpt.isEmpty()) {
+                throw new UsernameNotFoundException(username);
+            }
+            Usuario u = usuarioOpt.get();
+            return User.builder()
+                    .username(u.getEmail())
+                    .password(u.getContrasenia())
+                    .roles(u.getRol() != null && u.getRol().getNombre() != null ? u.getRol().getNombre() : "USER")
+                    .build();
+        };
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
+        http
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable())
-                .authorizeHttpRequests(auth -> auth
-                .anyRequest().permitAll()
+                .formLogin(form -> form
+                        .loginPage("/login").permitAll()
+                        .usernameParameter("email")
+                        .passwordParameter("contrasenia")
+                        .defaultSuccessUrl("/recetas", true)
+                        .failureUrl("/login?error")
                 )
-                .build();
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .permitAll()
+                )
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/", "/index", "/home", "/login", "/registro", "/css/**", "/img/**", "/js/**",
+                                "/static/**", "/recetas", "/recetas/ver", "/recetas/imagen/**"
+						).permitAll()
+                        .anyRequest().authenticated()
+                );
+
+        return http.build();
     }
 }
