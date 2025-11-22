@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import com.ejbs.recetario.model.entity.Detalle;
 import com.ejbs.recetario.repository.DetalleRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class DetalleServiceImpl implements DetalleService {
 
@@ -28,8 +30,9 @@ public class DetalleServiceImpl implements DetalleService {
 	}
 
 	@Override
-	public Detalle actualizarDetalle(Detalle detalle) {
-		return repositorio.save(detalle);
+	@Transactional
+	public void actualizarDetalle(Long idDetalle, Double cantidad, Long idIngrediente) {
+		repositorio.actualizarDetalle(idDetalle, cantidad, idIngrediente);
 	}
 
 }

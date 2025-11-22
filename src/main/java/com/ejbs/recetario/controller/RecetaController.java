@@ -12,10 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ejbs.recetario.model.dto.RecetaCompDTO;
+import com.ejbs.recetario.model.entity.Detalle;
 import com.ejbs.recetario.model.entity.Paso;
 import com.ejbs.recetario.model.entity.Receta;
 import com.ejbs.recetario.model.entity.Usuario;
+import com.ejbs.recetario.service.detalle.DetalleServiceImpl;
 import com.ejbs.recetario.service.ingrediente.IngredienteServiceImpl;
+import com.ejbs.recetario.service.paso.PasoServiceImpl;
 import com.ejbs.recetario.service.receta.RecetaServiceImpl;
 import com.ejbs.recetario.service.usuario.UsuarioServiceImpl;
 
@@ -32,6 +36,12 @@ public class RecetaController {
 
 	@Autowired
 	IngredienteServiceImpl ingredienteRepositorio;
+
+	@Autowired
+	PasoServiceImpl pasoRepositorio;
+
+	@Autowired
+	DetalleServiceImpl detalleRepositorio;
 
 	@GetMapping({ "/recetas", "/" })
 	public String listarRecetas(Model modelo,
@@ -69,6 +79,42 @@ public class RecetaController {
 		return RUTA_VISTA + "vistaReceta";
 	}
 
+	@GetMapping("/recetas/editar")
+	public String editarReceta(Model modelo, @RequestParam(required = false) Long idReceta) {
+		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(idReceta);
+		Usuario user = usuarioRepositorio.getUsuarioSesion();
+		if (user != null) {
+			modelo.addAttribute("nomUser", user.getNombre());
+		}
+		if (!recetaOpt.isPresent()) {
+			return "redirect:/recetas";
+		}
+		Receta rec = recetaOpt.get();
+		RecetaCompDTO dto = new RecetaCompDTO(rec, rec.getPasos(), rec.getDetalles());
+		modelo.addAttribute("ingredientes", ingredienteRepositorio.listarTodoIngrediente());
+		modelo.addAttribute("dto", dto);
+		return RUTA_VISTA + "editarReceta";
+	}
+
+	@PostMapping("/recetas/editar")
+	public String actualizarReceta(@ModelAttribute("receta") RecetaCompDTO dto) {
+		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(dto.getReceta().getIdReceta());
+		if (!recetaOpt.isPresent()) {
+			return "redirect:/recetas";
+		}
+		Receta recetaExistente = recetaOpt.get();
+		List<Paso> pasos = dto.getPasos();
+		for (Paso paso : pasos) {
+			pasoRepositorio.actualizarPaso(paso.getIdPaso(), paso.getNotas());
+		}
+		for (Detalle detalle : dto.getDetalles()) {
+			detalleRepositorio.actualizarDetalle(detalle.getIdDetalle(), detalle.getCantidad(),
+					detalle.getIngrediente().getIdIngrediente());
+		}
+		recetaRepositorio.actualizarNombre(recetaExistente.getIdReceta(), dto.getReceta().getNombre());
+		return "redirect:/recetas";
+	}
+
 	@GetMapping("/recetas/agregar")
 	public String agregarReceta(Model modelo) {
 		Usuario user = usuarioRepositorio.getUsuarioSesion();
@@ -83,58 +129,4 @@ public class RecetaController {
 		recetaRepositorio.eliminarReceta(idReceta);
 		return RUTA_VISTA + "redirect:/recetas";
 	}
-
-	@GetMapping("/recetas/editar")
-	public String editarReceta(Model modelo, @RequestParam(required = false) Long idReceta) {
-		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(idReceta);
-		Usuario user = usuarioRepositorio.getUsuarioSesion();
-		if (user != null) {
-			modelo.addAttribute("nomUser", user.getNombre());
-		}
-		if (!recetaOpt.isPresent()) {
-			return "redirect:/recetas";
-		}
-		modelo.addAttribute("ingredientes", ingredienteRepositorio.listarTodoIngrediente());
-		modelo.addAttribute("receta", recetaOpt.get());
-		modelo.addAttribute("pasos", recetaOpt.get().getPasos());
-		modelo.addAttribute("detalles", recetaOpt.get().getDetalles());
-		System.out.println(recetaOpt.get());
-		return RUTA_VISTA + "editarReceta";
-	}
-
-	@PostMapping("/recetas/editado")
-	public String actualizarReceta(@ModelAttribute("receta") Receta recetaModelo) {
-		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(recetaModelo.getIdReceta());
-		if (!recetaOpt.isPresent()) {
-			return "redirect:/recetas";
-		}
-		Receta recetaExistente = recetaOpt.get();
-		recetaRepositorio.actualizarNombre(recetaExistente.getIdReceta(), recetaModelo.getNombre());
-		return "redirect:/recetas";
-	}
-
-	@PostMapping("/recetas/editado/pasos")
-	public String actualizarPasos(@ModelAttribute("pasos") List<Paso> listaPasos) {
-		for (Paso paso : listaPasos) {
-			System.out.println(paso);
-		}
-		return "redirect:/recetas";
-	}
-
-	@PostMapping("/recetas/{numControl}")
-	public String actualizarReceta(@PathVariable Long idReceta, @ModelAttribute("receta") Receta receta) {
-		/*
-		 * Receta existente = servicio.obtenerEstudianteID(numControl);
-		 * existente.setNumControl(numControl);
-		 * existente.setNombre(estudiante.getNombre());
-		 * existente.setApPat(estudiante.getApPat());
-		 * existente.setApMat(estudiante.getApMat());
-		 * existente.setCorreo(estudiante.getCorreo());
-		 * existente.setCreditos(estudiante.getCreditos());
-		 * servicio.actualizarEstudiante(existente);
-		 * return "redirect:/recetas";
-		 */
-		return "";
-	}
-
 }

@@ -20,36 +20,40 @@ import lombok.Setter;
 @Table(name = "DETALLES")
 public class Detalle {
 
-    @Getter
-    @Setter
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idDetalle;
+	@Getter
+	@Setter
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idDetalle;
 
-    @Getter
-    @Setter
-    @ManyToOne
-    @JoinColumn(name = "ID_RECETA")
-    private Receta receta;
+	@Getter
+	@Setter
+	@ManyToOne
+	@JoinColumn(name = "ID_RECETA")
+	private Receta receta;
 
-    @Getter
-    @Setter
-    @ManyToOne
-    @JoinColumn(name = "ID_INGREDIENTE")
-    private Ingrediente ingrediente;
+	@Getter
+	@Setter
+	@ManyToOne
+	@JoinColumn(name = "ID_INGREDIENTE")
+	private Ingrediente ingrediente;
 
-    @Getter
-    @Setter
-    @Column(name = "CANTIDAD", nullable = false)
-    private Double cantidad;
+	@Getter
+	@Setter
+	@Column(name = "CANTIDAD", nullable = false)
+	private Double cantidad;
 
-/*     @Getter
-    @Setter
-    @Column(name = "NOTAS", length = 200, nullable = false)
-    private String notas; */
+	/*
+	 * @Getter
+	 * 
+	 * @Setter
+	 * 
+	 * @Column(name = "NOTAS", length = 200, nullable = false)
+	 * private String notas;
+	 */
 
-    @Getter
-    @Setter
-    @Column(name = "COSTO", nullable = false)
-    private Double costo;
+	@Getter
+	@Setter
+	@Column(name = "COSTO", nullable = false)
+	private Double costo;
 }

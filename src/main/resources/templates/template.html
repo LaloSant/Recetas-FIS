@@ -58,7 +58,7 @@
 <!-- </body> -->
 
 <div th:fragment="receta-card (receta, usuarioSesion)" class="card my-1 mx-auto border-4 border-dark-subtle" style="width: 300px;">
-	<img th:src="@{/recetas/imagen/{id}(id=${receta.idReceta})}" class="card-img-top" alt="Imagen de receta"
+	<img th:src="@{/recetas/imagen/{id}(id=${receta.idReceta})}" class="card-img-top" alt="Imagen de receta no encontrada"
 		style="max-width: 300px; max-height: 250px; min-width: 250px; min-height: 200px;">
 	<div class="card-body">
 		<h4 class="card-title" th:text="${receta.nombre}"></h4>

@@ -2,6 +2,7 @@ package com.ejbs.recetario.service.detalle;
 
 import java.util.List;
 
+
 import com.ejbs.recetario.model.entity.Detalle;
 
 public interface DetalleService {
@@ -12,6 +13,6 @@ public interface DetalleService {
 
 	public Detalle guardarDetalle(Detalle detalle);
 
-	public Detalle actualizarDetalle(Detalle detalle);
+	public void actualizarDetalle(Long idDetalle, Double cantidad, Long idIngrediente);
 
 }

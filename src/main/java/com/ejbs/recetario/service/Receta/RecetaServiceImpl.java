@@ -67,7 +67,6 @@ public class RecetaServiceImpl implements RecetaService {
 	@Transactional
 	public void actualizarNombre(Long idReceta, String nombre) {
 		repositorio.actualizarNombre(idReceta, nombre);
-
 	}
 
 }
