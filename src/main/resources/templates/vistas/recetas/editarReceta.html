@@ -11,8 +11,8 @@
 			<div class="container justify-content-center card m-3">
 				<h1 class="text-center">Editar receta</h1>
 				<div class="card-body">
-					<form th:action="@{/recetas/editar}" th:object="${dto}" method="post">
-						<div class="mb-1 mt-3">
+					<form th:action="@{/recetas/editar}" th:object="${dto}" method="post" enctype="multipart/form-data">
+						<div class="mb-2 mt-2 border p-2">
 							<div class="input-group">
 								<span class="input-group-text"><i class="bi bi-hash"></i></span>
 								<span class="input-group-text" th:text="'ID RECETA'"></span>
@@ -36,12 +36,12 @@
 								<span class="input-group-text" th:text="*{receta.usuario.nombre}"></span>
 							</div>
 						</div>
-						<div class="mb-1 mt-3">
+						<div class="mb-2 mt-2 border p-2">
 							<div class="d-flex justify-content-center">
 								<h4 class="text-center">PASOS:</h4>
 							</div>
 							<div th:each="paso, iterStat : *{pasos}" class="ms-5">
-								<div class="mb-3 mt-1 ms-5">
+								<div class="mb-3 mt-1 ms-2">
 									<div class="input-group">
 										<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
 										<span class="input-group-text" th:text="'Paso ' + ${paso.indicePaso}"></span>
@@ -51,12 +51,12 @@
 								</div>
 							</div>
 						</div>
-						<div>
+						<div class="mb-2 mt-2 border p-2">
 							<div class="d-flex justify-content-center mt-3">
 								<h4 class="text-center">INGREDIENTES:</h4>
 							</div>
 							<div th:each="detalle, iterStat : *{detalles}" class="ms-5">
-								<div class="mb-3 mt-1 ms-5">
+								<div class="mb-3 mt-1 ms-2">
 									<div class="input-group">
 										<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
 										<span class="input-group-text">Detalle</span>
@@ -73,6 +73,22 @@
 										<input type="hidden" th:field="*{detalles[__${iterStat.index}__].costo}" />
 									</div>
 								</div>
+							</div>
+						</div>
+						<div class="mb-2 mt-2 border p-2">
+							<div class="d-flex justify-content-center mt-3">
+								<h4 class="text-center">IMAGEN:</h4>
+							</div>
+							<div class="input-group my-3">
+								<span class="input-group-text"><i class="bi bi-image"></i></span>
+								<span class="input-group-text">Imagen</span>
+								<input type="file" th:field="*{imagen}" class="form-control" accept="image/*" onchange="previewImage(event)" />
+							</div>
+	
+							<!-- Preview de la imagen actual -->
+							<div class="text-center my-3">
+								<img th:src="@{/recetas/imagen/{id}(id=${dto.receta.idReceta})}" id="preview" class="img-thumbnail" style="max-width: 300px;"
+									alt="Imagen de la receta no encontrada" />
 							</div>
 						</div>
 						<div class="box-footer d-flex justify-content-center">

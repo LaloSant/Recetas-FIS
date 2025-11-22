@@ -1,5 +1,6 @@
 package com.ejbs.recetario.controller;
 
+import java.sql.Blob;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.sql.rowset.serial.SerialBlob;
 
 import com.ejbs.recetario.model.dto.RecetaCompDTO;
 import com.ejbs.recetario.model.entity.Detalle;
@@ -90,7 +94,7 @@ public class RecetaController {
 			return "redirect:/recetas";
 		}
 		Receta rec = recetaOpt.get();
-		RecetaCompDTO dto = new RecetaCompDTO(rec, rec.getPasos(), rec.getDetalles());
+		RecetaCompDTO dto = new RecetaCompDTO(rec, rec.getPasos(), rec.getDetalles(), null);
 		modelo.addAttribute("ingredientes", ingredienteRepositorio.listarTodoIngrediente());
 		modelo.addAttribute("dto", dto);
 		return RUTA_VISTA + "editarReceta";
@@ -104,12 +108,28 @@ public class RecetaController {
 		}
 		Receta recetaExistente = recetaOpt.get();
 		List<Paso> pasos = dto.getPasos();
-		for (Paso paso : pasos) {
-			pasoRepositorio.actualizarPaso(paso.getIdPaso(), paso.getNotas());
+		if (pasos != null) {
+			for (Paso paso : pasos) {
+				pasoRepositorio.actualizarPaso(paso.getIdPaso(), paso.getNotas());
+			}
 		}
-		for (Detalle detalle : dto.getDetalles()) {
-			detalleRepositorio.actualizarDetalle(detalle.getIdDetalle(), detalle.getCantidad(),
-					detalle.getIngrediente().getIdIngrediente());
+		List<Detalle> detalles = dto.getDetalles();
+		if (detalles != null) {
+			for (Detalle detalle : detalles) {
+				detalleRepositorio.actualizarDetalle(detalle.getIdDetalle(), detalle.getCantidad(),
+						detalle.getIngrediente().getIdIngrediente());
+			}
+		}
+		MultipartFile archivo = dto.getImagen();
+		if (archivo != null && !archivo.isEmpty()) {
+			try {
+				byte[] bytes = archivo.getBytes();
+				Blob blob = new SerialBlob(bytes);
+				recetaExistente.setImagen(blob);
+				recetaRepositorio.guardarReceta(recetaExistente);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		recetaRepositorio.actualizarNombre(recetaExistente.getIdReceta(), dto.getReceta().getNombre());
 		return "redirect:/recetas";
