@@ -2,6 +2,9 @@ package com.ejbs.recetario.repository;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.ejbs.recetario.model.entity.Receta;
 
@@ -11,4 +14,12 @@ public interface RecetaRepository extends JpaRepository<Receta, Long> {
 	public List<Receta> findAllByOrderByVisitasSemanalesDesc();
 
 	public List<Receta> findAllByOrderByVisitasTotalesDesc();
+
+	@Modifying
+	@Query("UPDATE Receta r SET r.visitasSemanales = r.visitasSemanales + 1, r.visitasTotales = r.visitasTotales + 1 WHERE r.idReceta = :idReceta")
+	void aumentarVisita(@Param("idReceta") Long idReceta);
+
+	@Modifying
+	@Query("UPDATE Receta r SET r.nombre = :nombre WHERE r.idReceta = :idReceta")
+	void actualizarNombre(@Param("idReceta") Long idReceta, @Param("nombre") String nombre);
 }

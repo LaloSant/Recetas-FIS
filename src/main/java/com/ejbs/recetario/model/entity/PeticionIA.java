@@ -35,7 +35,7 @@ public class PeticionIA {
 
     @Getter
     @Setter
-    @Column(name = "DESCRCRIPCION", nullable = false, length = 50)
+    @Column(name = "DESCRIPCION", nullable = false, length = 50)
     private String descripcion;
 
 	@Getter

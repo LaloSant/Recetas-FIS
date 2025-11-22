@@ -1,4 +1,4 @@
-package com.ejbs.recetario.service.Detalle;
+package com.ejbs.recetario.service.detalle;
 
 import java.util.List;
 

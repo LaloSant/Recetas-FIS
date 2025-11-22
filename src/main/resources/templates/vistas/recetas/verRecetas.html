@@ -12,7 +12,7 @@
 			</div>
 			<div class="col d-flex justify-content-end m-2">
 				<div class="dropdown">
-					<button th:text=" 'Ordenar por: ' + ${textoFiltro}" class="btn btn-dark dropdown-toggle sticky-top" type="button"
+					<button th:text=" 'Ordenar por: ' + ${textoOrden}" class="btn btn-dark dropdown-toggle sticky-top" type="button"
 						data-bs-toggle="dropdown" aria-expanded="false">
 						Ordenar por
 					</button>
@@ -28,16 +28,9 @@
 	<div class="container-fluid mb-4">
 		<div class="row px-0 mx-0" th:object="${receta}">
 			<div th:each="receta : ${recetas}" class="col">
-				<a th:if="${porSemana == true}">
 					<div
-						th:replace="~{template :: receta-card(${receta.idReceta}, ${receta.nombre}, ${receta.visitasSemanales}, ${receta.usuario.nombre}, 'visitas semanales')}">
+						th:replace="~{template :: receta-card(${receta}, ${usuarioSesion})}">
 					</div>
-				</a>
-				<a th:if="${porTotal == true}">
-					<div
-						th:replace="~{template :: receta-card(${receta.idReceta}, ${receta.nombre}, ${receta.visitasTotales}, ${receta.usuario.nombre}, 'visitas totales')}">
-					</div>
-				</a>
 			</div>
 		</div>
 	</div>

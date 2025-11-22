@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ejbs.recetario.model.entity.Paso;
 import com.ejbs.recetario.model.entity.Receta;
 import com.ejbs.recetario.model.entity.Usuario;
-import com.ejbs.recetario.service.Receta.RecetaServiceImpl;
-import com.ejbs.recetario.service.Usuario.UsuarioServiceImpl;
+import com.ejbs.recetario.service.ingrediente.IngredienteServiceImpl;
+import com.ejbs.recetario.service.receta.RecetaServiceImpl;
+import com.ejbs.recetario.service.usuario.UsuarioServiceImpl;
 
 @Controller
 public class RecetaController {
@@ -28,33 +30,31 @@ public class RecetaController {
 	@Autowired
 	UsuarioServiceImpl usuarioRepositorio;
 
-
+	@Autowired
+	IngredienteServiceImpl ingredienteRepositorio;
 
 	@GetMapping({ "/recetas", "/" })
 	public String listarRecetas(Model modelo,
-			@RequestParam(name = "ordenarPor", required = false, defaultValue = "semana") String ordenarPor) {
-		
+			@RequestParam(required = false, defaultValue = "semana") String ordenarPor) {
 		Usuario user = usuarioRepositorio.getUsuarioSesion();
 		if (user != null) {
 			modelo.addAttribute("nomUser", user.getNombre());
+			modelo.addAttribute("usuarioSesion", user);
 		}
 		List<Receta> recetas;
 		if ("semana".equals(ordenarPor)) {
 			recetas = recetaRepositorio.obtenerTopSemana();
-			modelo.addAttribute("textoFiltro", "Visitas semanales");
-			modelo.addAttribute("porSemana", true);
+			modelo.addAttribute("textoOrden", "Visitas semanales");
 		} else {
 			recetas = recetaRepositorio.obtenerTopTotal();
-			modelo.addAttribute("textoFiltro", "Visitas totales");
-			modelo.addAttribute("porTotal", true);
+			modelo.addAttribute("textoOrden", "Visitas totales");
 		}
 		modelo.addAttribute("recetas", recetas);
 		return RUTA_VISTA + "verRecetas";
 	}
 
 	@GetMapping("/recetas/ver")
-	public String nuevaReceta(Model modelo,
-			@RequestParam(required = false, defaultValue = "1") Long idReceta) {
+	public String vistaReceta(Model modelo, @RequestParam(required = false, defaultValue = "1") Long idReceta) {
 		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(idReceta);
 		Usuario user = usuarioRepositorio.getUsuarioSesion();
 		if (user != null) {
@@ -63,14 +63,19 @@ public class RecetaController {
 		if (!recetaOpt.isPresent()) {
 			return "redirect:/recetas";
 		}
-		modelo.addAttribute("receta", recetaOpt.get());
+		Receta receta = recetaOpt.get();
+		recetaRepositorio.aumentarVisita(idReceta);
+		modelo.addAttribute("receta", receta);
 		return RUTA_VISTA + "vistaReceta";
 	}
 
-	@GetMapping("/recetas/editar/{idReceta}")
-	public String editarReceta(Model modelo, @PathVariable Long idReceta) {
-		modelo.addAttribute("receta", recetaRepositorio.obtenerRecetaPorID(idReceta));
-		return RUTA_VISTA + "editarReceta";
+	@GetMapping("/recetas/agregar")
+	public String agregarReceta(Model modelo) {
+		Usuario user = usuarioRepositorio.getUsuarioSesion();
+		if (user != null) {
+			modelo.addAttribute("nomUser", user.getNombre());
+		}
+		return RUTA_VISTA + "agregarReceta";
 	}
 
 	@GetMapping("/recetas/{idReceta}")
@@ -79,10 +84,41 @@ public class RecetaController {
 		return RUTA_VISTA + "redirect:/recetas";
 	}
 
-	@PostMapping("/recetas")
-	public String guardarReceta(@ModelAttribute("receta") Receta receta) {
-		recetaRepositorio.guardarReceta(receta);
-		return RUTA_VISTA + "redirect:/recetas";
+	@GetMapping("/recetas/editar")
+	public String editarReceta(Model modelo, @RequestParam(required = false) Long idReceta) {
+		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(idReceta);
+		Usuario user = usuarioRepositorio.getUsuarioSesion();
+		if (user != null) {
+			modelo.addAttribute("nomUser", user.getNombre());
+		}
+		if (!recetaOpt.isPresent()) {
+			return "redirect:/recetas";
+		}
+		modelo.addAttribute("ingredientes", ingredienteRepositorio.listarTodoIngrediente());
+		modelo.addAttribute("receta", recetaOpt.get());
+		modelo.addAttribute("pasos", recetaOpt.get().getPasos());
+		modelo.addAttribute("detalles", recetaOpt.get().getDetalles());
+		System.out.println(recetaOpt.get());
+		return RUTA_VISTA + "editarReceta";
+	}
+
+	@PostMapping("/recetas/editado")
+	public String actualizarReceta(@ModelAttribute("receta") Receta recetaModelo) {
+		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(recetaModelo.getIdReceta());
+		if (!recetaOpt.isPresent()) {
+			return "redirect:/recetas";
+		}
+		Receta recetaExistente = recetaOpt.get();
+		recetaRepositorio.actualizarNombre(recetaExistente.getIdReceta(), recetaModelo.getNombre());
+		return "redirect:/recetas";
+	}
+
+	@PostMapping("/recetas/editado/pasos")
+	public String actualizarPasos(@ModelAttribute("pasos") List<Paso> listaPasos) {
+		for (Paso paso : listaPasos) {
+			System.out.println(paso);
+		}
+		return "redirect:/recetas";
 	}
 
 	@PostMapping("/recetas/{numControl}")

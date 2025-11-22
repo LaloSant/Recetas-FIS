@@ -8,20 +8,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ejbs.recetario.model.entity.Usuario;
-import com.ejbs.recetario.service.Usuario.UsuarioService;
+import com.ejbs.recetario.service.usuario.UsuarioServiceImpl;
 
 @Controller
 public class LoginController {
 
 	@Autowired
-	UsuarioService repositorioUsuario;
+	UsuarioServiceImpl usuarioRepositorio;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
 	@GetMapping({ "/login" })
-	public String login(Model model, @RequestParam(name = "error", required = false) String error, 
-			@RequestParam(name = "logout", required = false) String logout) {
+	public String login(Model model, @RequestParam(required = false) String error,
+			@RequestParam(required = false) String logout) {
+
+		Usuario user = usuarioRepositorio.getUsuarioSesion();
+		if (user != null) {
+			model.addAttribute("nomUser", user.getNombre());
+			model.addAttribute("usuarioSesion", user);
+		}
 		boolean reintento = (error != null);
 		boolean logoutExito = (logout != null);
 		model.addAttribute("reintento", reintento);

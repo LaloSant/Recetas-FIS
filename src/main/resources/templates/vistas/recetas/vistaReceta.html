@@ -31,7 +31,7 @@
 						<h5 class="text-body-tertiary" th:text="'Visitas semanales: ' + ${receta.visitasTotales}"></h5>
 					</div>
 				</div>
-				<div class="col-lg-6 col-md-12 text-center">
+				<div class="col-lg-8 col-md-12 text-center">
 					<img th:src="@{/recetas/imagen/{id}(id=${receta.idReceta})}" class="card-img-top border border-2 border-dark rounded p-1"
 						alt="Imagen de receta" style="max-width: 300px; max-height: 300px; min-width: 250px; min-height: 250px;">
 				</div>
@@ -48,7 +48,8 @@
 							<input class="form-check-input m-1 p-2" type="checkbox" value="" th:id="${detalle.idDetalle}"
 								style="transform: scale(1.2);">
 							<label class="form-check-label stretched-link fs-6 mx-4" th:for="${detalle.idDetalle}"
-								th:text="${detalle.cantidad} + ' ' +${detalle.notas} + ' de ' + ${detalle.ingrediente.nombre}"></label>
+								th:text="${detalle.cantidad} + ' ' + ' de ' + ${detalle.ingrediente.nombre}"></label>
+								<!-- th:text="${detalle.cantidad} + ' ' +${detalle.notas} + ' de ' + ${detalle.ingrediente.nombre}"></label> -->
 						</li>
 					</ul>
 				</div>

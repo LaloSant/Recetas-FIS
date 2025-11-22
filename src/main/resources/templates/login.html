@@ -4,7 +4,7 @@
 <head th:replace="~{template :: head}"></head>
 
 <body class="bg-secondary">
-	<header th:replace="~{template :: header (nomUser=null)}"></header>
+	<header th:replace="~{template :: header (${nomUser})}"></header>
 
 	<div class="container py-5 h-100">
 		<div class="row d-flex justify-content-center align-items-center h-100 mb-5 ">
@@ -21,8 +21,8 @@
 				</td>
 				<form th:action="@{/login}" method="post" th:object="${usuario}">
 					<div class="card bg-dark text-white" style="border-radius: 1rem;">
-						<div class="card-body p-5 text-center">
-							<div class="mb-1 mt-md-1 pb-2">
+						<div class="card-body px-5 text-center">
+							<div class="mb-0 mt-md-1 pb-0">
 								<h2 class="fw-bold mb-2 text-uppercase">Iniciar sesión</h2>
 								<div class="mb-3">
 									<label for="email" class="form-label">Dirección de correo</label>
@@ -35,8 +35,13 @@
 								<button type="submit" class="btn btn-primary">Iniciar sesión</button>
 							</div>
 							<div>
-								<p class="mb-0">¿Aún no tienes cuenta? <a href="/registro" class="text-white-50 fw-bold">Registrarse</a>
-								</p>
+								<p class="mb-0 my-3">¿Aún no tienes cuenta? <a href="/registro" class="text-white-100 fw-bold">Registrarse</a></p>
+								<p class="mb-0 my-3">Ingresar sin iniciar sesion: <a th:href="@{/recetas}" class="text-white-50 fw-bold">Ver recetas</a></p>
+							</div>
+							<div>
+								<button class="btn btn-rpimary">
+									Ingresar sin iniciar sesion
+								</button>
 							</div>
 						</div>
 					</div>

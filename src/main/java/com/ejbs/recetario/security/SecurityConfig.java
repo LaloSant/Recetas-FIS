@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.ejbs.recetario.model.entity.Usuario;
-import com.ejbs.recetario.service.Usuario.UsuarioService;
+import com.ejbs.recetario.service.usuario.UsuarioService;
 
 import lombok.AllArgsConstructor;
 
@@ -63,8 +63,8 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/index", "/home", "/login", "/registro", "/css/**", "/img/**", "/js/**",
-                                "/static/**", "/recetas", "/recetas/ver", "/recetas/imagen/**"
-						).permitAll()
+                                "/static/**", "/recetas", "/recetas/ver", "/recetas/imagen/**")
+                        .permitAll()
                         .anyRequest().authenticated()
                 );
 

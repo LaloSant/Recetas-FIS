@@ -41,9 +41,18 @@ public class Ingrediente {
     @Column(name = "IMAGEN")
     private Blob imagen;
 
+	@Getter
+	@Setter
+	@Column(name = "MAGNITUD", length = 200, nullable = false)
+	private String magnitud;
+
     /* @Getter
     @Setter
     @OneToMany(mappedBy = "idIngrediente")
     private List<RecetaIngrediente> recetasIngredientes; */
 
+	@Override
+	public String toString() {
+		return "Ingrediente [idIngrediente=" + idIngrediente + ", nombre=" + nombre + "]";
+	}
 }

@@ -11,38 +11,38 @@
             <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
                 <h1 class="text-center">Registro de estudiante</h1>
                 <div class="card-body">
-                    <form th:action="@{/estudiantes}" th:object="${estudiante}" method="post">
+                    <form  method="post">
                         <div class="form-group">
                             <label>Numero de control: </label>
-                            <input type="text" name="Numero de control" th:field="*{numControl}" class="form-control"
+                            <input type="text" name="Numero de control"  class="form-control"
                                 placeholder="Ingrese Numero de control" required>
                             <br>
                         </div>
                         <div class="form-group">
                             <label>Nombre: </label>
-                            <input type="text" name="Nombre" th:field="*{nombre}" class="form-control" placeholder="Ingrese nombre" required>
+                            <input type="text" name="Nombre"  class="form-control" placeholder="Ingrese nombre" required>
                             <br>
                         </div>
                         <div class="form-group">
                             <label>Apellido Pat: </label>
-                            <input type="text" name="Apellido Pat" th:field="*{apPat}" class="form-control" placeholder="Ingrese Apellido Paterno"
+                            <input type="text" name="Apellido Pat"  class="form-control" placeholder="Ingrese Apellido Paterno"
                                 required>
                             <br>
                         </div>
                         <div class="form-group">
                             <label>Apellido Mat: </label>
-                            <input type="text" name="Apellido Mat" th:field="*{apMat}" class="form-control" placeholder="Ingrese Apellido Materno"
+                            <input type="text" name="Apellido Mat"  class="form-control" placeholder="Ingrese Apellido Materno"
                                 required>
                             <br>
                         </div>
                         <div class="form-group">
                             <label>Correo: </label>
-                            <input type="text" name="Correo" th:field="*{correo}" class="form-control" placeholder="Ingrese Correo" required>
+                            <input type="text" name="Correo"  class="form-control" placeholder="Ingrese Correo" required>
                             <br>
                         </div>
                         <div class="form-group">
                             <label>Creditos: </label>
-                            <input type="text" name="Creditos" th:field="*{creditos}" class="form-control" placeholder="Ingrese Creditos" required>
+                            <input type="text" name="Creditos" class="form-control" placeholder="Ingrese Creditos" required>
                             <br>
                         </div>
                         <div class="box-footer">
@@ -53,6 +53,10 @@
             </div>
         </div>
     </div>
+
+	<footer th:replace="~{template :: footer }">
+
+	</footer>
 </body>
 
 </html>

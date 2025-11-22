@@ -1,4 +1,4 @@
-package com.ejbs.recetario.service.Receta;
+package com.ejbs.recetario.service.receta;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,4 +22,8 @@ public interface RecetaService {
 	public Receta actualizarReceta(Receta receta);
 
 	public void eliminarReceta(Long idReceta);
+
+	public void aumentarVisita(Long idReceta);
+
+	public void actualizarNombre(Long idReceta, String nombre);
 }

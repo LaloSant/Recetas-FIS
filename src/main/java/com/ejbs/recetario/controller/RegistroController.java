@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.ejbs.recetario.model.entity.Rol;
 import com.ejbs.recetario.model.entity.Usuario;
-import com.ejbs.recetario.service.Rol.RolServiceImpl;
-import com.ejbs.recetario.service.Usuario.UsuarioServiceImpl;
+import com.ejbs.recetario.service.rol.RolServiceImpl;
+import com.ejbs.recetario.service.usuario.UsuarioServiceImpl;
 
 
 @Controller

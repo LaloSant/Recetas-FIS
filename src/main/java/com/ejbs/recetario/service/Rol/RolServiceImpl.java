@@ -1,4 +1,4 @@
-package com.ejbs.recetario.service.Rol;
+package com.ejbs.recetario.service.rol;
 
 import java.util.Optional;
 

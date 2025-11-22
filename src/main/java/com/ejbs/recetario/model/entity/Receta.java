@@ -53,7 +53,7 @@ public class Receta {
 	@Getter
 	@Setter
 	@Column(name = "CALIFICACION", columnDefinition = "NUMBER CHECK (CALIFICACION >= 0 AND CALIFICACION <= 5)")
-	private Long calificacion; // Rating from 0 to 5
+	private Long calificacion;
 
 	@Getter
 	@Setter
@@ -71,4 +71,5 @@ public class Receta {
 	@OneToMany(mappedBy = "receta")
 	private List<Paso> pasos;
 
+	
 }

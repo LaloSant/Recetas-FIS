@@ -43,10 +43,10 @@ public class Detalle {
     @Column(name = "CANTIDAD", nullable = false)
     private Double cantidad;
 
-    @Getter
+/*     @Getter
     @Setter
     @Column(name = "NOTAS", length = 200, nullable = false)
-    private String notas;
+    private String notas; */
 
     @Getter
     @Setter
