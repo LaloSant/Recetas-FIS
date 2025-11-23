@@ -12,9 +12,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 
 @Entity
 @Table(name = "DETALLES")
@@ -43,26 +45,9 @@ public class Detalle {
 	@Column(name = "CANTIDAD", nullable = false)
 	private Double cantidad;
 
-	/*
-	 * @Getter
-	 * 
-	 * @Setter
-	 * 
-	 * @Column(name = "NOTAS", length = 200, nullable = false)
-	 * private String notas;
-	 */
-
 	@Getter
 	@Setter
 	@Column(name = "COSTO", nullable = false)
 	private Double costo;
 
-	@Override
-	public String toString(){
-		return "idDetalle: " + idDetalle + "\n" +
-		"Receta: " + receta + "\n" +
-		"ingrediente: " + ingrediente + "\n" +
-		"cantidad: " + cantidad + "\n" +
-		"costo: " + costo + "";
-	}
 }

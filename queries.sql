@@ -74,7 +74,8 @@ CREATE TABLE PETICION_IA (
 		CONSTRAINT PET_IA_ID_PK PRIMARY KEY
 	,ESTATUS        CHAR(3)
 		CONSTRAINT PET_EST_CK CHECK ( ESTATUS IN ( 'PEN'
-		                                          ,'ENT' ) )
+		                                          ,'ENT'
+												  ,'DEN') )
 		CONSTRAINT PET_EST_NN NOT NULL
 	,DESCRIPCION    VARCHAR2(50)
 		CONSTRAINT PET_DESC_NN NOT NULL

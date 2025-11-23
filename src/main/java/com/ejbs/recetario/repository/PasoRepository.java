@@ -14,9 +14,9 @@ public interface PasoRepository extends JpaRepository<Paso, Long> {
 
 	@Modifying
 	@Query("UPDATE Paso p SET p.notas = :notas WHERE p.idPaso = :idPaso")
-	void actualizarPaso(@Param("idPaso") Long idPaso, @Param("notas") String notas);
+	public void actualizarPaso(@Param("idPaso") Long idPaso, @Param("notas") String notas);
 
 	@Modifying
 	@Query("UPDATE Paso p SET p.notas = :notas, p.imagen = :imagen WHERE p.idPaso = :idPaso")
-	void actualizarPaso(@Param("idPaso") Long idPaso, @Param("notas") String notas, @Param("imagen") Blob imagen);
+	public void actualizarPaso(@Param("idPaso") Long idPaso, @Param("notas") String notas, @Param("imagen") Blob imagen);
 }

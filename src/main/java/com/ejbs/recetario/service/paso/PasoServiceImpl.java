@@ -27,7 +27,7 @@ public class PasoServiceImpl implements PasoService {
 	@Override
 	@Transactional
 	public void actualizarPaso(Long idPaso, String notas, Blob imagen) {
-		repositorio.actualizarPaso(idPaso, notas);
+		repositorio.actualizarPaso(idPaso, notas, imagen);
 	}
 
 	@Override
@@ -67,6 +67,11 @@ public class PasoServiceImpl implements PasoService {
 	@Override
 	public void guardarPaso(Paso paso) {
 		repositorio.save(paso);
+	}
+
+	@Override
+	public List<Paso> obtenerTodoPaso() {
+		return repositorio.findAll();
 	}
 
 }

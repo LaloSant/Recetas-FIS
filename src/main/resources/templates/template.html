@@ -16,7 +16,7 @@
 </head>
 
 <!-- <body> -->
-<header th:fragment="header (nomUser)">
+<header th:fragment="header (nomUser, rol)">
 	<nav class="navbar navbar-dark bg-dark navbar-expand-md sticky-top">
 		<div class="container-fluid">
 			<a class="navbar-brand py-2">
@@ -44,6 +44,13 @@
 								<hr class="dropdown-divider">
 							</li>
 							<li th:if="${nomUser != null}"><a class="dropdown-item" th:href="@{/logout}">Cerrar sesion</a></li>
+						</ul>
+					</li>
+					<li th:if="${rol != null and (rol == 'Moderador' or rol == 'Admin')}" class="nav-item dropdown">
+						<a th:text="${'Moderador'}" class="nav-link dropdown-toggle border-bottom border-primary text-wrap" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"></a>
+						<ul class="dropdown-menu fs-5 bg-body-secondary">
+							<li><a class="dropdown-item" th:href="@{/moderador/peticiones}">Consultar Peticiones IA</a></li>
 						</ul>
 					</li>
 				</ul>

@@ -1,6 +1,6 @@
 package com.ejbs.recetario.controller;
 
-import java.sql.Blob;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -15,19 +15,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.sql.rowset.serial.SerialBlob;
 
 import com.ejbs.recetario.model.dto.PasoDTO;
 import com.ejbs.recetario.model.dto.RecetaCompDTO;
 import com.ejbs.recetario.model.entity.Detalle;
 import com.ejbs.recetario.model.entity.Paso;
+import com.ejbs.recetario.model.entity.PeticionIA;
 import com.ejbs.recetario.model.entity.Receta;
 import com.ejbs.recetario.model.entity.Usuario;
 import com.ejbs.recetario.service.detalle.DetalleServiceImpl;
 import com.ejbs.recetario.service.ingrediente.IngredienteServiceImpl;
 import com.ejbs.recetario.service.paso.PasoServiceImpl;
+import com.ejbs.recetario.service.peticiones.PeticionesServiceImpl;
 import com.ejbs.recetario.service.receta.RecetaServiceImpl;
 import com.ejbs.recetario.service.usuario.UsuarioServiceImpl;
 
@@ -51,6 +50,9 @@ public class RecetaController {
 	@Autowired
 	DetalleServiceImpl detalleRepositorio;
 
+	@Autowired
+	PeticionesServiceImpl peticionRepositorio;
+
 	@GetMapping({ "/recetas", "/" })
 	public String listarRecetas(Model modelo,
 			@RequestParam(required = false, defaultValue = "semana") String ordenarPor,
@@ -61,6 +63,7 @@ public class RecetaController {
 		modelo.addAttribute("ingredientes", ingredienteRepositorio.listarTodoIngrediente());
 		if (user != null) {
 			modelo.addAttribute("nomUser", user.getNombre());
+			modelo.addAttribute("rol", user.getRol().getNombre());
 			modelo.addAttribute("usuarioSesion", user);
 		}
 		List<Receta> recetas;
@@ -102,7 +105,7 @@ public class RecetaController {
 	}
 
 	@PostMapping("/recetas/calificar")
-	public String calificarReceta(@RequestParam("idReceta") Long idReceta,
+	public String calificarReceta(@RequestParam Long idReceta,
 			@RequestParam("calificacion") int calificacionNueva) {
 		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(idReceta);
 		if (recetaOpt.isPresent()) {
@@ -152,9 +155,8 @@ public class RecetaController {
 	}
 
 	@PostMapping("/recetas/editar")
-	public String actualizarReceta(@ModelAttribute("dto") RecetaCompDTO dto) {
+	public String actualizarReceta(@ModelAttribute RecetaCompDTO dto) throws IOException {
 		if (dto == null || dto.getReceta() == null || dto.getReceta().getIdReceta() == null) {
-			System.out.println("[actualizarReceta] ERROR: dto o receta o idReceta es nulo");
 			return "redirect:/recetas";
 		}
 		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(dto.getReceta().getIdReceta());
@@ -173,13 +175,16 @@ public class RecetaController {
 					pasoExistente.setNotas(paso.getNotas());
 					if (pasoImagenes != null && i < pasoImagenes.size() && pasoImagenes.get(i).getImagen() != null
 							&& !pasoImagenes.get(i).getImagen().isEmpty()) {
-						try {
-							byte[] bytes = pasoImagenes.get(i).getImagen().getBytes();
-							Blob blob = new SerialBlob(bytes);
-							pasoExistente.setImagen(blob);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
+						pasoExistente.setImagen(ImagenController.mpfTBlob(pasoImagenes.get(i).getImagen()));
+						/*
+						 * try {
+						 * byte[] bytes = pasoImagenes.get(i).getImagen().getBytes();
+						 * Blob blob = new SerialBlob(bytes);
+						 * pasoExistente.setImagen(blob);
+						 * } catch (Exception e) {
+						 * e.printStackTrace();
+						 * }
+						 */
 					}
 					pasoRepositorio.actualizarPaso(pasoExistente.getIdPaso(), pasoExistente.getNotas(),
 							pasoExistente.getImagen());
@@ -200,17 +205,11 @@ public class RecetaController {
 				}
 			}
 		}
-		MultipartFile archivo = dto.getImagen();
-		if (archivo != null && !archivo.isEmpty()) {
-			try {
-				byte[] bytes = archivo.getBytes();
-				Blob blob = new SerialBlob(bytes);
-				recetaExistente.setImagen(blob);
-				recetaRepositorio.guardarReceta(recetaExistente);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		if (dto.getImagen() != null && !dto.getImagen().isEmpty()) {
+			recetaExistente.setImagen(ImagenController.mpfTBlob(dto.getImagen()));
+			recetaRepositorio.guardarReceta(recetaExistente);
 		}
+
 		if (dto.getReceta().getNombre() != null) {
 			recetaRepositorio.actualizarNombre(recetaExistente.getIdReceta(), dto.getReceta().getNombre());
 		}
@@ -240,19 +239,16 @@ public class RecetaController {
 		}
 		Receta nuevaReceta = dto.getReceta();
 		nuevaReceta.setUsuario(user);
+		nuevaReceta.setImagen(ImagenController.mpfTBlob(dto.getImagen()));
 
-		MultipartFile archivo = dto.getImagen();
-		if (archivo != null && !archivo.isEmpty()) {
-			try {
-				byte[] bytes = archivo.getBytes();
-				Blob blob = new SerialBlob(bytes);
-				nuevaReceta.setImagen(blob);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
 		Receta recetaGuardada = recetaRepositorio.guardarReceta(nuevaReceta);
 		List<Paso> pasos = dto.getPasos();
+		List<Paso> pasosIA = pasos.stream().filter(p -> p.isGenerarPeticion()).toList();
+		for (Paso paso : pasosIA) {
+			PeticionIA peticionGenerada = peticionRepositorio.generarPeticion(paso.getNotas());
+			paso.setPeticionIA(peticionGenerada);
+			peticionGenerada.setPaso(paso);
+		}
 		pasoRepositorio.guardarPasos(pasos, recetaGuardada);
 		List<Detalle> detalles = dto.getDetalles();
 		detalleRepositorio.guardarDetalles(detalles, recetaGuardada);
@@ -273,6 +269,12 @@ public class RecetaController {
 			detalleRepositorio.eliminarDetalle(detalle);
 		}
 		for (Paso paso : recetaOpt.get().getPasos()) {
+			PeticionIA peticion = paso.getPeticionIA();
+			if (peticion != null) {
+				peticion.setPaso(null); // Romper la relación bidireccional
+				paso.setPeticionIA(null);
+				peticionRepositorio.eliminarPeticion(peticion.getIdPeticionIA());
+			}
 			pasoRepositorio.eliminarPaso(paso);
 		}
 		recetaRepositorio.eliminarReceta(idReceta);

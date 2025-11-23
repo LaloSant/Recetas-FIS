@@ -7,6 +7,8 @@ import com.ejbs.recetario.model.entity.Paso;
 import com.ejbs.recetario.model.entity.Receta;
 
 public interface PasoService {
+	public List<Paso> obtenerTodoPaso();
+	
 	public void actualizarPaso(Long idPaso, String notas);
 
 	public void actualizarPaso(Long idPaso, String notas, Blob imagen);

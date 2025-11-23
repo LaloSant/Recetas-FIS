@@ -1,25 +1,31 @@
 package com.ejbs.recetario.model.entity;
 
-import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = "paso")
+// @ToString
 
 @Entity
 @Table(name = "PETICION_IA")
 public class PeticionIA {
+
+	public PeticionIA(String descripcion){
+		this.descripcion = descripcion;
+		this.estatus = "PEN";
+	}
 
     @Getter
     @Setter
@@ -40,6 +46,6 @@ public class PeticionIA {
 
 	@Getter
 	@Setter
-	@OneToMany(mappedBy="peticionIA")
-	private List<Paso> pasos;
+	@OneToOne(mappedBy="peticionIA")
+	private Paso paso;
 }

@@ -3,6 +3,8 @@ package com.ejbs.recetario.controller;
 import java.sql.Blob;
 import java.sql.SQLException;
 
+import javax.sql.rowset.serial.SerialBlob;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ejbs.recetario.service.paso.PasoServiceImpl;
 import com.ejbs.recetario.service.receta.RecetaServiceImpl;
@@ -34,13 +37,11 @@ public class ImagenController {
 		try {
 			bytes = img.getBytes(1, (int) img.length());
 		} catch (SQLException ex) {
-
 		}
 		String mimeType = "image/jpeg";
 		if (bytes == null || bytes.length == 0) {
 			return ResponseEntity.notFound().build();
 		}
-
 		return ResponseEntity
 				.ok()
 				.contentType(MediaType.parseMediaType(mimeType))
@@ -58,17 +59,27 @@ public class ImagenController {
 		try {
 			bytes = img.getBytes(1, (int) img.length());
 		} catch (SQLException ex) {
-
 		}
 		String mimeType = "image/jpeg";
 		if (bytes == null || bytes.length == 0) {
 			return ResponseEntity.notFound().build();
 		}
-
 		return ResponseEntity
 				.ok()
 				.contentType(MediaType.parseMediaType(mimeType))
 				.body(bytes);
 	}
 
+	public static Blob mpfTBlob(MultipartFile mpf){
+		if (mpf != null && !mpf.isEmpty()) {
+			try {
+				byte[] bytes = mpf.getBytes();
+				Blob blob = new SerialBlob(bytes);
+				return blob;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
 }

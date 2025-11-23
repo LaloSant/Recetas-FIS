@@ -26,6 +26,7 @@ public class RecetaServiceImpl implements RecetaService {
 		receta.setVisitasSemanales(0l);
 		receta.setVisitasTotales(0l);
 		receta.setCalificacion(0d);
+		receta.setCalificacionesTotales(0l);
 		return repositorio.save(receta);
 	}
 
