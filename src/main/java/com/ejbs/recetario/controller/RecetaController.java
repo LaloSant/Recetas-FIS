@@ -1,6 +1,7 @@
 package com.ejbs.recetario.controller;
 
 import java.sql.Blob;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -101,7 +101,12 @@ public class RecetaController {
 	}
 
 	@PostMapping("/recetas/editar")
-	public String actualizarReceta(@ModelAttribute("receta") RecetaCompDTO dto) {
+	public String actualizarReceta(@ModelAttribute("dto") RecetaCompDTO dto) {
+		// Validate that receta and its ID are present
+		if (dto == null || dto.getReceta() == null || dto.getReceta().getIdReceta() == null) {
+			System.out.println("[actualizarReceta] ERROR: dto o receta o idReceta es nulo");
+			return "redirect:/recetas";
+		}
 		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(dto.getReceta().getIdReceta());
 		if (!recetaOpt.isPresent()) {
 			return "redirect:/recetas";
@@ -110,14 +115,24 @@ public class RecetaController {
 		List<Paso> pasos = dto.getPasos();
 		if (pasos != null) {
 			for (Paso paso : pasos) {
-				pasoRepositorio.actualizarPaso(paso.getIdPaso(), paso.getNotas());
+				if (paso.getIdPaso() != null && paso.getNotas() != null) {
+					pasoRepositorio.actualizarPaso(paso.getIdPaso(), paso.getNotas());
+				} else {
+					pasoRepositorio.guardarPasos(Arrays.asList(paso), recetaExistente);
+				}
 			}
 		}
 		List<Detalle> detalles = dto.getDetalles();
 		if (detalles != null) {
 			for (Detalle detalle : detalles) {
-				detalleRepositorio.actualizarDetalle(detalle.getIdDetalle(), detalle.getCantidad(),
-						detalle.getIngrediente().getIdIngrediente());
+				if (detalle.getIdDetalle() != null && detalle.getCantidad() != null
+						&& detalle.getIngrediente() != null && detalle.getIngrediente().getIdIngrediente() != null) {
+					detalleRepositorio.actualizarDetalle(detalle.getIdDetalle(), detalle.getCantidad(),
+							detalle.getIngrediente().getIdIngrediente());
+				}else if (detalle.getIdDetalle() == null) {
+					detalleRepositorio.guardarDetalles(Arrays.asList(detalle), recetaExistente);
+				}
+				System.out.println("Detalle invalido " + detalle.toString());
 			}
 		}
 		MultipartFile archivo = dto.getImagen();
@@ -131,22 +146,69 @@ public class RecetaController {
 				e.printStackTrace();
 			}
 		}
-		recetaRepositorio.actualizarNombre(recetaExistente.getIdReceta(), dto.getReceta().getNombre());
+		if (dto.getReceta().getNombre() != null) {
+			recetaRepositorio.actualizarNombre(recetaExistente.getIdReceta(), dto.getReceta().getNombre());
+		}
+
 		return "redirect:/recetas";
 	}
 
-	@GetMapping("/recetas/agregar")
-	public String agregarReceta(Model modelo) {
+	@GetMapping("/receta/agregar")
+	public String agregarRecetaVista(Model modelo) {
 		Usuario user = usuarioRepositorio.getUsuarioSesion();
+		RecetaCompDTO dto = new RecetaCompDTO();
 		if (user != null) {
 			modelo.addAttribute("nomUser", user.getNombre());
 		}
+		modelo.addAttribute("dto", dto);
+		modelo.addAttribute("ingredientes", ingredienteRepositorio.listarTodoIngrediente());
 		return RUTA_VISTA + "agregarReceta";
 	}
 
-	@GetMapping("/recetas/{idReceta}")
-	public String eliminarReceta(@PathVariable Long idReceta) {
+	@PostMapping("/receta/agregar")
+	public String agregarReceta(@ModelAttribute("dto") RecetaCompDTO dto) {
+		Usuario user = usuarioRepositorio.getUsuarioSesion();
+		if (user == null) {
+			return "redirect:/login";
+		}
+		Receta nuevaReceta = dto.getReceta();
+		nuevaReceta.setUsuario(user);
+
+		MultipartFile archivo = dto.getImagen();
+		if (archivo != null && !archivo.isEmpty()) {
+			try {
+				byte[] bytes = archivo.getBytes();
+				Blob blob = new SerialBlob(bytes);
+				nuevaReceta.setImagen(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		Receta recetaGuardada = recetaRepositorio.guardarReceta(nuevaReceta);
+		List<Paso> pasos = dto.getPasos();
+		pasoRepositorio.guardarPasos(pasos, recetaGuardada);
+		List<Detalle> detalles = dto.getDetalles();
+		detalleRepositorio.guardarDetalles(detalles, recetaGuardada);
+		return "redirect:/recetas";
+	}
+
+	@GetMapping("/recetas/eliminar")
+	public String eliminarReceta(Model modelo, @RequestParam(required = false) Long idReceta,
+			@RequestParam(required = false) String nomUser) {
+		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(idReceta);
+		if (!recetaOpt.isPresent()) {
+			return "redirect:/recetas";
+		}
+		if (!recetaOpt.get().getUsuario().getNombre().equals(nomUser)) {
+			return "redirect:/recetas";
+		}
+		for (Detalle detalle : recetaOpt.get().getDetalles()) {
+			detalleRepositorio.eliminarDetalle(detalle);
+		}
+		for (Paso paso : recetaOpt.get().getPasos()) {
+			pasoRepositorio.eliminarPaso(paso);
+		}
 		recetaRepositorio.eliminarReceta(idReceta);
-		return RUTA_VISTA + "redirect:/recetas";
+		return "redirect:/recetas";
 	}
 }

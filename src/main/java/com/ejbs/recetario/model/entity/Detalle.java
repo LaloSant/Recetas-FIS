@@ -56,4 +56,13 @@ public class Detalle {
 	@Setter
 	@Column(name = "COSTO", nullable = false)
 	private Double costo;
+
+	@Override
+	public String toString(){
+		return "idDetalle: " + idDetalle + "\n" +
+		"Receta: " + receta + "\n" +
+		"ingrediente: " + ingrediente + "\n" +
+		"cantidad: " + cantidad + "\n" +
+		"costo: " + costo + "";
+	}
 }

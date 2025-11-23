@@ -48,7 +48,7 @@
 							<input class="form-check-input m-1 p-2" type="checkbox" value="" th:id="${detalle.idDetalle}"
 								style="transform: scale(1.2);">
 							<label class="form-check-label stretched-link fs-6 mx-4" th:for="${detalle.idDetalle}"
-								th:text="${detalle.cantidad} + ' ' + ' de ' + ${detalle.ingrediente.nombre}"></label>
+								th:text="${detalle.cantidad} + ' ' + ${detalle.ingrediente.magnitud} +' '+ ' de ' + ${detalle.ingrediente.nombre}"></label>
 								<!-- th:text="${detalle.cantidad} + ' ' +${detalle.notas} + ' de ' + ${detalle.ingrediente.nombre}"></label> -->
 						</li>
 					</ul>

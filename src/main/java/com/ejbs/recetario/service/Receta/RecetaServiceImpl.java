@@ -23,6 +23,9 @@ public class RecetaServiceImpl implements RecetaService {
 
 	@Override
 	public Receta guardarReceta(Receta receta) {
+		receta.setVisitasSemanales(0l);
+		receta.setVisitasTotales(0l);
+		receta.setCalificacion(0l);
 		return repositorio.save(receta);
 	}
 

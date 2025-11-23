@@ -40,39 +40,49 @@
 							<div class="d-flex justify-content-center">
 								<h4 class="text-center">PASOS:</h4>
 							</div>
-							<div th:each="paso, iterStat : *{pasos}" class="ms-5">
-								<div class="mb-3 mt-1 ms-2">
-									<div class="input-group">
-										<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
-										<span class="input-group-text" th:text="'Paso ' + ${paso.indicePaso}"></span>
-										<input type="hidden" th:field="*{pasos[__${iterStat.index}__].idPaso}" />
-										<input type="text" th:field="*{pasos[__${iterStat.index}__].notas}" class="form-control" />
+							<div id="pasos-container" class="ms-5">
+								<div th:each="paso, iterStat : *{pasos}">
+									<div class="mb-3 mt-1 ms-2">
+										<div class="input-group">
+											<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
+											<span class="input-group-text" th:text="'Paso ' + ${paso.indicePaso}"></span>
+											<input type="hidden" th:field="*{pasos[__${iterStat.index}__].idPaso}" />
+											<input type="text" th:field="*{pasos[__${iterStat.index}__].notas}" class="form-control" />
+										</div>
 									</div>
 								</div>
+							</div>
+							<div class="d-flex justify-content-center mt-2">
+								<button type="button" class="btn btn-info" onclick="agregarPaso()">Agregar Paso</button>
 							</div>
 						</div>
 						<div class="mb-2 mt-2 border p-2">
 							<div class="d-flex justify-content-center mt-3">
 								<h4 class="text-center">INGREDIENTES:</h4>
 							</div>
-							<div th:each="detalle, iterStat : *{detalles}" class="ms-5">
-								<div class="mb-3 mt-1 ms-2">
-									<div class="input-group">
-										<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
-										<span class="input-group-text">Detalle</span>
-										<input type="hidden" th:field="*{detalles[__${iterStat.index}__].idDetalle}" />
-										<input type="text" th:field="*{detalles[__${iterStat.index}__].cantidad}" class="form-control" />
-										<select th:field="*{detalles[__${iterStat.index}__].ingrediente.idIngrediente}" class="form-select">
-											<option value="">Seleccionar ingrediente</option>
-											<option th:each="ingrediente : ${ingredientes}" th:value="${ingrediente.idIngrediente}"
-												th:text="${ingrediente.nombre} + ' (' + ${ingrediente.magnitud} + ')'"
-												th:selected="${ingrediente.idIngrediente == detalle.ingrediente.idIngrediente}">
-											</option>
-										</select>
-										<span class="input-group-text" th:text="'Costo unitario: ' + ${detalle.costo}"></span>
-										<input type="hidden" th:field="*{detalles[__${iterStat.index}__].costo}" />
+							<div id="detalles-container" class="ms-5">
+								<div th:each="detalle, iterStat : *{detalles}">
+									<div class="mb-3 mt-1 ms-2">
+										<div class="input-group">
+											<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
+											<span class="input-group-text">Detalle</span>
+											<input type="hidden" th:field="*{detalles[__${iterStat.index}__].idDetalle}" />
+											<input type="number" step="0.1" min="0" max="1000" th:field="*{detalles[__${iterStat.index}__].cantidad}" class="form-control" />
+											<select th:field="*{detalles[__${iterStat.index}__].ingrediente.idIngrediente}" class="form-select">
+												<option value="">Seleccionar ingrediente</option>
+												<option th:each="ingrediente : ${ingredientes}" th:value="${ingrediente.idIngrediente}"
+													th:text="${ingrediente.nombre} + ' (' + ${ingrediente.magnitud} + ')'"
+													th:selected="${ingrediente.idIngrediente == detalle.ingrediente.idIngrediente}">
+												</option>
+											</select>
+											<span class="input-group-text" th:text="'Costo unitario: ' + ${detalle.costo}"></span>
+											<input type="hidden" th:field="*{detalles[__${iterStat.index}__].costo}" />
+										</div>
 									</div>
 								</div>
+							</div>
+							<div class="d-flex justify-content-center mt-2">
+								<button type="button" class="btn btn-info" onclick="agregarDetalle()">Agregar Ingrediente</button>
 							</div>
 						</div>
 						<div class="mb-2 mt-2 border p-2">
@@ -84,11 +94,11 @@
 								<span class="input-group-text">Imagen</span>
 								<input type="file" th:field="*{imagen}" class="form-control" accept="image/*" onchange="previewImage(event)" />
 							</div>
-	
+
 							<!-- Preview de la imagen actual -->
 							<div class="text-center my-3">
-								<img th:src="@{/recetas/imagen/{id}(id=${dto.receta.idReceta})}" id="preview" class="img-thumbnail" style="max-width: 300px;"
-									alt="Imagen de la receta no encontrada" />
+								<img th:src="@{/recetas/imagen/{id}(id=${dto.receta.idReceta})}" id="preview" class="img-thumbnail"
+									style="max-width: 300px;" alt="Imagen de la receta no encontrada" />
 							</div>
 						</div>
 						<div class="box-footer d-flex justify-content-center">
@@ -100,6 +110,63 @@
 		</div>
 	</div>
 	<footer th:replace="~{template :: footer}"></footer>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		const ingredientes = /*[[${ingredientes}]]*/[];
+		/*]]>*/
+		
+		let pasoIndex = /*[[${#lists.size(dto.pasos)}]]*/ 0;
+		let detalleIndex = /*[[${#lists.size(dto.detalles)}]]*/ 0;
+		
+		function agregarPaso() {
+			const container = document.getElementById('pasos-container');
+
+			const pasoDiv = document.createElement('div');
+			pasoDiv.className = 'mb-3 mt-1 ms-2';
+
+			const inputGroup = document.createElement('div');
+			inputGroup.className = 'input-group';
+
+			inputGroup.innerHTML = `
+						<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
+						<span class="input-group-text">Paso ${pasoIndex + 1}</span>
+						<input type="text" name="pasos[${pasoIndex}].notas" class="form-control" placeholder="Descripción del paso" />
+					`;
+
+			pasoDiv.appendChild(inputGroup);
+			container.appendChild(pasoDiv);
+			pasoIndex++;
+		}
+
+		function agregarDetalle() {
+			const container = document.getElementById('detalles-container');
+
+			const detalleDiv = document.createElement('div');
+			detalleDiv.className = 'mb-3 mt-1 ms-2';
+
+			const inputGroup = document.createElement('div');
+			inputGroup.className = 'input-group';
+
+			let optionsHtml = '<option value="">Seleccionar ingrediente</option>';
+			ingredientes.forEach(ingrediente => {
+				optionsHtml += `<option value="${ingrediente.idIngrediente}">${ingrediente.nombre} (${ingrediente.magnitud})</option>`;
+			});
+
+			inputGroup.innerHTML = `
+						<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
+						<span class="input-group-text">Detalle</span>
+						<input type="number" step="0.1" min="0" max="1000" name="detalles[${detalleIndex}].cantidad" class="form-control" placeholder="Cantidad"/>
+						<select name="detalles[${detalleIndex}].ingrediente.idIngrediente" class="form-select">
+							${optionsHtml}
+						</select>
+					`;
+
+			detalleDiv.appendChild(inputGroup);
+			container.appendChild(detalleDiv);
+			detalleIndex++;
+		}
+
+	</script>
 </body>
 
 </html>

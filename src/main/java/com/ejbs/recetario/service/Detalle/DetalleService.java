@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import com.ejbs.recetario.model.entity.Detalle;
+import com.ejbs.recetario.model.entity.Receta;
 
 public interface DetalleService {
 
@@ -13,6 +14,10 @@ public interface DetalleService {
 
 	public Detalle guardarDetalle(Detalle detalle);
 
+	public void guardarDetalles(List<Detalle> detalles, Receta receta);
+
 	public void actualizarDetalle(Long idDetalle, Double cantidad, Long idIngrediente);
+
+	public void eliminarDetalle(Detalle detalle);
 
 }

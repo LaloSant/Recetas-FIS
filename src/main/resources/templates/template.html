@@ -68,14 +68,17 @@
 		<li class="list-group-item" th:text="${receta.visitasSemanales} + ' visitas semanales'"></li>
 		<li class="list-group-item" th:text="'Subido por: ' + ${receta.usuario.nombre}"></li>
 	</ul>
-	<div class="card-body m-3">
+	<div class="card-body m-0">
 		<div class="container text-center p-0">
 			<div class="row justify-content-center">
 				<div class="col px-1">
-					<a th:href="@{/recetas/ver(idReceta=${receta.idReceta})}" class="btn btn-success w-100">Ver</a>
+					<a th:href="@{/recetas/ver(idReceta=${receta.idReceta})}" class="btn btn-success w-100"><i class="bi bi-eye-fill"></i> Ver Receta</a>
 				</div>
 				<div th:if="${usuarioSesion} == ${receta.usuario}" class="col px-1">
-					<a th:href="@{/recetas/editar(idReceta=${receta.idReceta})}" class="btn btn-warning w-100">Editar</a>
+					<a th:href="@{/recetas/editar(idReceta=${receta.idReceta})}" class="btn btn-warning w-100"><i class="bi bi-pencil-fill"></i> Editar</a>
+				</div>
+				<div th:if="${usuarioSesion} == ${receta.usuario}" class="col px-1">
+					<a th:href="@{/recetas/eliminar(idReceta=${receta.idReceta})(nom=${nomUser})}" class="btn btn-danger w-100"><i class="bi bi-x-circle-fill"></i>Eliminar</a>
 				</div>
 			</div>
 		</div>
