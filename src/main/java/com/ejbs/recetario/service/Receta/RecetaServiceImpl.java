@@ -25,13 +25,23 @@ public class RecetaServiceImpl implements RecetaService {
 	public Receta guardarReceta(Receta receta) {
 		receta.setVisitasSemanales(0l);
 		receta.setVisitasTotales(0l);
-		receta.setCalificacion(0l);
+		receta.setCalificacion(0d);
 		return repositorio.save(receta);
 	}
 
 	@Override
 	public Optional<Receta> obtenerRecetaPorID(Long idReceta) {
 		return repositorio.findById(idReceta);
+	}
+
+	@Override
+	public List<Receta> obtenerTodoPor(String nombre) {
+		return repositorio.findBynombreIgnoreCaseContaining(nombre);
+	}
+
+	@Override
+	public List<Receta> obtenerTodoPor(List<Long> ids) {
+		return repositorio.findAllById(ids);
 	}
 
 	@Override
@@ -63,13 +73,19 @@ public class RecetaServiceImpl implements RecetaService {
 	@Transactional
 	public void aumentarVisita(Long idReceta) {
 		repositorio.aumentarVisita(idReceta);
-		
+
 	}
 
 	@Override
 	@Transactional
 	public void actualizarNombre(Long idReceta, String nombre) {
 		repositorio.actualizarNombre(idReceta, nombre);
+	}
+
+	@Override
+	@Transactional
+	public void actualizarCalificacion(Long idReceta, Double calificacion) {
+		repositorio.actualizarCalificacion(idReceta, calificacion);
 	}
 
 }

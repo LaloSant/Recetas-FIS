@@ -4,8 +4,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ejbs.recetario.model.entity.Detalle;
+import com.ejbs.recetario.model.entity.Ingrediente;
 import com.ejbs.recetario.model.entity.Receta;
 import com.ejbs.recetario.repository.DetalleRepository;
+import com.ejbs.recetario.service.ingrediente.IngredienteServiceImpl;
 
 import jakarta.transaction.Transactional;
 
@@ -15,9 +17,22 @@ public class DetalleServiceImpl implements DetalleService {
 	@Autowired
 	DetalleRepository repositorio;
 
+	@Autowired
+	IngredienteServiceImpl ingredienteRepositorio;
+
 	@Override
 	public List<Detalle> listarTodoDetalle() {
 		return repositorio.findAll();
+	}
+
+	@Override
+	public List<Detalle> buscarPorIngredientes(List<Long> ids) {
+		return repositorio.findByIngredientes(ids);
+	}
+	
+	@Override
+	public List<Long> buscarPorIngredientes(List<Long> ids, Long size) {
+		return repositorio.recetasPorIngredientes(ids, size);
 	}
 
 	@Override
@@ -40,9 +55,9 @@ public class DetalleServiceImpl implements DetalleService {
 	public void guardarDetalles(List<Detalle> detalles, Receta receta) {
 		if (detalles != null) {
 			for (Detalle detalle : detalles) {
+				Ingrediente ing = ingredienteRepositorio.obtenerIngrediente(detalle.getIngrediente().getIdIngrediente());
 				detalle.setReceta(receta);
-				System.out.println(detalle.getIngrediente());
-				detalle.setCosto(0d);
+				detalle.setCosto(ing.getCostoUnitario() * detalle.getCantidad());
 				repositorio.save(detalle);
 			}
 		}

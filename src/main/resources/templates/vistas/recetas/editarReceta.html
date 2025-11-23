@@ -76,7 +76,7 @@
 													th:selected="${ingrediente.idIngrediente == detalle.ingrediente.idIngrediente}">
 												</option>
 											</select>
-											<span class="input-group-text" th:text="'Costo unitario: ' + ${detalle.costo}"></span>
+											<span class="input-group-text" th:text="'Costo total: ' + ${detalle.costo}"></span>
 											<input type="hidden" th:field="*{detalles[__${iterStat.index}__].costo}" />
 										</div>
 									</div>

@@ -52,8 +52,13 @@ public class Receta {
 
 	@Getter
 	@Setter
+	@Column(name = "CALIFICACIONES_TOTALES")
+	private Long calificacionesTotales;
+
+	@Getter
+	@Setter
 	@Column(name = "CALIFICACION", columnDefinition = "NUMBER CHECK (CALIFICACION >= 0 AND CALIFICACION <= 5)")
-	private Long calificacion;
+	private Double calificacion;
 
 	@Getter
 	@Setter
@@ -71,5 +76,24 @@ public class Receta {
 	@OneToMany(mappedBy = "receta")
 	private List<Paso> pasos;
 
-	
+	public double calcularCosto(){
+		double costo = 0d;
+		for (Detalle detalle : detalles) {
+			costo += detalle.getCosto();
+		}
+		return costo;
+	}
+
+	public Double actualizarCalificacion(int calificacionNueva) {
+		double mult = calificacion * calificacionesTotales;
+		mult += calificacionNueva;
+		calificacionesTotales++;
+		calificacion = roundAvoid(mult / calificacionesTotales, 2);
+		return calificacion;
+	}
+
+	public static double roundAvoid(double value, int places) {
+		double scale = Math.pow(10, places);
+		return Math.round(value * scale) / scale;
+	}
 }

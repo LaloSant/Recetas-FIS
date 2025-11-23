@@ -3,8 +3,10 @@ package com.ejbs.recetario.controller;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,14 +53,43 @@ public class RecetaController {
 
 	@GetMapping({ "/recetas", "/" })
 	public String listarRecetas(Model modelo,
-			@RequestParam(required = false, defaultValue = "semana") String ordenarPor) {
-		System.out.println("Entro maria a recetas");
+			@RequestParam(required = false, defaultValue = "semana") String ordenarPor,
+			@RequestParam(required = false) String nombreReceta,
+			@RequestParam(required = false) List<Long> ingredientes,
+			@RequestParam(required = false) Integer exclusivo) {
 		Usuario user = usuarioRepositorio.getUsuarioSesion();
+		modelo.addAttribute("ingredientes", ingredienteRepositorio.listarTodoIngrediente());
 		if (user != null) {
 			modelo.addAttribute("nomUser", user.getNombre());
 			modelo.addAttribute("usuarioSesion", user);
 		}
 		List<Receta> recetas;
+		if (nombreReceta != null && !nombreReceta.isBlank()) {
+			recetas = recetaRepositorio.obtenerTodoPor(nombreReceta);
+			modelo.addAttribute("recetas", recetas);
+			return RUTA_VISTA + "verRecetas";
+		}
+		if (ingredientes != null) {
+			if (exclusivo != null && exclusivo == 1) {
+				modelo.addAttribute("exclusivo", 1);
+				List<Long> recetasIds = detalleRepositorio.buscarPorIngredientes(ingredientes,
+						(long) ingredientes.size());
+				recetas = recetaRepositorio.obtenerTodoPor(recetasIds);
+				modelo.addAttribute("recetas", recetas);
+				modelo.addAttribute("ingredientesSel", ingredientes);
+				return RUTA_VISTA + "verRecetas";
+			}
+			List<Detalle> detalles = detalleRepositorio.buscarPorIngredientes(ingredientes);
+			Set<Receta> set = new HashSet<>();
+			for (Detalle detalle : detalles) {
+				set.add(detalle.getReceta());
+			}
+			recetas = new ArrayList<>(set);
+			modelo.addAttribute("exclusivo", 0);
+			modelo.addAttribute("recetas", recetas);
+			modelo.addAttribute("ingredientesSel", ingredientes);
+			return RUTA_VISTA + "verRecetas";
+		}
 		if ("semana".equals(ordenarPor)) {
 			recetas = recetaRepositorio.obtenerTopSemana();
 			modelo.addAttribute("textoOrden", "Visitas semanales");
@@ -68,6 +99,18 @@ public class RecetaController {
 		}
 		modelo.addAttribute("recetas", recetas);
 		return RUTA_VISTA + "verRecetas";
+	}
+
+	@PostMapping("/recetas/calificar")
+	public String calificarReceta(@RequestParam("idReceta") Long idReceta,
+			@RequestParam("calificacion") int calificacionNueva) {
+		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(idReceta);
+		if (recetaOpt.isPresent()) {
+			Receta receta = recetaOpt.get();
+			receta.actualizarCalificacion(calificacionNueva);
+			recetaRepositorio.actualizarCalificacion(idReceta, receta.getCalificacion());
+		}
+		return String.format("redirect:/recetas/ver?idReceta=%d", idReceta);
 	}
 
 	@GetMapping("/recetas/ver")
@@ -83,6 +126,7 @@ public class RecetaController {
 		Receta receta = recetaOpt.get();
 		recetaRepositorio.aumentarVisita(idReceta);
 		modelo.addAttribute("receta", receta);
+		modelo.addAttribute("costo", receta.calcularCosto());
 		return RUTA_VISTA + "vistaReceta";
 	}
 
@@ -216,13 +260,13 @@ public class RecetaController {
 	}
 
 	@GetMapping("/recetas/eliminar")
-	public String eliminarReceta(Model modelo, @RequestParam(required = false) Long idReceta,
-			@RequestParam(required = false) String nomUser) {
+	public String eliminarReceta(Model modelo, @RequestParam(required = true) Long idReceta,
+			@RequestParam(required = true) String nom) {
 		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(idReceta);
 		if (!recetaOpt.isPresent()) {
 			return "redirect:/recetas";
 		}
-		if (!recetaOpt.get().getUsuario().getNombre().equals(nomUser)) {
+		if (!recetaOpt.get().getUsuario().getNombre().equals(nom)) {
 			return "redirect:/recetas";
 		}
 		for (Detalle detalle : recetaOpt.get().getDetalles()) {
@@ -234,4 +278,5 @@ public class RecetaController {
 		recetaRepositorio.eliminarReceta(idReceta);
 		return "redirect:/recetas";
 	}
+
 }

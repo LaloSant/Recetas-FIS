@@ -15,11 +15,19 @@ public interface RecetaRepository extends JpaRepository<Receta, Long> {
 
 	public List<Receta> findAllByOrderByVisitasTotalesDesc();
 
+	public List<Receta>findBynombreIgnoreCaseContaining(String nombre);
+	
 	@Modifying
 	@Query("UPDATE Receta r SET r.visitasSemanales = r.visitasSemanales + 1, r.visitasTotales = r.visitasTotales + 1 WHERE r.idReceta = :idReceta")
-	void aumentarVisita(@Param("idReceta") Long idReceta);
+	public void aumentarVisita(@Param("idReceta") Long idReceta);
 
 	@Modifying
 	@Query("UPDATE Receta r SET r.nombre = :nombre WHERE r.idReceta = :idReceta")
-	void actualizarNombre(@Param("idReceta") Long idReceta, @Param("nombre") String nombre);
+	public void actualizarNombre(@Param("idReceta") Long idReceta, @Param("nombre") String nombre);
+
+	@Modifying
+	@Query("UPDATE Receta r SET r.calificacion = :calificacion, r.calificacionesTotales = r.calificacionesTotales + 1 WHERE r.idReceta = :idReceta")
+	public void actualizarCalificacion(@Param("idReceta") Long idReceta, @Param("calificacion") Double calificacion);
+
+
 }

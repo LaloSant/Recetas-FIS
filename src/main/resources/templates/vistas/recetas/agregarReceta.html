@@ -59,7 +59,7 @@
 							<div class="input-group my-3">
 								<span class="input-group-text"><i class="bi bi-image"></i></span>
 								<span class="input-group-text">Imagen</span>
-								<input type="file" th:field="*{imagen}" class="form-control" accept="image/*" accept=".jpg,image/jpeg" />
+								<input type="file" th:field="*{imagen}" class="form-control" accept=".jpg,image/jpeg" />
 							</div>
 						</div>
 						<div class="box-footer d-flex justify-content-center">
@@ -121,7 +121,7 @@
 					${optionsHtml}
 				</select>
 			`;
-			const inputGroup2 = document.createElement('div');
+			/* const inputGroup2 = document.createElement('div');
 			inputGroup.className = 'input-group';
 			inputGroup.innerHTML = `
 				<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
@@ -130,7 +130,7 @@
 				<select name="detalles[${detalleIndex}].ingrediente.idIngrediente" class="form-select">
 					${optionsHtml}
 				</select>
-			`;
+			`; */
 
 			detalleDiv.appendChild(inputGroup);
 			container.appendChild(detalleDiv);
