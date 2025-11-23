@@ -2,10 +2,13 @@ package com.ejbs.recetario.model.entity;
 
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -23,7 +26,7 @@ public class Usuario {
     @Getter
     @Setter
     @Id
-    @Column(name = "ID_USUARIO", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
 
     @Getter
@@ -33,8 +36,8 @@ public class Usuario {
 
     @Getter
     @Setter
-    @Column(name = "AP_PAT", nullable = false)
-    private String apPat;
+    @Column(name = "EMAIL", nullable = false)
+    private String email;
 
     @Getter
     @Setter
@@ -43,12 +46,30 @@ public class Usuario {
 
     @Getter
     @Setter
-    @Column(name = "CORREO", nullable = false)
-    private String correo;
+    @ManyToOne
+    @JoinColumn(name = "ID_ROL")
+    private Rol rol;
+	
+	@Getter
+	@Setter
+	@OneToMany(mappedBy = "usuario")
+	private List<Receta> recetas;
 
-    @Getter
+    /*     @Getter
     @Setter
-    @OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, orphanRemoval = true) //mappedBy -> nombre de variable
-    private List<Receta> recetas;
+    @OneToMany(mappedBy = "idUsuario")
+    private List<Receta> recetas; */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Usuario{");
+        sb.append("idUsuario=").append(idUsuario);
+        sb.append(", nombre=").append(nombre);
+        sb.append(", contrasenia=").append("[PROTEGIDO]");
+        sb.append(", email=").append(email);
+        sb.append(", rol=").append(rol.getIdRol());
+        sb.append('}');
+        return sb.toString();
+    }
 
 }

@@ -45,36 +45,36 @@ esac
 set_java_home() {
   # For Cygwin and MinGW, ensure paths are in Unix format before anything is touched
   if [ -n "${JAVA_HOME-}" ]; then
-    if [ -x "$JAVA_HOME/jre/sh/java" ]; then
-      # IBM's JDK on AIX uses strange locations for the executables
-      JAVACMD="$JAVA_HOME/jre/sh/java"
-      JAVACCMD="$JAVA_HOME/jre/sh/javac"
-    else
-      JAVACMD="$JAVA_HOME/bin/java"
-      JAVACCMD="$JAVA_HOME/bin/javac"
+	if [ -x "$JAVA_HOME/jre/sh/java" ]; then
+	  # IBM's JDK on AIX uses strange locations for the executables
+	  JAVACMD="$JAVA_HOME/jre/sh/java"
+	  JAVACCMD="$JAVA_HOME/jre/sh/javac"
+	else
+	  JAVACMD="$JAVA_HOME/bin/java"
+	  JAVACCMD="$JAVA_HOME/bin/javac"
 
-      if [ ! -x "$JAVACMD" ] || [ ! -x "$JAVACCMD" ]; then
-        echo "The JAVA_HOME environment variable is not defined correctly, so mvnw cannot run." >&2
-        echo "JAVA_HOME is set to \"$JAVA_HOME\", but \"\$JAVA_HOME/bin/java\" or \"\$JAVA_HOME/bin/javac\" does not exist." >&2
-        return 1
-      fi
-    fi
+	  if [ ! -x "$JAVACMD" ] || [ ! -x "$JAVACCMD" ]; then
+		echo "The JAVA_HOME environment variable is not defined correctly, so mvnw cannot run." >&2
+		echo "JAVA_HOME is set to \"$JAVA_HOME\", but \"\$JAVA_HOME/bin/java\" or \"\$JAVA_HOME/bin/javac\" does not exist." >&2
+		return 1
+	  fi
+	fi
   else
-    JAVACMD="$(
-      'set' +e
-      'unset' -f command 2>/dev/null
-      'command' -v java
-    )" || :
-    JAVACCMD="$(
-      'set' +e
-      'unset' -f command 2>/dev/null
-      'command' -v javac
-    )" || :
+	JAVACMD="$(
+	  'set' +e
+	  'unset' -f command 2>/dev/null
+	  'command' -v java
+	)" || :
+	JAVACCMD="$(
+	  'set' +e
+	  'unset' -f command 2>/dev/null
+	  'command' -v javac
+	)" || :
 
-    if [ ! -x "${JAVACMD-}" ] || [ ! -x "${JAVACCMD-}" ]; then
-      echo "The java/javac command does not exist in PATH nor is JAVA_HOME set, so mvnw cannot run." >&2
-      return 1
-    fi
+	if [ ! -x "${JAVACMD-}" ] || [ ! -x "${JAVACCMD-}" ]; then
+	  echo "The java/javac command does not exist in PATH nor is JAVA_HOME set, so mvnw cannot run." >&2
+	  return 1
+	fi
   fi
 }
 
@@ -82,9 +82,9 @@ set_java_home() {
 hash_string() {
   str="${1:-}" h=0
   while [ -n "$str" ]; do
-    char="${str%"${str#?}"}"
-    h=$(((h * 31 + $(LC_CTYPE=C printf %d "'$char")) % 4294967296))
-    str="${str#?}"
+	char="${str%"${str#?}"}"
+	h=$(((h * 31 + $(LC_CTYPE=C printf %d "'$char")) % 4294967296))
+	str="${str#?}"
   done
   printf %x\\n $h
 }
@@ -123,9 +123,9 @@ maven-mvnd-*bin.*)
   :Darwin*arm64) distributionPlatform=darwin-aarch64 ;;
   :Linux*x86_64*) distributionPlatform=linux-amd64 ;;
   *)
-    echo "Cannot detect native platform for mvnd on $(uname)-$(uname -m), use pure java version" >&2
-    distributionPlatform=linux-amd64
-    ;;
+	echo "Cannot detect native platform for mvnd on $(uname)-$(uname -m), use pure java version" >&2
+	distributionPlatform=linux-amd64
+	;;
   esac
   distributionUrl="${distributionUrl%-bin.*}-$distributionPlatform.zip"
   ;;
@@ -203,12 +203,12 @@ elif set_java_home; then
 	{
 	  protected java.net.PasswordAuthentication getPasswordAuthentication()
 	  {
-	    return new java.net.PasswordAuthentication( System.getenv( "MVNW_USERNAME" ), System.getenv( "MVNW_PASSWORD" ).toCharArray() );
+		return new java.net.PasswordAuthentication( System.getenv( "MVNW_USERNAME" ), System.getenv( "MVNW_PASSWORD" ).toCharArray() );
 	  }
 	  public static void main( String[] args ) throws Exception
 	  {
-	    setDefault( new Downloader() );
-	    java.nio.file.Files.copy( java.net.URI.create( args[0] ).toURL().openStream(), java.nio.file.Paths.get( args[1] ).toAbsolutePath().normalize() );
+		setDefault( new Downloader() );
+		java.nio.file.Files.copy( java.net.URI.create( args[0] ).toURL().openStream(), java.nio.file.Paths.get( args[1] ).toAbsolutePath().normalize() );
 	  }
 	}
 	END
@@ -223,26 +223,26 @@ fi
 if [ -n "${distributionSha256Sum-}" ]; then
   distributionSha256Result=false
   if [ "$MVN_CMD" = mvnd.sh ]; then
-    echo "Checksum validation is not supported for maven-mvnd." >&2
-    echo "Please disable validation by removing 'distributionSha256Sum' from your maven-wrapper.properties." >&2
-    exit 1
+	echo "Checksum validation is not supported for maven-mvnd." >&2
+	echo "Please disable validation by removing 'distributionSha256Sum' from your maven-wrapper.properties." >&2
+	exit 1
   elif command -v sha256sum >/dev/null; then
-    if echo "$distributionSha256Sum  $TMP_DOWNLOAD_DIR/$distributionUrlName" | sha256sum -c >/dev/null 2>&1; then
-      distributionSha256Result=true
-    fi
+	if echo "$distributionSha256Sum  $TMP_DOWNLOAD_DIR/$distributionUrlName" | sha256sum -c >/dev/null 2>&1; then
+	  distributionSha256Result=true
+	fi
   elif command -v shasum >/dev/null; then
-    if echo "$distributionSha256Sum  $TMP_DOWNLOAD_DIR/$distributionUrlName" | shasum -a 256 -c >/dev/null 2>&1; then
-      distributionSha256Result=true
-    fi
+	if echo "$distributionSha256Sum  $TMP_DOWNLOAD_DIR/$distributionUrlName" | shasum -a 256 -c >/dev/null 2>&1; then
+	  distributionSha256Result=true
+	fi
   else
-    echo "Checksum validation was requested but neither 'sha256sum' or 'shasum' are available." >&2
-    echo "Please install either command, or disable validation by removing 'distributionSha256Sum' from your maven-wrapper.properties." >&2
-    exit 1
+	echo "Checksum validation was requested but neither 'sha256sum' or 'shasum' are available." >&2
+	echo "Please install either command, or disable validation by removing 'distributionSha256Sum' from your maven-wrapper.properties." >&2
+	exit 1
   fi
   if [ $distributionSha256Result = false ]; then
-    echo "Error: Failed to validate Maven distribution SHA-256, your Maven distribution might be compromised." >&2
-    echo "If you updated your Maven version, you need to update the specified distributionSha256Sum property." >&2
-    exit 1
+	echo "Error: Failed to validate Maven distribution SHA-256, your Maven distribution might be compromised." >&2
+	echo "If you updated your Maven version, you need to update the specified distributionSha256Sum property." >&2
+	exit 1
   fi
 fi
 

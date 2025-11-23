@@ -5,10 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.ejbs.recetario.service.UsuarioService;
+import com.ejbs.recetario.service.usuario.UsuarioService;
 
 @Controller
 public class UsuarioController {
+
+    private static final String RUTA_VISTA = "/vistas/usuarios/";
 
     @Autowired
     UsuarioService servicio;
@@ -16,6 +18,6 @@ public class UsuarioController {
     @GetMapping({"/usuarios"})
     public String listarUsuarios(Model modelo) {
         modelo.addAttribute("usuarios", servicio.listarTodoUsuario());
-        return "usuarios";
+        return RUTA_VISTA + "usuarios";
     }
 }

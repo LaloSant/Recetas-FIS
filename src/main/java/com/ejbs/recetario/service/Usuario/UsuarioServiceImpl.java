@@ -1,15 +1,18 @@
-package com.ejbs.recetario.service;
+package com.ejbs.recetario.service.usuario;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.ejbs.recetario.model.entity.Usuario;
 import com.ejbs.recetario.repository.UsuarioRepository;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService{
+public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     private UsuarioRepository repositorio;
@@ -25,8 +28,13 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public Usuario obtenerUsuarioPorID(Long idUsuario) {
-        return repositorio.findById(idUsuario).get();
+    public Optional<Usuario> obtenerUsuario(Long idUsuario) {
+        return repositorio.findById(idUsuario);
+    }
+
+    @Override
+    public Optional<Usuario> obtenerUsuario(String email) {
+        return repositorio.findByEmail(email);
     }
 
     @Override
@@ -38,5 +46,11 @@ public class UsuarioServiceImpl implements UsuarioService{
     public void eliminarUsuario(Long idUsuario) {
         repositorio.deleteById(idUsuario);
     }
-    
+
+	public Usuario getUsuarioSesion() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Optional<Usuario> optional = obtenerUsuario(auth.getName());
+		return (optional.isPresent()) ? optional.get() : null;
+	}
+
 }

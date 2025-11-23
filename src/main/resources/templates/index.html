@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
-<head>
-    <meta charset="UTF-8" />
-    <title>Index</title>
-</head>
+<head th:replace="~{template :: head}"></head>
 
 <body>
-    <h1>Titulo del index</h1>
+	<header th:replace="~{template :: header (nomUser=null)}"></header>
+	<footer th:replace="~{template :: footer}"></footer>
 </body>
 
 </html>
