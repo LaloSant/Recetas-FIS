@@ -49,7 +49,7 @@
 								style="transform: scale(1.2);">
 							<label class="form-check-label stretched-link fs-6 mx-4" th:for="${detalle.idDetalle}"
 								th:text="${detalle.cantidad} + ' ' + ${detalle.ingrediente.magnitud} +' '+ ' de ' + ${detalle.ingrediente.nombre}"></label>
-								<!-- th:text="${detalle.cantidad} + ' ' +${detalle.notas} + ' de ' + ${detalle.ingrediente.nombre}"></label> -->
+							<!-- th:text="${detalle.cantidad} + ' ' +${detalle.notas} + ' de ' + ${detalle.ingrediente.nombre}"></label> -->
 						</li>
 					</ul>
 				</div>
@@ -66,7 +66,10 @@
 								</button>
 							</h2>
 							<div th:id="'collapse' + ${paso.idPaso}" class="accordion-collapse collapse fs-6">
-								<div class="accordion-body" th:text="${paso.notas}">
+								<div class="accordion-body text-center">
+									<p th:text="${paso.notas}"></p>
+									<img th:src="@{/pasos/imagen/{id}(id=${paso.idPaso})}" class="card-img-top " alt="Sin imagen de paso"
+										style="width: 200px; height: 200px;">
 								</div>
 							</div>
 						</div>

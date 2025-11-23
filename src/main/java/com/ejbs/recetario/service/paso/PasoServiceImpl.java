@@ -1,5 +1,6 @@
 package com.ejbs.recetario.service.paso;
 
+import java.sql.Blob;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,13 @@ public class PasoServiceImpl implements PasoService {
 	@Override
 	@Transactional
 	public void actualizarPaso(Long idPaso, String notas) {
-		repositorio.actualizarNombre(idPaso, notas);
+		repositorio.actualizarPaso(idPaso, notas);
+	}
+
+	@Override
+	@Transactional
+	public void actualizarPaso(Long idPaso, String notas, Blob imagen) {
+		repositorio.actualizarPaso(idPaso, notas);
 	}
 
 	@Override
@@ -34,7 +41,19 @@ public class PasoServiceImpl implements PasoService {
 			for (int i = 0; i < pasos.size(); i++) {
 				Paso paso = pasos.get(i);
 				paso.setReceta(receta);
-				paso.setIndicePaso(i + 1l); // Asignamos el número de paso
+				paso.setIndicePaso(i + 1l);
+				repositorio.save(paso);
+			}
+		}
+	}
+
+	@Override
+	public void guardarPasos(List<Paso> pasos, Receta receta, Long indicePaso) {
+		if (pasos != null) {
+			for (int i = 0; i < pasos.size(); i++) {
+				Paso paso = pasos.get(i);
+				paso.setReceta(receta);
+				paso.setIndicePaso(indicePaso);
 				repositorio.save(paso);
 			}
 		}
@@ -43,6 +62,11 @@ public class PasoServiceImpl implements PasoService {
 	@Override
 	public void eliminarPaso(Paso paso) {
 		repositorio.delete(paso);
+	}
+
+	@Override
+	public void guardarPaso(Paso paso) {
+		repositorio.save(paso);
 	}
 
 }

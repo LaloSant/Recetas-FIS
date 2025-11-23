@@ -47,7 +47,8 @@
 											<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
 											<span class="input-group-text" th:text="'Paso ' + ${paso.indicePaso}"></span>
 											<input type="hidden" th:field="*{pasos[__${iterStat.index}__].idPaso}" />
-											<input type="text" th:field="*{pasos[__${iterStat.index}__].notas}" class="form-control" />
+											<input type="text" th:field="*{pasos[__${iterStat.index}__].notas}" class="form-control"/>
+											<input type="file" th:field="*{pasoDTOs[__${iterStat.index}__].imagen}" class="form-control" accept=".jpg,image/jpeg" onchange="previewImage(event)" />
 										</div>
 									</div>
 								</div>
@@ -92,13 +93,13 @@
 							<div class="input-group my-3">
 								<span class="input-group-text"><i class="bi bi-image"></i></span>
 								<span class="input-group-text">Imagen</span>
-								<input type="file" th:field="*{imagen}" class="form-control" accept="image/*" onchange="previewImage(event)" />
+								<input type="file" th:field="*{imagen}" class="form-control" accept=".jpg,image/jpeg" onchange="previewImage(event)" />
 							</div>
 
 							<!-- Preview de la imagen actual -->
 							<div class="text-center my-3">
 								<img th:src="@{/recetas/imagen/{id}(id=${dto.receta.idReceta})}" id="preview" class="img-thumbnail"
-									style="max-width: 300px;" alt="Imagen de la receta no encontrada" />
+									style="max-width: 300px;" alt="Imagen de la receta no encontrada" accept=".jpg,image/jpeg" />
 							</div>
 						</div>
 						<div class="box-footer d-flex justify-content-center">

@@ -1,6 +1,7 @@
 package com.ejbs.recetario.controller;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.rowset.serial.SerialBlob;
 
+import com.ejbs.recetario.model.dto.PasoDTO;
 import com.ejbs.recetario.model.dto.RecetaCompDTO;
 import com.ejbs.recetario.model.entity.Detalle;
 import com.ejbs.recetario.model.entity.Paso;
@@ -50,6 +52,7 @@ public class RecetaController {
 	@GetMapping({ "/recetas", "/" })
 	public String listarRecetas(Model modelo,
 			@RequestParam(required = false, defaultValue = "semana") String ordenarPor) {
+		System.out.println("Entro maria a recetas");
 		Usuario user = usuarioRepositorio.getUsuarioSesion();
 		if (user != null) {
 			modelo.addAttribute("nomUser", user.getNombre());
@@ -94,7 +97,11 @@ public class RecetaController {
 			return "redirect:/recetas";
 		}
 		Receta rec = recetaOpt.get();
-		RecetaCompDTO dto = new RecetaCompDTO(rec, rec.getPasos(), rec.getDetalles(), null);
+		List<PasoDTO> pasoImagenes = new ArrayList<>();
+		for (int i = 0; i < rec.getPasos().size(); i++) {
+			pasoImagenes.add(new PasoDTO(rec.getPasos().get(i), null));
+		}
+		RecetaCompDTO dto = new RecetaCompDTO(rec, rec.getPasos(), rec.getDetalles(), null, pasoImagenes);
 		modelo.addAttribute("ingredientes", ingredienteRepositorio.listarTodoIngrediente());
 		modelo.addAttribute("dto", dto);
 		return RUTA_VISTA + "editarReceta";
@@ -102,7 +109,6 @@ public class RecetaController {
 
 	@PostMapping("/recetas/editar")
 	public String actualizarReceta(@ModelAttribute("dto") RecetaCompDTO dto) {
-		// Validate that receta and its ID are present
 		if (dto == null || dto.getReceta() == null || dto.getReceta().getIdReceta() == null) {
 			System.out.println("[actualizarReceta] ERROR: dto o receta o idReceta es nulo");
 			return "redirect:/recetas";
@@ -113,12 +119,28 @@ public class RecetaController {
 		}
 		Receta recetaExistente = recetaOpt.get();
 		List<Paso> pasos = dto.getPasos();
+		List<PasoDTO> pasoImagenes = dto.getPasoDTOs();
+
 		if (pasos != null) {
-			for (Paso paso : pasos) {
+			for (int i = 0; i < pasos.size(); i++) {
+				Paso paso = pasos.get(i);
 				if (paso.getIdPaso() != null && paso.getNotas() != null) {
-					pasoRepositorio.actualizarPaso(paso.getIdPaso(), paso.getNotas());
+					Paso pasoExistente = pasoRepositorio.obtenerPaso(paso.getIdPaso());
+					pasoExistente.setNotas(paso.getNotas());
+					if (pasoImagenes != null && i < pasoImagenes.size() && pasoImagenes.get(i).getImagen() != null
+							&& !pasoImagenes.get(i).getImagen().isEmpty()) {
+						try {
+							byte[] bytes = pasoImagenes.get(i).getImagen().getBytes();
+							Blob blob = new SerialBlob(bytes);
+							pasoExistente.setImagen(blob);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+					pasoRepositorio.actualizarPaso(pasoExistente.getIdPaso(), pasoExistente.getNotas(),
+							pasoExistente.getImagen());
 				} else {
-					pasoRepositorio.guardarPasos(Arrays.asList(paso), recetaExistente);
+					pasoRepositorio.guardarPasos(Arrays.asList(paso), recetaExistente, i + 1l); // nuevo
 				}
 			}
 		}
@@ -129,10 +151,9 @@ public class RecetaController {
 						&& detalle.getIngrediente() != null && detalle.getIngrediente().getIdIngrediente() != null) {
 					detalleRepositorio.actualizarDetalle(detalle.getIdDetalle(), detalle.getCantidad(),
 							detalle.getIngrediente().getIdIngrediente());
-				}else if (detalle.getIdDetalle() == null) {
+				} else if (detalle.getIdDetalle() == null) {
 					detalleRepositorio.guardarDetalles(Arrays.asList(detalle), recetaExistente);
 				}
-				System.out.println("Detalle invalido " + detalle.toString());
 			}
 		}
 		MultipartFile archivo = dto.getImagen();
@@ -157,10 +178,12 @@ public class RecetaController {
 	public String agregarRecetaVista(Model modelo) {
 		Usuario user = usuarioRepositorio.getUsuarioSesion();
 		RecetaCompDTO dto = new RecetaCompDTO();
+		PasoDTO pdto = new PasoDTO();
 		if (user != null) {
 			modelo.addAttribute("nomUser", user.getNombre());
 		}
 		modelo.addAttribute("dto", dto);
+		modelo.addAttribute("pdto", pdto);
 		modelo.addAttribute("ingredientes", ingredienteRepositorio.listarTodoIngrediente());
 		return RUTA_VISTA + "agregarReceta";
 	}

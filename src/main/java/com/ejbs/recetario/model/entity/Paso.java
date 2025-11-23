@@ -22,36 +22,49 @@ import lombok.Setter;
 @Table(name = "PASOS")
 public class Paso {
 
-    @Getter
-    @Setter
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPaso;
+	/* public Paso(Long idPaso, Receta receta, Long indicePaso, String notas, Blob imagen, PeticionIA peticionIa) {
+		this.idPaso = idPaso;
+		this.receta = receta;
+		this.indicePaso = indicePaso;
+		this.notas = notas;
+		this.imagen = imagen;
+		this.peticionIA = peticionIa;
+	} */
 
-    @Getter
-    @Setter
-    @ManyToOne
-    @JoinColumn(name = "ID_RECETA")
-    private Receta receta;
+	@Getter
+	@Setter
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idPaso;
 
-    @Getter
-    @Setter
-    @Column(name = "INDICE_PASO", nullable = false)
-    private Long indicePaso;
+	@Getter
+	@Setter
+	@ManyToOne
+	@JoinColumn(name = "ID_RECETA")
+	private Receta receta;
 
-    @Getter
-    @Setter
-    @Column(name = "NOTAS", nullable = false, length = 200)
-    private String notas;
+	@Getter
+	@Setter
+	@Column(name = "INDICE_PASO", nullable = false)
+	private Long indicePaso;
 
-    @Getter
-    @Setter
-    @Column(name = "IMAGEN", nullable = true)
-    private Blob imagen;
+	@Getter
+	@Setter
+	@Column(name = "NOTAS", nullable = false, length = 200)
+	private String notas;
 
-    @Getter
-    @Setter
+	@Getter
+	@Setter
+	@Column(name = "IMAGEN", nullable = true)
+	private Blob imagen;
+
+	/* @Getter
+	@Setter
+	private MultipartFile imagenTemp; */
+
+	@Getter
+	@Setter
 	@ManyToOne
 	@JoinColumn(name = "ID_PET_IA")
-    private PeticionIA peticionIA;
+	private PeticionIA peticionIA;
 }
