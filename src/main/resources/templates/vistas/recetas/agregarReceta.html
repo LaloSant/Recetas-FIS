@@ -21,7 +21,8 @@
 							<div class="input-group my-3">
 								<span class="input-group-text"><i class="bi bi-file-text"></i></span>
 								<span class="input-group-text" th:text="'NOMBRE'"></span>
-								<input class="form-control" th:field="*{receta.nombre}" placeholder="Ingrese nombre de receta" type="text">
+								<input class="form-control" th:field="*{receta.nombre}" placeholder="Ingrese nombre de receta" type="text" required
+									minlength="3" maxlength="255">
 							</div>
 							<div class="input-group mt-2">
 								<span class="input-group-text"><i class="bi bi-person-circle"></i></span>
@@ -30,27 +31,25 @@
 							</div>
 						</div>
 						<div class="mb-2 mt-2 border p-2">
-							<div class="">
-								<h4 class="text-center">PASOS:</h4>
-								<h6 class="text-center text-secondary mb-4">PARA AGREGAR IMAGENES A LOS PASOS, EDITE LA RECETA DESPUES DE AGREGARLA</h6>
-							</div>
-							<div id="pasos-container" class="ms-5">
-								<!-- Los nuevos pasos se agregarán aquí -->
-							</div>
-
-							<div class="d-flex justify-content-center mt-2">
-								<button type="button" class="btn btn-info" onclick="agregarPaso()">Agregar Paso</button>
-							</div>
-						</div>
-						<div class="mb-2 mt-2 border p-2">
 							<div class="d-flex justify-content-center mt-3">
 								<h4 class="text-center">INGREDIENTES:</h4>
 							</div>
 							<div class="m5" id="detalles-container">
-
 							</div>
 							<div class="d-flex justify-content-center mt-2">
 								<button type="button" class="btn btn-info" onclick="agregarDetalle()">Agregar Ingrediente</button>
+							</div>
+						</div>
+						<div class="mb-2 mt-2 border p-2">
+							<div class="">
+								<h4 class="text-center">PASOS:</h4>
+								<h6 class="text-center text-secondary mb-4">PARA AGREGAR IMAGENES A LOS PASOS, EDITE LA RECETA DESPUES DE AGREGARLA
+								</h6>
+							</div>
+							<div id="pasos-container" class="ms-5">
+							</div>
+							<div class="d-flex justify-content-center mt-2">
+								<button type="button" class="btn btn-info" onclick="agregarPaso()">Agregar Paso</button>
 							</div>
 						</div>
 						<div class="mb-2 mt-2 border p-2">
@@ -93,7 +92,8 @@
 				<div class="input-group mb-1">
 					<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
 					<span class="input-group-text">Paso ${pasoIndex + 1}</span>
-					<input type="text" name="pasos[${pasoIndex}].notas" class="form-control" placeholder="Descripción del paso" />
+					<input type="text" name="pasos[${pasoIndex}].notas" class="form-control" placeholder="Descripción del paso (mayor a 10 caractéres)"
+						required minlength="10" maxlength="500" />
 				</div>
 				<div class="input-group">
 					<span class="input-group-text">
@@ -124,21 +124,11 @@
 			inputGroup.innerHTML = `
 				<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
 				<span class="input-group-text">Detalle</span>
-				<input type="number" step="0.1" min="0" max="1000" name="detalles[${detalleIndex}].cantidad" class="form-control" placeholder="Cantidad"/>
-				<select name="detalles[${detalleIndex}].ingrediente.idIngrediente" class="form-select">
+				<input type="number" step="0.1" min="0" max="1000" name="detalles[${detalleIndex}].cantidad" class="form-control" placeholder="Cantidad" required/>
+				<select name="detalles[${detalleIndex}].ingrediente.idIngrediente" class="form-select" required>
 					${optionsHtml}
 				</select>
 			`;
-			/* const inputGroup2 = document.createElement('div');
-			inputGroup.className = 'input-group';
-			inputGroup.innerHTML = `
-				<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
-				<span class="input-group-text">Detalle</span>
-				<input type="number" step="0.1" min="0" max="1000" name="detalles[${detalleIndex}].cantidad" class="form-control" placeholder="Cantidad"/>
-				<select name="detalles[${detalleIndex}].ingrediente.idIngrediente" class="form-select">
-					${optionsHtml}
-				</select>
-			`; */
 
 			detalleDiv.appendChild(inputGroup);
 			container.appendChild(detalleDiv);

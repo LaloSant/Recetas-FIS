@@ -243,13 +243,15 @@ public class RecetaController {
 
 		Receta recetaGuardada = recetaRepositorio.guardarReceta(nuevaReceta);
 		List<Paso> pasos = dto.getPasos();
-		List<Paso> pasosIA = pasos.stream().filter(p -> p.isGenerarPeticion()).toList();
-		for (Paso paso : pasosIA) {
-			PeticionIA peticionGenerada = peticionRepositorio.generarPeticion(paso.getNotas());
-			paso.setPeticionIA(peticionGenerada);
-			peticionGenerada.setPaso(paso);
+		if (pasos != null) {
+			List<Paso> pasosIA = pasos.stream().filter(p -> p.isGenerarPeticion()).toList();
+			for (Paso paso : pasosIA) {
+				PeticionIA peticionGenerada = peticionRepositorio.generarPeticion(paso.getNotas());
+				paso.setPeticionIA(peticionGenerada);
+				peticionGenerada.setPaso(paso);
+			}
+			pasoRepositorio.guardarPasos(pasos, recetaGuardada);
 		}
-		pasoRepositorio.guardarPasos(pasos, recetaGuardada);
 		List<Detalle> detalles = dto.getDetalles();
 		detalleRepositorio.guardarDetalles(detalles, recetaGuardada);
 		return "redirect:/recetas";
