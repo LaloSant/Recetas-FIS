@@ -13,6 +13,8 @@ public interface PasoService {
 
 	public void actualizarPaso(Long idPaso, String notas, Blob imagen);
 
+	public void asignarPeticionIA(Long idPaso, Long idPeticionIA);
+
 	public Paso obtenerPaso(Long idPaso);
 
 	public void guardarPasos(List<Paso> pasos, Receta receta);

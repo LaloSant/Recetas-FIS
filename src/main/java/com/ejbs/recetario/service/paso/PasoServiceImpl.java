@@ -74,4 +74,10 @@ public class PasoServiceImpl implements PasoService {
 		return repositorio.findAll();
 	}
 
+	@Override
+	@Transactional
+	public void asignarPeticionIA(Long idPaso, Long idPeticionIA) {
+		repositorio.asignarPeticion(idPaso, idPeticionIA);
+	}
+
 }

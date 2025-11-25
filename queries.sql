@@ -237,6 +237,143 @@ INSERT INTO INGREDIENTES (
           ,4.00
           ,'cabeza'
           ,NULL );
+		  
+INSERT INTO INGREDIENTES (
+	NOMBRE
+	,COSTO_UNITARIO
+	,MAGNITUD
+	,IMAGEN
+) VALUES ( 'Huevo'
+          ,0.20
+          ,'unidad'
+          ,NULL );
+INSERT INTO INGREDIENTES (
+	NOMBRE
+	,COSTO_UNITARIO
+	,MAGNITUD
+	,IMAGEN
+) VALUES ( 'Leche'
+          ,1.10
+          ,'litro'
+          ,NULL );
+INSERT INTO INGREDIENTES (
+	NOMBRE
+	,COSTO_UNITARIO
+	,MAGNITUD
+	,IMAGEN
+) VALUES ( 'Harina de Trigo'
+          ,1.50
+          ,'kg'
+          ,NULL );
+INSERT INTO INGREDIENTES (
+	NOMBRE
+	,COSTO_UNITARIO
+	,MAGNITUD
+	,IMAGEN
+) VALUES ( 'Azúcar'
+          ,1.20
+          ,'kg'
+          ,NULL );
+INSERT INTO INGREDIENTES (
+	NOMBRE
+	,COSTO_UNITARIO
+	,MAGNITUD
+	,IMAGEN
+) VALUES ( 'Mantequilla'
+          ,2.50
+          ,'250g'
+          ,NULL );
+INSERT INTO INGREDIENTES (
+	NOMBRE
+	,COSTO_UNITARIO
+	,MAGNITUD
+	,IMAGEN
+) VALUES ( 'Papa'
+          ,1.00
+          ,'kg'
+          ,NULL );
+INSERT INTO INGREDIENTES (
+	NOMBRE
+	,COSTO_UNITARIO
+	,MAGNITUD
+	,IMAGEN
+) VALUES ( 'Zanahoria'
+          ,0.80
+          ,'kg'
+          ,NULL );
+INSERT INTO INGREDIENTES (
+	NOMBRE
+	,COSTO_UNITARIO
+	,MAGNITUD
+	,IMAGEN
+) VALUES ( 'Limón'
+          ,0.30
+          ,'unidad'
+          ,NULL );
+INSERT INTO INGREDIENTES (
+	NOMBRE
+	,COSTO_UNITARIO
+	,MAGNITUD
+	,IMAGEN
+) VALUES ( 'Queso Mozzarella'
+          ,3.00
+          ,'200g'
+          ,NULL );
+INSERT INTO INGREDIENTES (
+	NOMBRE
+	,COSTO_UNITARIO
+	,MAGNITUD
+	,IMAGEN
+) VALUES ( 'Jamón'
+          ,2.80
+          ,'150g'
+          ,NULL );
+INSERT INTO INGREDIENTES (
+	NOMBRE
+	,COSTO_UNITARIO
+	,MAGNITUD
+	,IMAGEN
+) VALUES ( 'Pan de Molde'
+          ,2.00
+          ,'paquete'
+          ,NULL );
+INSERT INTO INGREDIENTES (
+	NOMBRE
+	,COSTO_UNITARIO
+	,MAGNITUD
+	,IMAGEN
+) VALUES ( 'Carne Molida de Res'
+          ,9.00
+          ,'kg'
+          ,NULL );
+INSERT INTO INGREDIENTES (
+	NOMBRE
+	,COSTO_UNITARIO
+	,MAGNITUD
+	,IMAGEN
+) VALUES ( 'Pimiento Verde'
+          ,0.60
+          ,'unidad'
+          ,NULL );
+INSERT INTO INGREDIENTES (
+	NOMBRE
+	,COSTO_UNITARIO
+	,MAGNITUD
+	,IMAGEN
+) VALUES ( 'Champiñones'
+          ,2.20
+          ,'250g'
+          ,NULL );
+INSERT INTO INGREDIENTES (
+	NOMBRE
+	,COSTO_UNITARIO
+	,MAGNITUD
+	,IMAGEN
+) VALUES ( 'Vainilla'
+          ,0.50
+          ,'cucharadita'
+          ,NULL );
+
 COMMIT;
 
 -- RECETAS (Asignadas a usuarios 1, 2 y 3)

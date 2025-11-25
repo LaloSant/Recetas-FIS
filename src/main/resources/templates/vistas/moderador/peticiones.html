@@ -11,6 +11,19 @@
 				PETICIONES IA PARA EL MODERADOR
 			</h2>
 		</div>
+		<div class="col d-flex justify-content-start m-2 z-1">
+			<div class="dropdown">
+				<button th:text="'FILTRAR POR ESTATUS: ' + ${filtro}" class="btn btn-dark dropdown-toggle sticky-top" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+					FILTRAR POR ESTATUS:
+				</button>
+				<ul class="dropdown-menu">
+					<li><a class="dropdown-item" th:href="@{/moderador/peticiones(filtro='PEN')}">PENDIENTE </a></li>
+					<li><a class="dropdown-item" th:href="@{/moderador/peticiones(filtro='ENT')}">ENTREGADO</a></li>
+					<li><a class="dropdown-item" th:href="@{/moderador/peticiones(filtro='DEN')}">DENEGADO</a></li>
+					<li><a class="dropdown-item" th:href="@{/moderador/peticiones}">NINGUN FILTRO</a></li>
+				</ul>
+			</div>
+		</div>
 		<table class="table table-dark table-striped table-hover my-3">
 			<thead>
 				<tr>
@@ -38,7 +51,7 @@
 						<a th:href="@{/moderador/peticiones/denegar(idPeticionIA=${peticion.idPeticionIA})}" class="btn btn-danger">
 							<i class="bi bi-x-circle-fill"></i> DENEGAR
 						</a>
-						
+
 					</td>
 				</tr>
 			</tbody>
