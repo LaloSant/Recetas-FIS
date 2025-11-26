@@ -176,15 +176,6 @@ public class RecetaController {
 					if (pasoImagenes != null && i < pasoImagenes.size() && pasoImagenes.get(i).getImagen() != null
 							&& !pasoImagenes.get(i).getImagen().isEmpty()) {
 						pasoExistente.setImagen(ImagenController.mpfTBlob(pasoImagenes.get(i).getImagen()));
-						/*
-						 * try {
-						 * byte[] bytes = pasoImagenes.get(i).getImagen().getBytes();
-						 * Blob blob = new SerialBlob(bytes);
-						 * pasoExistente.setImagen(blob);
-						 * } catch (Exception e) {
-						 * e.printStackTrace();
-						 * }
-						 */
 					}
 					pasoRepositorio.actualizarPaso(pasoExistente.getIdPaso(), pasoExistente.getNotas(),
 							pasoExistente.getImagen());
@@ -244,13 +235,12 @@ public class RecetaController {
 		Receta recetaGuardada = recetaRepositorio.guardarReceta(nuevaReceta);
 		List<Paso> pasos = dto.getPasos();
 		if (pasos != null) {
-			/* List<Paso> pasosIA = pasos.stream().filter(p -> p.isGenerarPeticion()).toList(); */
 			for (Paso paso : pasos) {
 				pasoRepositorio.guardarPasos(pasos, recetaGuardada);
 				if (paso.isGenerarPeticion()) {
 					PeticionIA peticionGenerada = peticionRepositorio.generarPeticion(paso.getNotas());
 					paso.setPeticionIA(peticionGenerada);
-					peticionGenerada.setPaso(paso);	
+					peticionGenerada.setPaso(paso);
 					System.out.println(paso.getPeticionIA().getIdPeticionIA());
 					pasoRepositorio.asignarPeticionIA(paso.getIdPaso(), paso.getPeticionIA().getIdPeticionIA());
 				}
@@ -265,10 +255,7 @@ public class RecetaController {
 	public String eliminarReceta(Model modelo, @RequestParam(required = true) Long idReceta,
 			@RequestParam(required = true) String nom) {
 		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(idReceta);
-		if (!recetaOpt.isPresent()) {
-			return "redirect:/recetas";
-		}
-		if (!recetaOpt.get().getUsuario().getNombre().equals(nom)) {
+		if (!recetaOpt.isPresent() || !recetaOpt.get().getUsuario().getNombre().equals(nom)) {
 			return "redirect:/recetas";
 		}
 		for (Detalle detalle : recetaOpt.get().getDetalles()) {
@@ -277,7 +264,7 @@ public class RecetaController {
 		for (Paso paso : recetaOpt.get().getPasos()) {
 			PeticionIA peticion = paso.getPeticionIA();
 			if (peticion != null) {
-				peticion.setPaso(null); // Romper la relación bidireccional
+				peticion.setPaso(null);
 				paso.setPeticionIA(null);
 				peticionRepositorio.eliminarPeticion(peticion.getIdPeticionIA());
 			}
