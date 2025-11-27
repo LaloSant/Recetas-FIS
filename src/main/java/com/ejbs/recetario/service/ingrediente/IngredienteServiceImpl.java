@@ -1,6 +1,8 @@
 package com.ejbs.recetario.service.ingrediente;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +23,9 @@ public class IngredienteServiceImpl implements IngredienteService{
 
 	@Override
 	public List<Ingrediente> listarTodoIngrediente() {
-		return repositorio.findAll();
+		return repositorio.findAll().stream()
+				.sorted(Comparator.comparing(Ingrediente::getNombre))
+				.collect(Collectors.toList());
 	}
 
 	@Override

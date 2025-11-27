@@ -2,6 +2,7 @@ package com.ejbs.recetario.service.peticiones;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import com.ejbs.recetario.repository.PeticionesRepository;
 import jakarta.transaction.Transactional;
 
 @Service
-public class PeticionesServiceImpl implements PeticionesService{
+public class PeticionesServiceImpl implements PeticionesService {
 
 	@Autowired
 	PeticionesRepository repositorio;
@@ -23,7 +24,7 @@ public class PeticionesServiceImpl implements PeticionesService{
 
 	@Override
 	public List<PeticionIA> obtenerTodaPeticion() {
-		return repositorio.findAll();
+		return repositorio.findAll(Sort.by(Sort.Direction.DESC, "estatus"));
 	}
 
 	@Override
@@ -41,5 +42,10 @@ public class PeticionesServiceImpl implements PeticionesService{
 	public void eliminarPeticion(Long idPeticion) {
 		repositorio.deleteById(idPeticion);
 	}
-	
+
+	@Override
+	public List<PeticionIA> obtenerPeticionesPorEstatus(String estatus) {
+		return repositorio.findByEstatus(estatus);
+	}
+
 }

@@ -1,6 +1,7 @@
 package com.ejbs.recetario.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,7 @@ public class ModeradorController {
 	PasoServiceImpl pasoRepositorio;
 
 	@GetMapping("/moderador/peticiones")
-	public String verPeticiones(Model modelo) {
+	public String verPeticiones(Model modelo, @RequestParam(required = false) String filtro) {
 		Usuario user = usuarioRepositorio.getUsuarioSesion();
 		if (user != null) {
 			modelo.addAttribute("nomUser", user.getNombre());
@@ -40,6 +41,23 @@ public class ModeradorController {
 			modelo.addAttribute("usuarioSesion", user);
 		}
 		List<PeticionIA> peticiones = peticionesRepositorio.obtenerTodaPeticion();
+		String filtroText = "";
+		if (filtro != null) {
+			peticiones = peticiones.stream().filter(p -> p.getEstatus().equals(filtro)).collect(Collectors.toList());
+			switch (filtro) {
+				case "ENT" -> {
+					filtroText = "ENTREGADOS";
+				}
+				case "PEN" -> {
+					filtroText = "PENDIENTES";
+				}
+				case "DEN" -> {
+					filtroText = "DENEGADOS";
+				}
+			}
+			modelo.addAttribute("peticiones", peticiones);
+		}
+		modelo.addAttribute("filtro", filtroText);
 		modelo.addAttribute("peticiones", peticiones);
 		return RUTA_MODERADOR + "peticiones";
 	}
@@ -67,6 +85,17 @@ public class ModeradorController {
 		peticionesRepositorio.actualizarPeticion(pet.getIdPeticionIA(), "ENT");
 		Paso paso = pet.getPaso();
 		pasoRepositorio.actualizarPaso(paso.getIdPaso(), paso.getNotas(), ImagenController.mpfTBlob(dto.getMpf()));
+		return "redirect:/moderador/peticiones";
+	}
+
+	@GetMapping("/moderador/peticiones/denegar{idPeticionIA}")
+	public String getMethodName(Model model, @RequestParam Long idPeticionIA) {
+		Usuario user = usuarioRepositorio.getUsuarioSesion();
+		if (user == null || user.getRol().getIdRol().equals("USER")) {
+			return "redirect:/recetas";
+		}
+		PeticionIA pet = peticionesRepositorio.obtenerPeticion(idPeticionIA);
+		peticionesRepositorio.actualizarPeticion(pet.getIdPeticionIA(), "DEN");
 		return "redirect:/moderador/peticiones";
 	}
 

@@ -1,7 +1,9 @@
 package com.ejbs.recetario.model.entity;
 
 import java.sql.Blob;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -71,17 +73,22 @@ public class Receta {
 	@OneToMany(mappedBy = "receta")
 	private List<Detalle> detalles;
 
-	@Getter
 	@Setter
 	@OneToMany(mappedBy = "receta")
 	private List<Paso> pasos;
 
-	public double calcularCosto(){
+	public List<Paso> getPasos(){
+		return pasos.stream().sorted(Comparator.comparing(Paso :: getIdPaso)).collect(Collectors.toList());
+	}
+
+	public String calcularCosto() {
 		double costo = 0d;
+		String formateado = "0";
 		for (Detalle detalle : detalles) {
-			costo += detalle.getCosto();
+			costo += detalle.calcularCosto();
+			formateado = String.format("%.2f", costo);
 		}
-		return costo;
+		return formateado;
 	}
 
 	public Double actualizarCalificacion(int calificacionNueva) {

@@ -14,4 +14,8 @@ public interface PeticionesService {
 	public void actualizarPeticion(Long idPeticion, String estatus);
 
 	public void eliminarPeticion(Long idPeticion);
+
+	public List<PeticionIA> obtenerPeticionesPorEstatus(String estatus);
+
+
 }

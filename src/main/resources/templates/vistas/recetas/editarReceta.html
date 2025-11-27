@@ -28,34 +28,13 @@
 							<div class="input-group my-3">
 								<span class="input-group-text"><i class="bi bi-file-text"></i></span>
 								<span class="input-group-text" th:text="'NOMBRE'"></span>
-								<input class="form-control" th:field="*{receta.nombre}" th:value="${dto.receta.nombre}" type="text">
+								<input class="form-control" th:field="*{receta.nombre}" th:value="${dto.receta.nombre}" type="text" required
+									minlength="3" maxlength="50">
 							</div>
 							<div class="input-group mt-2">
 								<span class="input-group-text"><i class="bi bi-person-circle"></i></span>
 								<span class="input-group-text" th:text="'USUARIO'"></span>
 								<span class="input-group-text" th:text="*{receta.usuario.nombre}"></span>
-							</div>
-						</div>
-						<div class="mb-2 mt-2 border p-2">
-							<div class="d-flex justify-content-center">
-								<h4 class="text-center">PASOS:</h4>
-							</div>
-							<div id="pasos-container" class="ms-5">
-								<div th:each="paso, iterStat : *{pasos}">
-									<div class="mb-3 mt-1 ms-2">
-										<div class="input-group">
-											<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
-											<span class="input-group-text" th:text="'Paso ' + ${paso.indicePaso}"></span>
-											<input type="hidden" th:field="*{pasos[__${iterStat.index}__].idPaso}" />
-											<input type="text" th:field="*{pasos[__${iterStat.index}__].notas}" class="form-control" />
-											<input type="file" th:field="*{pasoDTOs[__${iterStat.index}__].imagen}" class="form-control"
-												accept=".jpg,image/jpeg" onchange="previewImage(event)" />
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="d-flex justify-content-center mt-2">
-								<button type="button" class="btn btn-info" onclick="agregarPaso()">Agregar Paso</button>
 							</div>
 						</div>
 						<div class="mb-2 mt-2 border p-2">
@@ -86,6 +65,31 @@
 							</div>
 							<div class="d-flex justify-content-center mt-2">
 								<button type="button" class="btn btn-info" onclick="agregarDetalle()">Agregar Ingrediente</button>
+							</div>
+						</div>
+						<div class="mb-2 mt-2 border p-2">
+							<div class="">
+								<h4 class="text-center">PASOS:</h4>
+								<h6 class="text-center text-secondary mb-4">PARA AGREGAR IMAGENES A LOS PASOS, EDITE LA RECETA DESPUES DE AGREGARLA
+								</h6>
+							</div>
+							<div id="pasos-container" class="ms-5">
+								<div th:each="paso, iterStat : *{pasos}">
+									<div class="mb-3 mt-1 ms-2">
+										<div class="input-group">
+											<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
+											<span class="input-group-text" th:text="'Paso ' + ${paso.indicePaso}"></span>
+											<input type="hidden" th:field="*{pasos[__${iterStat.index}__].idPaso}" />
+											<input type="text" th:field="*{pasos[__${iterStat.index}__].notas}" class="form-control" required
+												minlength="10" maxlength="200" />
+											<input type="file" th:field="*{pasoDTOs[__${iterStat.index}__].imagen}" class="form-control"
+												accept=".jpg,image/jpeg" onchange="previewImage(event)" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="d-flex justify-content-center mt-2">
+								<button type="button" class="btn btn-info" onclick="agregarPaso()">Agregar Paso</button>
 							</div>
 						</div>
 						<div class="mb-2 mt-2 border p-2">
@@ -132,7 +136,7 @@
 			inputGroup.innerHTML = `
 						<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
 						<span class="input-group-text">Paso ${pasoIndex + 1}</span>
-						<input type="text" name="pasos[${pasoIndex}].notas" class="form-control" placeholder="Descripción del paso" />
+						<input type="text" name="pasos[${pasoIndex}].notas" class="form-control" placeholder="Descripción del paso" required minlength="10" maxlength="200" />
 					`;
 
 			pasoDiv.appendChild(inputGroup);
