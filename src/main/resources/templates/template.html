@@ -62,14 +62,24 @@
 <!-- </body> -->
 
 <div th:fragment="receta-card (receta, usuarioSesion)" class="card my-1 mx-auto border-4 border-dark-subtle" style="width: 300px;">
-	<img th:src="@{/recetas/imagen/{id}(id=${receta.idReceta})}" class="card-img-top" alt="Imagen de receta no encontrada"
+	<a th:href="@{/recetas/ver(idReceta=${receta.idReceta})}">
+		<img th:src="@{/recetas/imagen/{id}(id=${receta.idReceta})}" class="card-img-top" alt="Imagen de receta no encontrada"
 		style="max-width: 300px; max-height: 250px; min-width: 250px; min-height: 200px;">
+	</a>
 	<div class="card-body">
 		<h4 class="card-title" th:text="${receta.nombre}"></h4>
 	</div>
 	<ul class="list-group list-group-flush">
-		<li class="list-group-item" th:text="${receta.visitasTotales} + ' visitas totales'"></li>
+		<li class="list-group-item">
+			<h4>Calificacion</h4>
+			<span th:each="i : ${#numbers.sequence(1, 5)}">
+				<span th:if="${i <= receta.calificacion}" style="color: orange;">★</span>
+				<span th:unless="${i <= receta.calificacion}" style="color: orange;">☆</span>
+			</span>
+		</li>
+		<li class="list-group-item" th:text="'Costo aproximado: $' +  ${receta.calcularCosto()} "></li>
 		<li class="list-group-item" th:text="${receta.visitasSemanales} + ' visitas semanales'"></li>
+		<li class="list-group-item" th:text="${receta.visitasTotales} + ' visitas totales'"></li>
 		<li class="list-group-item" th:text="'Subido por: ' + ${receta.usuario.nombre}"></li>
 	</ul>
 	<div class="card-body m-0">

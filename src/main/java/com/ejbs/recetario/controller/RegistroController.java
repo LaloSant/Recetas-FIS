@@ -47,7 +47,6 @@ public class RegistroController {
 		usuario.setRol(rolOptional.get());
 		usuario.setContrasenia(passwordEncoder.encode(usuario.getContrasenia()));
 		repositorioUsuario.guardarUsuario(usuario);
-		System.out.println("Se registro");
 		return "login";
 	}
 

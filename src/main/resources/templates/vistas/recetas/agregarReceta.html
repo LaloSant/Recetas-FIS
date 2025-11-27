@@ -34,7 +34,7 @@
 							<div class="d-flex justify-content-center mt-3">
 								<h4 class="text-center">INGREDIENTES:</h4>
 							</div>
-							<div class="m5" id="detalles-container">
+							<div id="detalles-container">
 							</div>
 							<div class="d-flex justify-content-center mt-2">
 								<button type="button" class="btn btn-info" onclick="agregarDetalle()">Agregar Ingrediente</button>
@@ -46,7 +46,7 @@
 								<h6 class="text-center text-secondary mb-4">PARA AGREGAR IMAGENES A LOS PASOS, EDITE LA RECETA DESPUES DE AGREGARLA
 								</h6>
 							</div>
-							<div id="pasos-container" class="ms-5">
+							<div id="pasos-container">
 							</div>
 							<div class="d-flex justify-content-center mt-2">
 								<button type="button" class="btn btn-info" onclick="agregarPaso()">Agregar Paso</button>
@@ -83,7 +83,7 @@
 			const container = document.getElementById('pasos-container');
 
 			const pasoDiv = document.createElement('div');
-			pasoDiv.className = 'mb-3 mt-1 ms-2';
+			pasoDiv.className = 'mb-3 mt-1';
 
 			const inputGroup = document.createElement('div');
 			inputGroup.className = 'input-group';
@@ -99,9 +99,11 @@
 					<span class="input-group-text">
 						<input class="form-check-input mt-0" type="checkbox" name="pasos[${pasoIndex}].generarPeticion" value="true">
 					</span>
-					<span class="input-group-text">Generar petición IA para imagen de este paso</span>
+					
+					<h6 class="text-center text-secondary mb-4">Generar petición IA para imagen de este paso</h6>
 				</div>
 			`;
+			/* <span class="input-group-text">Generar petición IA para imagen de este paso</span> */
 			pasoDiv.appendChild(inputGroup);
 			container.appendChild(pasoDiv);
 			pasoIndex++;
@@ -111,7 +113,7 @@
 			const container = document.getElementById('detalles-container');
 
 			const detalleDiv = document.createElement('div');
-			detalleDiv.className = 'mb-3 mt-1 ms-2';
+			detalleDiv.className = 'mb-3 mt-1 ms-0';
 
 			const inputGroup = document.createElement('div');
 			inputGroup.className = 'input-group';

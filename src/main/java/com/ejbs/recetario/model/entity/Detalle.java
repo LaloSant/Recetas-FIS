@@ -50,4 +50,9 @@ public class Detalle {
 	@Column(name = "COSTO", nullable = false)
 	private Double costo;
 
+	public Double calcularCosto(){
+		costo = ingrediente.getCostoUnitario() * cantidad;
+		return costo;
+	}
+
 }

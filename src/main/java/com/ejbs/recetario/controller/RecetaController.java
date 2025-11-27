@@ -241,7 +241,6 @@ public class RecetaController {
 					PeticionIA peticionGenerada = peticionRepositorio.generarPeticion(paso.getNotas());
 					paso.setPeticionIA(peticionGenerada);
 					peticionGenerada.setPaso(paso);
-					System.out.println(paso.getPeticionIA().getIdPeticionIA());
 					pasoRepositorio.asignarPeticionIA(paso.getIdPaso(), paso.getPeticionIA().getIdPeticionIA());
 				}
 			}

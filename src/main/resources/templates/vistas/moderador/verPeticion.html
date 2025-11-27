@@ -19,7 +19,16 @@
 		<div class="cointainer m-3 p-2">
 			<div class="row bg-dark">
 				<div class="col col-md-5 m-2">
+
 					<h4 class="text-center text-white">AÑADIR IMAGEN</h4>
+					<h6 id="prompt-text" class="text-white"
+						th:text="'PROMPT SUGERIDO: Genera una imagen para un paso de una receta de: ' + ${dto.peticion.paso.receta.nombre} + '. Para el paso con descripcion: ' + ${dto.peticion.descripcion}">
+					</h6>
+					<div class="d-flex justify-content-center my-2">
+						<button class="btn btn-success" onclick="copyPrompt()">
+							<i class="bi bi-clipboard"></i> Copiar Prompt
+						</button>
+					</div>
 					<form th:action="@{/peticion/modificar}" th:object="${dto}" method="post" enctype="multipart/form-data">
 						<div class="input-group my-3">
 							<span class="input-group-text"><i class="bi bi-image"></i></span>
@@ -67,6 +76,15 @@
 				};
 				reader.readAsDataURL(input.files[0]);
 			}
+		}
+
+		function copyPrompt() {
+			const promptTextElement = document.getElementById('prompt-text');
+			const textToCopy = promptTextElement.innerText.replace('PROMPT SUGERIDO: ', '');
+			navigator.clipboard.writeText(textToCopy).then(() => {
+				// Opcional: mostrar una notificación de que el texto se ha copiado.
+				alert("Prompt copiado al portapapeles");
+			});
 		}
 	</script>
 </body>
