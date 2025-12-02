@@ -100,6 +100,7 @@ public class RecetaController {
 			recetas = recetaRepositorio.obtenerTopTotal();
 			modelo.addAttribute("textoOrden", "Visitas totales");
 		}
+		//recetas = recetas.stream().limit(10).toList();
 		modelo.addAttribute("recetas", recetas);
 		return RUTA_VISTA + "verRecetas";
 	}
