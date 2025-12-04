@@ -53,6 +53,21 @@ public class RecetaController {
 	@Autowired
 	PeticionesServiceImpl peticionRepositorio;
 
+	@GetMapping("/recetas/misRecetas")
+	public String getMisRecetas(Model modelo) {
+		Usuario user = usuarioRepositorio.getUsuarioSesion();
+		if (user != null) {
+			modelo.addAttribute("nomUser", user.getNombre());
+			modelo.addAttribute("rol", user.getRol().getNombre());
+			modelo.addAttribute("usuarioSesion", user);
+		}
+		List<Receta> recetas = recetaRepositorio.listarTodaReceta().stream().filter(r -> r.getUsuario().equals(user))
+				.toList();
+		modelo.addAttribute("recetas", recetas);
+
+		return RUTA_VISTA + "verRecetas";
+	}
+
 	@GetMapping({ "/recetas", "/" })
 	public String listarRecetas(Model modelo,
 			@RequestParam(required = false, defaultValue = "semana") String ordenarPor,
@@ -100,7 +115,7 @@ public class RecetaController {
 			recetas = recetaRepositorio.obtenerTopTotal();
 			modelo.addAttribute("textoOrden", "Visitas totales");
 		}
-		//recetas = recetas.stream().limit(10).toList();
+		// recetas = recetas.stream().limit(10).toList();
 		modelo.addAttribute("recetas", recetas);
 		return RUTA_VISTA + "verRecetas";
 	}

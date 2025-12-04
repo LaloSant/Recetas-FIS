@@ -36,6 +36,7 @@
 						<ul class="dropdown-menu fs-5 bg-body-secondary">
 							<li><a class="dropdown-item" th:href="@{/login}">Ingresar</a></li>
 							<li><a class="dropdown-item" th:href="@{/registro}">Registrarse</a></li>
+							<li th:if="${nomUser != null}"><a class="dropdown-item" th:href="@{/recetas/misRecetas}">Mis recetas</a></li>
 							<li th:if="${nomUser != null}"> <a class="dropdown-item" th:href="@{/receta/agregar}">Agregar receta</a></li>
 							<li th:if="${nomUser != null}">
 								<hr class="dropdown-divider">
