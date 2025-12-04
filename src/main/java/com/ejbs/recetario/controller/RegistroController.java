@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ejbs.recetario.model.entity.Rol;
 import com.ejbs.recetario.model.entity.Usuario;
@@ -28,7 +29,10 @@ public class RegistroController {
 	private PasswordEncoder passwordEncoder;
 
 	@GetMapping(value = "/registro")
-	public String registro(Model model) {
+	public String registro(Model model, @RequestParam(required = false) String error) {
+		if (error != null && "1".equals(error)) {
+			model.addAttribute("error", error);
+		}
 		model.addAttribute("usuario", new Usuario());
 		Usuario user = repositorioUsuario.getUsuarioSesion();
 		if (user != null) {
@@ -39,6 +43,10 @@ public class RegistroController {
 
 	@PostMapping(value = "/registro")
 	public String guardarUsuario(@ModelAttribute Usuario usuario) {
+		Optional<Usuario> usuarioExistente = repositorioUsuario.obtenerUsuario(usuario.getEmail());
+		if (usuarioExistente.isPresent()) {
+			return "redirect:/registro?error=1";
+		}
 		Optional<Rol> rolOptional = repositorioRol.obtenerRolPorID("USER");
 		if (!rolOptional.isPresent()) {
 			usuario.setRol(null);

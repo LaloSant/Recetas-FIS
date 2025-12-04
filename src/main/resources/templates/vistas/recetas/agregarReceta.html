@@ -91,7 +91,7 @@
 			inputGroup.innerHTML = `
 				<div class="input-group mb-1">
 					<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
-					<span class="input-group-text">Paso ${pasoIndex + 1}</span>
+					<span class="input-group-text">${pasoIndex + 1}:</span>
 					<input type="text" name="pasos[${pasoIndex}].notas" class="form-control" placeholder="Descripción del paso (mayor a 10 caractéres)"
 						required minlength="10" maxlength="500" />
 				</div>
@@ -100,7 +100,7 @@
 						<input class="form-check-input mt-0" type="checkbox" name="pasos[${pasoIndex}].generarPeticion" value="true">
 					</span>
 					
-					<h6 class="text-center text-secondary mb-4">Generar petición IA para imagen de este paso</h6>
+					<h6 class="text-center text-secondary m-2">Generar petición IA para este paso</h6>
 				</div>
 			`;
 			/* <span class="input-group-text">Generar petición IA para imagen de este paso</span> */
@@ -125,7 +125,7 @@
 
 			inputGroup.innerHTML = `
 				<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
-				<span class="input-group-text">Detalle</span>
+				<!--<span class="input-group-text">Detalle</span> --->
 				<input type="number" step="0.1" min="0" max="1000" name="detalles[${detalleIndex}].cantidad" class="form-control" placeholder="Cantidad" required/>
 				<select name="detalles[${detalleIndex}].ingrediente.idIngrediente" class="form-select" required>
 					${optionsHtml}

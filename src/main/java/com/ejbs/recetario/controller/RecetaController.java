@@ -139,6 +139,7 @@ public class RecetaController {
 		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(idReceta);
 		Usuario user = usuarioRepositorio.getUsuarioSesion();
 		if (user != null) {
+			modelo.addAttribute("rol", user.getRol().getNombre());
 			modelo.addAttribute("nomUser", user.getNombre());
 		}
 		if (!recetaOpt.isPresent()) {
@@ -215,6 +216,7 @@ public class RecetaController {
 		RecetaCompDTO dto = new RecetaCompDTO();
 		PasoDTO pdto = new PasoDTO();
 		if (user != null) {
+			modelo.addAttribute("rol", user.getRol().getNombre());
 			modelo.addAttribute("nomUser", user.getNombre());
 		}
 		modelo.addAttribute("dto", dto);
