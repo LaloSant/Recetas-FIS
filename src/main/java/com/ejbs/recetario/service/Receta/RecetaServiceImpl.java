@@ -32,6 +32,9 @@ public class RecetaServiceImpl implements RecetaService {
 
 	@Override
 	public Optional<Receta> obtenerRecetaPorID(Long idReceta) {
+		if (idReceta == null) {
+			return null;
+		}
 		return repositorio.findById(idReceta);
 	}
 
@@ -42,6 +45,9 @@ public class RecetaServiceImpl implements RecetaService {
 
 	@Override
 	public List<Receta> obtenerTodoPor(List<Long> ids) {
+		if (ids == null) {
+			return null;
+		}
 		return repositorio.findAllById(ids);
 	}
 
@@ -62,11 +68,17 @@ public class RecetaServiceImpl implements RecetaService {
 
 	@Override
 	public Receta actualizarReceta(Receta receta) {
+		if (receta == null) {
+			return null;
+		}
 		return repositorio.save(receta);
 	}
 
 	@Override
 	public void eliminarReceta(Long idReceta) {
+		if (idReceta == null) {
+			return;
+		}
 		repositorio.deleteById(idReceta);
 	}
 

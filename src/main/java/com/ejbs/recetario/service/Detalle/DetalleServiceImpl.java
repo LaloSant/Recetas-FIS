@@ -42,6 +42,9 @@ public class DetalleServiceImpl implements DetalleService {
 
 	@Override
 	public Detalle guardarDetalle(Detalle detalle) {
+		if (detalle == null) {
+			return null;
+		}
 		return repositorio.save(detalle);
 	}
 
@@ -65,6 +68,9 @@ public class DetalleServiceImpl implements DetalleService {
 
 	@Override
 	public void eliminarDetalle(Detalle detalle) {
+		if (detalle == null) {
+			return;
+		}
 		repositorio.delete(detalle);
 	}
 

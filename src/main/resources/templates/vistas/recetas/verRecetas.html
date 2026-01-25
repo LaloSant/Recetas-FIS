@@ -10,6 +10,9 @@
 			<div class="col col-lg-4">
 				<h2>BIENVENIDO</h2>
 			</div>
+			<h2 th:if="${recetas.isEmpty()}" class="mb-5">
+				SIN RECETAS REGISTRADAS
+			</h2>
 			<div class="col col-lg-2 d-flex justify-content-end m-2">
 				<form th:action="@{/recetas}" method="get">
 					<div class="dropdown z-3">

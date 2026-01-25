@@ -32,6 +32,9 @@ public class PasoServiceImpl implements PasoService {
 
 	@Override
 	public Paso obtenerPaso(Long idPaso) {
+		if (idPaso == null) {
+			return null;
+		}
 		return repositorio.findById(idPaso).get();
 	}
 
@@ -61,11 +64,17 @@ public class PasoServiceImpl implements PasoService {
 
 	@Override
 	public void eliminarPaso(Paso paso) {
+		if (paso == null) {
+			return;
+		}
 		repositorio.delete(paso);
 	}
 
 	@Override
 	public void guardarPaso(Paso paso) {
+		if (paso == null) {
+			return;
+		}
 		repositorio.save(paso);
 	}
 
