@@ -24,11 +24,17 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Usuario guardarUsuario(Usuario usuario) {
+		if (usuario == null) {
+			return null;
+		}
         return repositorio.save(usuario);
     }
 
     @Override
     public Optional<Usuario> obtenerUsuario(Long idUsuario) {
+		if (idUsuario == null) {
+			return null;
+		}
         return repositorio.findById(idUsuario);
     }
 
@@ -39,11 +45,17 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Usuario actualizarUsuario(Usuario usuario) {
+		if (usuario == null) {
+			return null;
+		}
         return repositorio.save(usuario);
     }
 
     @Override
     public void eliminarUsuario(Long idUsuario) {
+		if (idUsuario == null) {
+			return;
+		}
         repositorio.deleteById(idUsuario);
     }
 

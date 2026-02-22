@@ -11,13 +11,16 @@ import com.ejbs.recetario.model.entity.Ingrediente;
 import com.ejbs.recetario.repository.IngredienteRepository;
 
 @Service
-public class IngredienteServiceImpl implements IngredienteService{
+public class IngredienteServiceImpl implements IngredienteService {
 
 	@Autowired
 	IngredienteRepository repositorio;
 
 	@Override
 	public Ingrediente obtenerIngrediente(Long idIngrediente) {
+		if (idIngrediente == null) {
+			return null;
+		}
 		return repositorio.findById(idIngrediente).get();
 	}
 
@@ -30,12 +33,15 @@ public class IngredienteServiceImpl implements IngredienteService{
 
 	@Override
 	public Ingrediente guardarIngrediente(Ingrediente ingrediente) {
+		if (ingrediente == null) {
+			return null;
+		}
 		return repositorio.save(ingrediente);
 	}
 
 	@Override
 	public Ingrediente actualizarIngrediente(Ingrediente ingrediente) {
-		return repositorio.save(ingrediente);
+		return this.guardarIngrediente(ingrediente);
 	}
-	
+
 }

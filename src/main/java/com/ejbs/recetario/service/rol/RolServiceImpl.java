@@ -9,14 +9,17 @@ import com.ejbs.recetario.model.entity.Rol;
 import com.ejbs.recetario.repository.RolRepository;
 
 @Service
-public class RolServiceImpl implements RolService{
+public class RolServiceImpl implements RolService {
 
-    @Autowired
-    RolRepository rolRepository;
+	@Autowired
+	RolRepository rolRepository;
 
-    @Override
-    public Optional<Rol> obtenerRolPorID(String idRol) {
-        return rolRepository.findById(idRol);
-    }
-    
+	@Override
+	public Optional<Rol> obtenerRolPorID(String idRol) {
+		if (idRol == null) {
+			return null;
+		}
+		return rolRepository.findById(idRol);
+	}
+
 }

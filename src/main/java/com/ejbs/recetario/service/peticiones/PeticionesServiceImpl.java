@@ -19,6 +19,9 @@ public class PeticionesServiceImpl implements PeticionesService {
 
 	@Override
 	public PeticionIA obtenerPeticion(Long idPeticion) {
+		if (idPeticion == null) {
+			return null;
+		}
 		return repositorio.findById(idPeticion).get();
 	}
 
@@ -40,6 +43,9 @@ public class PeticionesServiceImpl implements PeticionesService {
 
 	@Override
 	public void eliminarPeticion(Long idPeticion) {
+		if (idPeticion == null) {
+			return;
+		}
 		repositorio.deleteById(idPeticion);
 	}
 
