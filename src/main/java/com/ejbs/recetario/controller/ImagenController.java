@@ -21,10 +21,10 @@ import com.ejbs.recetario.service.receta.RecetaServiceImpl;
 public class ImagenController {
 
 	@Autowired
-	RecetaServiceImpl recetaService;
+	private RecetaServiceImpl recetaService;
 
 	@Autowired
-	PasoServiceImpl pasoService;
+	private PasoServiceImpl pasoService;
 
 	@GetMapping("/recetas/imagen/{id}")
 	@ResponseBody

@@ -5,11 +5,11 @@ import java.util.List;
 import com.ejbs.recetario.model.entity.Ingrediente;
 
 public interface IngredienteService {
-	public List<Ingrediente> listarTodoIngrediente();
+	public List<Ingrediente> listarTodo();
 
-	public Ingrediente obtenerIngrediente(Long idIngrediente);
+	public Ingrediente obtener(Long idIngrediente);
 
-	public Ingrediente guardarIngrediente(Ingrediente ingrediente);
+	public Ingrediente guardar(Ingrediente ingrediente);
 
-	public Ingrediente actualizarIngrediente(Ingrediente ingrediente);
+	//public Ingrediente actualizar(Ingrediente ingrediente);
 }

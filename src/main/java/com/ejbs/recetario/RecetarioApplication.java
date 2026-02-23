@@ -10,12 +10,12 @@ import lombok.Getter;
 @SpringBootApplication
 public class RecetarioApplication {
 
-    @Getter
-    private static final Logger LOGGER = LogManager.getLogger();
+	@Getter
+	private static final Logger LOGGER = LogManager.getLogger();
 
-    public static void main(String[] args) {
-        /* ApplicationContext context = SpringApplication.run(recetarioApplication.class, args); */
-        SpringApplication.run(RecetarioApplication.class, args);
-    }
+	public static void main(String[] args) {
+		/* ApplicationContext context = SpringApplication.run(recetarioApplication.class, args); */
+		SpringApplication.run(RecetarioApplication.class, args);
+	}
 
 }

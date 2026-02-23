@@ -24,13 +24,13 @@ public class ModeradorController {
 	private static final String RUTA_MODERADOR = "/vistas/moderador/";
 
 	@Autowired
-	UsuarioServiceImpl usuarioRepositorio;
+	private UsuarioServiceImpl usuarioRepositorio;
 
 	@Autowired
-	PeticionesServiceImpl peticionesRepositorio;
+	private PeticionesServiceImpl peticionesRepositorio;
 
 	@Autowired
-	PasoServiceImpl pasoRepositorio;
+	private PasoServiceImpl pasoRepositorio;
 
 	@GetMapping("/moderador/peticiones")
 	public String verPeticiones(Model modelo, @RequestParam(required = false) String filtro) {

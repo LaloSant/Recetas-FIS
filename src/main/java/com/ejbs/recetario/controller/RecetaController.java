@@ -28,6 +28,7 @@ import com.ejbs.recetario.service.ingrediente.IngredienteServiceImpl;
 import com.ejbs.recetario.service.paso.PasoServiceImpl;
 import com.ejbs.recetario.service.peticiones.PeticionesServiceImpl;
 import com.ejbs.recetario.service.receta.RecetaServiceImpl;
+import com.ejbs.recetario.service.usuario.UserUtils;
 import com.ejbs.recetario.service.usuario.UsuarioServiceImpl;
 
 @Controller
@@ -36,36 +37,36 @@ public class RecetaController {
 	private static final String RUTA_VISTA = "/vistas/recetas/";
 
 	@Autowired
-	RecetaServiceImpl recetaRepositorio;
+	private RecetaServiceImpl recetaRepositorio;
 
 	@Autowired
-	UsuarioServiceImpl usuarioRepositorio;
+	private UsuarioServiceImpl usuarioRepositorio;
 
 	@Autowired
-	IngredienteServiceImpl ingredienteRepositorio;
+	private UserUtils userUtils;
 
 	@Autowired
-	PasoServiceImpl pasoRepositorio;
+	private IngredienteServiceImpl ingredienteRepositorio;
 
 	@Autowired
-	DetalleServiceImpl detalleRepositorio;
+	private PasoServiceImpl pasoRepositorio;
 
 	@Autowired
-	PeticionesServiceImpl peticionRepositorio;
+	private DetalleServiceImpl detalleRepositorio;
+
+	@Autowired
+	private PeticionesServiceImpl peticionRepositorio;
 
 	@GetMapping("/recetas/misRecetas")
 	public String getMisRecetas(Model modelo) {
 		Usuario user = usuarioRepositorio.getUsuarioSesion();
-		if (user != null) {
-			modelo.addAttribute("nomUser", user.getNombre());
-			modelo.addAttribute("rol", user.getRol().getNombre());
-			modelo.addAttribute("usuarioSesion", user);
-		}
-		List<Receta> recetas = recetaRepositorio.listarTodaReceta().stream().filter(r -> r.getUsuario().equals(user))
+		userUtils.setUserSession(modelo);
+		List<Receta> recetas = recetaRepositorio.listarTodaReceta().stream()
+				.filter(r -> r.getUsuario().equals(user))
 				.toList();
 		modelo.addAttribute("recetas", recetas);
 
-		return RUTA_VISTA + "verRecetas";
+		return RUTA_VISTA + "descubrir";
 	}
 
 	@GetMapping({ "/recetas", "/" })
@@ -74,28 +75,29 @@ public class RecetaController {
 			@RequestParam(required = false) String nombreReceta,
 			@RequestParam(required = false) List<Long> ingredientes,
 			@RequestParam(required = false) Integer exclusivo) {
-		Usuario user = usuarioRepositorio.getUsuarioSesion();
-		modelo.addAttribute("ingredientes", ingredienteRepositorio.listarTodoIngrediente());
-		if (user != null) {
-			modelo.addAttribute("nomUser", user.getNombre());
-			modelo.addAttribute("rol", user.getRol().getNombre());
-			modelo.addAttribute("usuarioSesion", user);
-		}
+		// Usuario user = usuarioRepositorio.getUsuarioSesion();
+		// if (user != null) {
+		// 	modelo.addAttribute("nomUser", user.getNombre());
+		// 	modelo.addAttribute("rol", user.getRol().getNombre());
+		// 	modelo.addAttribute("usuarioSesion", user);
+		// }
+		userUtils.setUserSession(modelo);
+		modelo.addAttribute("ingredientes", ingredienteRepositorio.listarTodo());
 		List<Receta> recetas;
 		if (nombreReceta != null && !nombreReceta.isBlank()) {
 			recetas = recetaRepositorio.obtenerTodoPor(nombreReceta);
 			modelo.addAttribute("recetas", recetas);
-			return RUTA_VISTA + "verRecetas";
+			return RUTA_VISTA + "descubrir";
 		}
 		if (ingredientes != null) {
 			if (exclusivo != null && exclusivo == 1) {
 				modelo.addAttribute("exclusivo", 1);
-				List<Long> recetasIds = detalleRepositorio.buscarPorIngredientes(ingredientes,
-						(long) ingredientes.size());
+				List<Long> recetasIds = detalleRepositorio.buscarPorIngredientes(
+						ingredientes, (long) ingredientes.size());
 				recetas = recetaRepositorio.obtenerTodoPor(recetasIds);
 				modelo.addAttribute("recetas", recetas);
 				modelo.addAttribute("ingredientesSel", ingredientes);
-				return RUTA_VISTA + "verRecetas";
+				return RUTA_VISTA + "descubrir";
 			}
 			List<Detalle> detalles = detalleRepositorio.buscarPorIngredientes(ingredientes);
 			Set<Receta> set = new HashSet<>();
@@ -106,7 +108,7 @@ public class RecetaController {
 			modelo.addAttribute("exclusivo", 0);
 			modelo.addAttribute("recetas", recetas);
 			modelo.addAttribute("ingredientesSel", ingredientes);
-			return RUTA_VISTA + "verRecetas";
+			return RUTA_VISTA + "descubrir";
 		}
 		if ("semana".equals(ordenarPor)) {
 			recetas = recetaRepositorio.obtenerTopSemana();
@@ -117,7 +119,7 @@ public class RecetaController {
 		}
 		// recetas = recetas.stream().limit(10).toList();
 		modelo.addAttribute("recetas", recetas);
-		return RUTA_VISTA + "verRecetas";
+		return RUTA_VISTA + "descubrir";
 	}
 
 	@PostMapping("/recetas/calificar")
@@ -133,7 +135,7 @@ public class RecetaController {
 	}
 
 	@GetMapping("/recetas/ver")
-	public String vistaReceta(Model modelo, @RequestParam(required = false, defaultValue = "1") Long idReceta) {
+	public String ver(Model modelo, @RequestParam(required = false, defaultValue = "1") Long idReceta) {
 		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(idReceta);
 		Usuario user = usuarioRepositorio.getUsuarioSesion();
 		if (user != null) {
@@ -146,17 +148,18 @@ public class RecetaController {
 		recetaRepositorio.aumentarVisita(idReceta);
 		modelo.addAttribute("receta", receta);
 		modelo.addAttribute("costo", receta.calcularCosto());
-		return RUTA_VISTA + "vistaReceta";
+		return RUTA_VISTA + "ver";
 	}
 
 	@GetMapping("/recetas/editar")
-	public String editarReceta(Model modelo, @RequestParam(required = false) Long idReceta) {
+	public String editar(Model modelo, @RequestParam(required = false) Long idReceta) {
+		// Usuario user = usuarioRepositorio.getUsuarioSesion();
+		// if (user != null) {
+		// 	modelo.addAttribute("rol", user.getRol().getNombre());
+		// 	modelo.addAttribute("nomUser", user.getNombre());
+		// }
+		userUtils.setUserSession(modelo);
 		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(idReceta);
-		Usuario user = usuarioRepositorio.getUsuarioSesion();
-		if (user != null) {
-			modelo.addAttribute("rol", user.getRol().getNombre());
-			modelo.addAttribute("nomUser", user.getNombre());
-		}
 		if (!recetaOpt.isPresent()) {
 			return "redirect:/recetas";
 		}
@@ -166,9 +169,9 @@ public class RecetaController {
 			pasoImagenes.add(new PasoDTO(rec.getPasos().get(i), null));
 		}
 		RecetaCompDTO dto = new RecetaCompDTO(rec, rec.getPasos(), rec.getDetalles(), null, pasoImagenes);
-		modelo.addAttribute("ingredientes", ingredienteRepositorio.listarTodoIngrediente());
+		modelo.addAttribute("ingredientes", ingredienteRepositorio.listarTodo());
 		modelo.addAttribute("dto", dto);
-		return RUTA_VISTA + "editarReceta";
+		return RUTA_VISTA + "editar";
 	}
 
 	@PostMapping("/recetas/editar")
@@ -226,22 +229,23 @@ public class RecetaController {
 	}
 
 	@GetMapping("/receta/agregar")
-	public String agregarRecetaVista(Model modelo) {
-		Usuario user = usuarioRepositorio.getUsuarioSesion();
+	public String agregarVista(Model modelo) {
 		RecetaCompDTO dto = new RecetaCompDTO();
 		PasoDTO pdto = new PasoDTO();
-		if (user != null) {
-			modelo.addAttribute("rol", user.getRol().getNombre());
-			modelo.addAttribute("nomUser", user.getNombre());
-		}
+		// Usuario user = usuarioRepositorio.getUsuarioSesion();
+		// if (user != null) {
+		// 	modelo.addAttribute("rol", user.getRol().getNombre());
+		// 	modelo.addAttribute("nomUser", user.getNombre());
+		// }
+		userUtils.setUserSession(modelo);
 		modelo.addAttribute("dto", dto);
 		modelo.addAttribute("pdto", pdto);
-		modelo.addAttribute("ingredientes", ingredienteRepositorio.listarTodoIngrediente());
-		return RUTA_VISTA + "agregarReceta";
+		modelo.addAttribute("ingredientes", ingredienteRepositorio.listarTodo());
+		return RUTA_VISTA + "agregar";
 	}
 
 	@PostMapping("/receta/agregar")
-	public String agregarReceta(@ModelAttribute("dto") RecetaCompDTO dto) {
+	public String agregar(@ModelAttribute("dto") RecetaCompDTO dto) {
 		Usuario user = usuarioRepositorio.getUsuarioSesion();
 		if (user == null) {
 			return "redirect:/login";

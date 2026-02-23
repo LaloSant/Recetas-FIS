@@ -2,8 +2,6 @@ package com.ejbs.recetario.service.ingrediente;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +15,7 @@ public class IngredienteServiceImpl implements IngredienteService {
 	IngredienteRepository repositorio;
 
 	@Override
-	public Ingrediente obtenerIngrediente(Long idIngrediente) {
+	public Ingrediente obtener(Long idIngrediente) {
 		if (idIngrediente == null) {
 			return null;
 		}
@@ -25,23 +23,23 @@ public class IngredienteServiceImpl implements IngredienteService {
 	}
 
 	@Override
-	public List<Ingrediente> listarTodoIngrediente() {
+	public List<Ingrediente> listarTodo() {
 		return repositorio.findAll().stream()
 				.sorted(Comparator.comparing(Ingrediente::getNombre))
-				.collect(Collectors.toList());
+				.toList();
 	}
 
 	@Override
-	public Ingrediente guardarIngrediente(Ingrediente ingrediente) {
+	public Ingrediente guardar(Ingrediente ingrediente) {
 		if (ingrediente == null) {
 			return null;
 		}
 		return repositorio.save(ingrediente);
 	}
 
-	@Override
-	public Ingrediente actualizarIngrediente(Ingrediente ingrediente) {
-		return this.guardarIngrediente(ingrediente);
-	}
+	// @Override
+	// public Ingrediente actualizar(Ingrediente ingrediente) {
+	// 	return this.guardar(ingrediente);
+	// }
 
 }

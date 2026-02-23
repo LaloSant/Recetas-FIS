@@ -5,19 +5,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.ejbs.recetario.service.usuario.UsuarioService;
+import com.ejbs.recetario.service.usuario.UsuarioServiceImpl;
 
 @Controller
 public class UsuarioController {
 
-    private static final String RUTA_VISTA = "/vistas/usuarios/";
+	private static final String RUTA_VISTA = "/vistas/usuarios/";
 
-    @Autowired
-    UsuarioService servicio;
+	@Autowired
+	private UsuarioServiceImpl repositorioUsuario;
 
-    @GetMapping({"/usuarios"})
-    public String listarUsuarios(Model modelo) {
-        modelo.addAttribute("usuarios", servicio.listarTodoUsuario());
-        return RUTA_VISTA + "usuarios";
-    }
+	@GetMapping("/usuarios")
+	public String listarUsuarios(Model modelo) {
+		modelo.addAttribute("usuarios", repositorioUsuario.listarTodoUsuario());
+		return RUTA_VISTA + "usuarios";
+	}
 }

@@ -10,12 +10,12 @@
 			<div class="col col-lg-4">
 				<h2>BIENVENIDO</h2>
 			</div>
-			<h2 th:if="${recetas.isEmpty()}" class="mb-5">
+			<h2 th:if="${recetas.isEmpty()}" class="mb-5" style="min-height: 25em;">
 				SIN RECETAS REGISTRADAS
 			</h2>
 			<div class="col col-lg-2 d-flex justify-content-end m-2">
 				<form th:action="@{/recetas}" method="get">
-					<div class="dropdown z-3">
+					<div th:if="${!recetas.isEmpty()}" class="dropdown z-3">
 						<button class="btn btn-dark dropdown-toggle" type="button" id="dropdownIngredientes" data-bs-toggle="dropdown"
 							aria-expanded="false">
 							Buscar por ingredientes
@@ -44,7 +44,7 @@
 					</div>
 				</form>
 			</div>
-			<div th:if="${textoOrden != null}" class="col d-flex justify-content-end m-2 z-1">
+			<div th:if="${textoOrden != null && !recetas.isEmpty()}" class="col d-flex justify-content-end m-2 z-1">
 				<div class="dropdown">
 					<button th:text=" 'Ordenar: ' + ${textoOrden}" class="btn btn-dark dropdown-toggle sticky-top" type="button"
 						data-bs-toggle="dropdown" aria-expanded="false">

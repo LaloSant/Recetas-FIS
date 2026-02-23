@@ -58,7 +58,7 @@ public class DetalleServiceImpl implements DetalleService {
 	public void guardarDetalles(List<Detalle> detalles, Receta receta) {
 		if (detalles != null) {
 			for (Detalle detalle : detalles) {
-				Ingrediente ing = ingredienteRepositorio.obtenerIngrediente(detalle.getIngrediente().getIdIngrediente());
+				Ingrediente ing = ingredienteRepositorio.obtener(detalle.getIngrediente().getIdIngrediente());
 				detalle.setReceta(receta);
 				detalle.setCosto(ing.getCostoUnitario() * detalle.getCantidad());
 				repositorio.save(detalle);
