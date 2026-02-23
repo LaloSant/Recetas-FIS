@@ -1,0 +1,628 @@
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m------------------------< [0;36mcom.flerchante:sabor[0;1m >------------------------[m
+[[1;34mINFO[m] [1mBuilding sabor 0.0.1-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:resources[m [1m(default-resources)[m @ [36msabor[0;1m ---[m
+[[1;34mINFO[m] Copying 1 resource from src/main/resources to target/classes
+[[1;34mINFO[m] Copying 14 resources from src/main/resources to target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.1:compile[m [1m(default-compile)[m @ [36msabor[0;1m ---[m
+[[1;34mINFO[m] Recompiling the module because of [1mchanged source code[m.
+[[1;34mINFO[m] Compiling 40 source files with javac [debug parameters release 25] to target/classes
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;31mERROR[m] COMPILATION ERROR : 
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ImagenController.java:[32,76] cannot find symbol
+  symbol:   method getImagen()
+  location: class com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ImagenController.java:[54,59] cannot find symbol
+  symbol:   method getImagen()
+  location: class com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/receta/RecetaServiceImpl.java:[26,23] cannot find symbol
+  symbol:   method setVisitasSemanales(long)
+  location: variable receta of type com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/receta/RecetaServiceImpl.java:[27,23] cannot find symbol
+  symbol:   method setVisitasTotales(long)
+  location: variable receta of type com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/receta/RecetaServiceImpl.java:[28,23] cannot find symbol
+  symbol:   method setCalificacion(double)
+  location: variable receta of type com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/receta/RecetaServiceImpl.java:[29,23] cannot find symbol
+  symbol:   method setCalificacionesTotales(long)
+  location: variable receta of type com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/paso/PasoServiceImpl.java:[46,37] cannot find symbol
+  symbol:   method setReceta(com.flerchante.sabor.model.entity.Receta)
+  location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/paso/PasoServiceImpl.java:[47,37] cannot find symbol
+  symbol:   method setIndicePaso(long)
+  location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/paso/PasoServiceImpl.java:[58,37] cannot find symbol
+  symbol:   method setReceta(com.flerchante.sabor.model.entity.Receta)
+  location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/paso/PasoServiceImpl.java:[59,37] cannot find symbol
+  symbol:   method setIndicePaso(java.lang.Long)
+  location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/model/entity/Receta.java:[81,67] invalid method reference
+  cannot find symbol
+    symbol:   method getIdPaso()
+    location: class com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/model/entity/Usuario.java:[70,39] cannot find symbol
+  symbol:   method getIdRol()
+  location: variable rol of type com.flerchante.sabor.model.entity.Rol
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/model/entity/Detalle.java:[54,36] cannot find symbol
+  symbol:   method getCostoUnitario()
+  location: variable ingrediente of type com.flerchante.sabor.model.entity.Ingrediente
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/usuario/UserUtils.java:[17,59] cannot find symbol
+  symbol:   method getNombre()
+  location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/usuario/UserUtils.java:[18,55] cannot find symbol
+  symbol:   method getRol()
+  location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[40,60] cannot find symbol
+  symbol:   method getNombre()
+  location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[41,56] cannot find symbol
+  symbol:   method getRol()
+  location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[47,71] cannot find symbol
+  symbol:   method getEstatus()
+  location: variable p of type com.flerchante.sabor.model.entity.PeticionIA
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[69,41] cannot find symbol
+  symbol:   method getRol()
+  location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[73,60] cannot find symbol
+  symbol:   method getNombre()
+  location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[74,56] cannot find symbol
+  symbol:   method getRol()
+  location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[78,35] constructor PeticionDTO in class com.flerchante.sabor.model.dto.PeticionDTO cannot be applied to given types;
+  required: no arguments
+  found:    com.flerchante.sabor.model.entity.PeticionIA,<nulltype>
+  reason: actual and formal argument lists differ in length
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[85,75] cannot find symbol
+  symbol:   method getPeticion()
+  location: variable dto of type com.flerchante.sabor.model.dto.PeticionDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[86,61] cannot find symbol
+  symbol:   method getIdPeticionIA()
+  location: variable pet of type com.flerchante.sabor.model.entity.PeticionIA
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[87,32] cannot find symbol
+  symbol:   method getPaso()
+  location: variable pet of type com.flerchante.sabor.model.entity.PeticionIA
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[88,52] cannot find symbol
+  symbol:   method getIdPaso()
+  location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[88,70] cannot find symbol
+  symbol:   method getNotas()
+  location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[88,112] cannot find symbol
+  symbol:   method getMpf()
+  location: variable dto of type com.flerchante.sabor.model.dto.PeticionDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[95,41] cannot find symbol
+  symbol:   method getRol()
+  location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[99,61] cannot find symbol
+  symbol:   method getIdPeticionIA()
+  location: variable pet of type com.flerchante.sabor.model.entity.PeticionIA
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[65,47] cannot find symbol
+  symbol:   method getUsuario()
+  location: variable r of type com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[105,48] cannot find symbol
+  symbol:   method getReceta()
+  location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[132,82] cannot find symbol
+  symbol:   method getCalificacion()
+  location: variable receta of type com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[142,60] cannot find symbol
+  symbol:   method getNombre()
+  location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[169,42] constructor PasoDTO in class com.flerchante.sabor.model.dto.PasoDTO cannot be applied to given types;
+  required: no arguments
+  found:    com.flerchante.sabor.model.entity.Paso,<nulltype>
+  reason: actual and formal argument lists differ in length
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[171,79] cannot find symbol
+  symbol:   method getDetalles()
+  location: variable rec of type com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[179,39] cannot find symbol
+  symbol:   method getReceta()
+  location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[179,66] cannot find symbol
+  symbol:   method getReceta()
+  location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[182,86] cannot find symbol
+  symbol:   method getReceta()
+  location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[187,39] cannot find symbol
+  symbol:   method getPasos()
+  location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[188,49] cannot find symbol
+  symbol:   method getPasoDTOs()
+  location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[193,41] cannot find symbol
+  symbol:   method getIdPaso()
+  location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[193,69] cannot find symbol
+  symbol:   method getNotas()
+  location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[194,94] cannot find symbol
+  symbol:   method getIdPaso()
+  location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[195,68] cannot find symbol
+  symbol:   method getNotas()
+  location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[196,115] cannot find symbol
+  symbol:   method getImagen()
+  location: class com.flerchante.sabor.model.dto.PasoDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[197,80] cannot find symbol
+  symbol:   method getImagen()
+  location: class com.flerchante.sabor.model.dto.PasoDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[198,118] cannot find symbol
+  symbol:   method getImagen()
+  location: class com.flerchante.sabor.model.dto.PasoDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[200,85] cannot find symbol
+  symbol:   method getIdPaso()
+  location: variable pasoExistente of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[200,112] cannot find symbol
+  symbol:   method getNotas()
+  location: variable pasoExistente of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[201,70] cannot find symbol
+  symbol:   method getImagen()
+  location: variable pasoExistente of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[207,45] cannot find symbol
+  symbol:   method getDetalles()
+  location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[210,44] cannot find symbol
+  symbol:   method getIdDetalle()
+  location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[210,78] cannot find symbol
+  symbol:   method getCantidad()
+  location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[211,59] cannot find symbol
+  symbol:   method getIngrediente()
+  location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[211,95] cannot find symbol
+  symbol:   method getIngrediente()
+  location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[212,85] cannot find symbol
+  symbol:   method getIdDetalle()
+  location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[212,109] cannot find symbol
+  symbol:   method getCantidad()
+  location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[213,64] cannot find symbol
+  symbol:   method getIngrediente()
+  location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[214,51] cannot find symbol
+  symbol:   method getIdDetalle()
+  location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[219,24] cannot find symbol
+  symbol:   method getImagen()
+  location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[219,52] cannot find symbol
+  symbol:   method getImagen()
+  location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[220,80] cannot find symbol
+  symbol:   method getImagen()
+  location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[224,24] cannot find symbol
+  symbol:   method getReceta()
+  location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[225,75] cannot find symbol
+  symbol:   method getIdReceta()
+  location: variable recetaExistente of type com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[225,94] cannot find symbol
+  symbol:   method getReceta()
+  location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[253,41] cannot find symbol
+  symbol:   method getReceta()
+  location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[254,28] cannot find symbol
+  symbol:   method setUsuario(com.flerchante.sabor.model.entity.Usuario)
+  location: variable nuevaReceta of type com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[255,68] cannot find symbol
+  symbol:   method getImagen()
+  location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[258,39] cannot find symbol
+  symbol:   method getPasos()
+  location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[262,41] cannot find symbol
+  symbol:   method isGenerarPeticion()
+  location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[263,111] cannot find symbol
+  symbol:   method getNotas()
+  location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[264,45] cannot find symbol
+  symbol:   method setPeticionIA(com.flerchante.sabor.model.entity.PeticionIA)
+  location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[265,57] cannot find symbol
+  symbol:   method setPaso(com.flerchante.sabor.model.entity.Paso)
+  location: variable peticionGenerada of type com.flerchante.sabor.model.entity.PeticionIA
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[266,79] cannot find symbol
+  symbol:   method getIdPaso()
+  location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[266,97] cannot find symbol
+  symbol:   method getPeticionIA()
+  location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[270,45] cannot find symbol
+  symbol:   method getDetalles()
+  location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[279,63] cannot find symbol
+  symbol:   method getUsuario()
+  location: class com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[282,55] cannot find symbol
+  symbol:   method getDetalles()
+  location: class com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[286,51] cannot find symbol
+  symbol:   method getPeticionIA()
+  location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[288,41] cannot find symbol
+  symbol:   method setPaso(<nulltype>)
+  location: variable peticion of type com.flerchante.sabor.model.entity.PeticionIA
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[289,37] cannot find symbol
+  symbol:   method setPeticionIA(<nulltype>)
+  location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[290,78] cannot find symbol
+  symbol:   method getIdPeticionIA()
+  location: variable peticion of type com.flerchante.sabor.model.entity.PeticionIA
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/ingrediente/IngredienteServiceImpl.java:[28,62] invalid method reference
+  cannot find symbol
+    symbol:   method getNombre()
+    location: class com.flerchante.sabor.model.entity.Ingrediente
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/detalle/DetalleServiceImpl.java:[62,89] cannot find symbol
+  symbol:   method getIngrediente()
+  location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/detalle/DetalleServiceImpl.java:[63,40] cannot find symbol
+  symbol:   method setReceta(com.flerchante.sabor.model.entity.Receta)
+  location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/detalle/DetalleServiceImpl.java:[64,53] cannot find symbol
+  symbol:   method getCostoUnitario()
+  location: variable ing of type com.flerchante.sabor.model.entity.Ingrediente
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/detalle/DetalleServiceImpl.java:[64,82] cannot find symbol
+  symbol:   method getCantidad()
+  location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RegistroController.java:[39,59] cannot find symbol
+  symbol:   method getNombre()
+  location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RegistroController.java:[46,95] cannot find symbol
+  symbol:   method getEmail()
+  location: variable usuario of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RegistroController.java:[52,32] cannot find symbol
+  symbol:   method setRol(<nulltype>)
+  location: variable usuario of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RegistroController.java:[55,24] cannot find symbol
+  symbol:   method setRol(com.flerchante.sabor.model.entity.Rol)
+  location: variable usuario of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RegistroController.java:[56,70] cannot find symbol
+  symbol:   method getContrasenia()
+  location: variable usuario of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/security/SecurityConfig.java:[40,52] cannot find symbol
+  symbol:   method getEmail()
+  location: variable u of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/security/SecurityConfig.java:[41,52] cannot find symbol
+  symbol:   method getContrasenia()
+  location: variable u of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/security/SecurityConfig.java:[42,49] cannot find symbol
+  symbol:   method getRol()
+  location: variable u of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/security/SecurityConfig.java:[42,71] cannot find symbol
+  symbol:   method getRol()
+  location: variable u of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/security/SecurityConfig.java:[42,104] cannot find symbol
+  symbol:   method getRol()
+  location: variable u of type com.flerchante.sabor.model.entity.Usuario
+[[1;34mINFO[m] 98 errors 
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;31mBUILD FAILURE[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  3.174 s
+[[1;34mINFO[m] Finished at: 2026-02-23T15:40:41-06:00
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;31mERROR[m] Failed to execute goal [32morg.apache.maven.plugins:maven-compiler-plugin:3.14.1:compile[m [1m(default-compile)[m on project [36msabor[m: [1;31mCompilation failure[m: Compilation failure: 
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ImagenController.java:[32,76] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getImagen()
+[[1;31mERROR[m]   location: class com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ImagenController.java:[54,59] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getImagen()
+[[1;31mERROR[m]   location: class com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/receta/RecetaServiceImpl.java:[26,23] cannot find symbol
+[[1;31mERROR[m]   symbol:   method setVisitasSemanales(long)
+[[1;31mERROR[m]   location: variable receta of type com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/receta/RecetaServiceImpl.java:[27,23] cannot find symbol
+[[1;31mERROR[m]   symbol:   method setVisitasTotales(long)
+[[1;31mERROR[m]   location: variable receta of type com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/receta/RecetaServiceImpl.java:[28,23] cannot find symbol
+[[1;31mERROR[m]   symbol:   method setCalificacion(double)
+[[1;31mERROR[m]   location: variable receta of type com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/receta/RecetaServiceImpl.java:[29,23] cannot find symbol
+[[1;31mERROR[m]   symbol:   method setCalificacionesTotales(long)
+[[1;31mERROR[m]   location: variable receta of type com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/paso/PasoServiceImpl.java:[46,37] cannot find symbol
+[[1;31mERROR[m]   symbol:   method setReceta(com.flerchante.sabor.model.entity.Receta)
+[[1;31mERROR[m]   location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/paso/PasoServiceImpl.java:[47,37] cannot find symbol
+[[1;31mERROR[m]   symbol:   method setIndicePaso(long)
+[[1;31mERROR[m]   location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/paso/PasoServiceImpl.java:[58,37] cannot find symbol
+[[1;31mERROR[m]   symbol:   method setReceta(com.flerchante.sabor.model.entity.Receta)
+[[1;31mERROR[m]   location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/paso/PasoServiceImpl.java:[59,37] cannot find symbol
+[[1;31mERROR[m]   symbol:   method setIndicePaso(java.lang.Long)
+[[1;31mERROR[m]   location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/model/entity/Receta.java:[81,67] invalid method reference
+[[1;31mERROR[m]   cannot find symbol
+[[1;31mERROR[m]     symbol:   method getIdPaso()
+[[1;31mERROR[m]     location: class com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/model/entity/Usuario.java:[70,39] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getIdRol()
+[[1;31mERROR[m]   location: variable rol of type com.flerchante.sabor.model.entity.Rol
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/model/entity/Detalle.java:[54,36] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getCostoUnitario()
+[[1;31mERROR[m]   location: variable ingrediente of type com.flerchante.sabor.model.entity.Ingrediente
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/usuario/UserUtils.java:[17,59] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getNombre()
+[[1;31mERROR[m]   location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/usuario/UserUtils.java:[18,55] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getRol()
+[[1;31mERROR[m]   location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[40,60] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getNombre()
+[[1;31mERROR[m]   location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[41,56] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getRol()
+[[1;31mERROR[m]   location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[47,71] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getEstatus()
+[[1;31mERROR[m]   location: variable p of type com.flerchante.sabor.model.entity.PeticionIA
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[69,41] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getRol()
+[[1;31mERROR[m]   location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[73,60] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getNombre()
+[[1;31mERROR[m]   location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[74,56] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getRol()
+[[1;31mERROR[m]   location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[78,35] constructor PeticionDTO in class com.flerchante.sabor.model.dto.PeticionDTO cannot be applied to given types;
+[[1;31mERROR[m]   required: no arguments
+[[1;31mERROR[m]   found:    com.flerchante.sabor.model.entity.PeticionIA,<nulltype>
+[[1;31mERROR[m]   reason: actual and formal argument lists differ in length
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[85,75] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getPeticion()
+[[1;31mERROR[m]   location: variable dto of type com.flerchante.sabor.model.dto.PeticionDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[86,61] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getIdPeticionIA()
+[[1;31mERROR[m]   location: variable pet of type com.flerchante.sabor.model.entity.PeticionIA
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[87,32] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getPaso()
+[[1;31mERROR[m]   location: variable pet of type com.flerchante.sabor.model.entity.PeticionIA
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[88,52] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getIdPaso()
+[[1;31mERROR[m]   location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[88,70] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getNotas()
+[[1;31mERROR[m]   location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[88,112] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getMpf()
+[[1;31mERROR[m]   location: variable dto of type com.flerchante.sabor.model.dto.PeticionDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[95,41] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getRol()
+[[1;31mERROR[m]   location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/ModeradorController.java:[99,61] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getIdPeticionIA()
+[[1;31mERROR[m]   location: variable pet of type com.flerchante.sabor.model.entity.PeticionIA
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[65,47] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getUsuario()
+[[1;31mERROR[m]   location: variable r of type com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[105,48] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getReceta()
+[[1;31mERROR[m]   location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[132,82] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getCalificacion()
+[[1;31mERROR[m]   location: variable receta of type com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[142,60] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getNombre()
+[[1;31mERROR[m]   location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[169,42] constructor PasoDTO in class com.flerchante.sabor.model.dto.PasoDTO cannot be applied to given types;
+[[1;31mERROR[m]   required: no arguments
+[[1;31mERROR[m]   found:    com.flerchante.sabor.model.entity.Paso,<nulltype>
+[[1;31mERROR[m]   reason: actual and formal argument lists differ in length
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[171,79] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getDetalles()
+[[1;31mERROR[m]   location: variable rec of type com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[179,39] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getReceta()
+[[1;31mERROR[m]   location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[179,66] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getReceta()
+[[1;31mERROR[m]   location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[182,86] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getReceta()
+[[1;31mERROR[m]   location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[187,39] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getPasos()
+[[1;31mERROR[m]   location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[188,49] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getPasoDTOs()
+[[1;31mERROR[m]   location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[193,41] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getIdPaso()
+[[1;31mERROR[m]   location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[193,69] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getNotas()
+[[1;31mERROR[m]   location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[194,94] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getIdPaso()
+[[1;31mERROR[m]   location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[195,68] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getNotas()
+[[1;31mERROR[m]   location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[196,115] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getImagen()
+[[1;31mERROR[m]   location: class com.flerchante.sabor.model.dto.PasoDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[197,80] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getImagen()
+[[1;31mERROR[m]   location: class com.flerchante.sabor.model.dto.PasoDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[198,118] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getImagen()
+[[1;31mERROR[m]   location: class com.flerchante.sabor.model.dto.PasoDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[200,85] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getIdPaso()
+[[1;31mERROR[m]   location: variable pasoExistente of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[200,112] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getNotas()
+[[1;31mERROR[m]   location: variable pasoExistente of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[201,70] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getImagen()
+[[1;31mERROR[m]   location: variable pasoExistente of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[207,45] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getDetalles()
+[[1;31mERROR[m]   location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[210,44] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getIdDetalle()
+[[1;31mERROR[m]   location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[210,78] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getCantidad()
+[[1;31mERROR[m]   location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[211,59] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getIngrediente()
+[[1;31mERROR[m]   location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[211,95] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getIngrediente()
+[[1;31mERROR[m]   location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[212,85] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getIdDetalle()
+[[1;31mERROR[m]   location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[212,109] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getCantidad()
+[[1;31mERROR[m]   location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[213,64] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getIngrediente()
+[[1;31mERROR[m]   location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[214,51] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getIdDetalle()
+[[1;31mERROR[m]   location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[219,24] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getImagen()
+[[1;31mERROR[m]   location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[219,52] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getImagen()
+[[1;31mERROR[m]   location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[220,80] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getImagen()
+[[1;31mERROR[m]   location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[224,24] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getReceta()
+[[1;31mERROR[m]   location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[225,75] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getIdReceta()
+[[1;31mERROR[m]   location: variable recetaExistente of type com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[225,94] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getReceta()
+[[1;31mERROR[m]   location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[253,41] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getReceta()
+[[1;31mERROR[m]   location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[254,28] cannot find symbol
+[[1;31mERROR[m]   symbol:   method setUsuario(com.flerchante.sabor.model.entity.Usuario)
+[[1;31mERROR[m]   location: variable nuevaReceta of type com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[255,68] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getImagen()
+[[1;31mERROR[m]   location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[258,39] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getPasos()
+[[1;31mERROR[m]   location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[262,41] cannot find symbol
+[[1;31mERROR[m]   symbol:   method isGenerarPeticion()
+[[1;31mERROR[m]   location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[263,111] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getNotas()
+[[1;31mERROR[m]   location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[264,45] cannot find symbol
+[[1;31mERROR[m]   symbol:   method setPeticionIA(com.flerchante.sabor.model.entity.PeticionIA)
+[[1;31mERROR[m]   location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[265,57] cannot find symbol
+[[1;31mERROR[m]   symbol:   method setPaso(com.flerchante.sabor.model.entity.Paso)
+[[1;31mERROR[m]   location: variable peticionGenerada of type com.flerchante.sabor.model.entity.PeticionIA
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[266,79] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getIdPaso()
+[[1;31mERROR[m]   location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[266,97] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getPeticionIA()
+[[1;31mERROR[m]   location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[270,45] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getDetalles()
+[[1;31mERROR[m]   location: variable dto of type com.flerchante.sabor.model.dto.RecetaCompDTO
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[279,63] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getUsuario()
+[[1;31mERROR[m]   location: class com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[282,55] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getDetalles()
+[[1;31mERROR[m]   location: class com.flerchante.sabor.model.entity.Receta
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[286,51] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getPeticionIA()
+[[1;31mERROR[m]   location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[288,41] cannot find symbol
+[[1;31mERROR[m]   symbol:   method setPaso(<nulltype>)
+[[1;31mERROR[m]   location: variable peticion of type com.flerchante.sabor.model.entity.PeticionIA
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[289,37] cannot find symbol
+[[1;31mERROR[m]   symbol:   method setPeticionIA(<nulltype>)
+[[1;31mERROR[m]   location: variable paso of type com.flerchante.sabor.model.entity.Paso
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RecetaController.java:[290,78] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getIdPeticionIA()
+[[1;31mERROR[m]   location: variable peticion of type com.flerchante.sabor.model.entity.PeticionIA
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/ingrediente/IngredienteServiceImpl.java:[28,62] invalid method reference
+[[1;31mERROR[m]   cannot find symbol
+[[1;31mERROR[m]     symbol:   method getNombre()
+[[1;31mERROR[m]     location: class com.flerchante.sabor.model.entity.Ingrediente
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/detalle/DetalleServiceImpl.java:[62,89] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getIngrediente()
+[[1;31mERROR[m]   location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/detalle/DetalleServiceImpl.java:[63,40] cannot find symbol
+[[1;31mERROR[m]   symbol:   method setReceta(com.flerchante.sabor.model.entity.Receta)
+[[1;31mERROR[m]   location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/detalle/DetalleServiceImpl.java:[64,53] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getCostoUnitario()
+[[1;31mERROR[m]   location: variable ing of type com.flerchante.sabor.model.entity.Ingrediente
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/service/detalle/DetalleServiceImpl.java:[64,82] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getCantidad()
+[[1;31mERROR[m]   location: variable detalle of type com.flerchante.sabor.model.entity.Detalle
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RegistroController.java:[39,59] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getNombre()
+[[1;31mERROR[m]   location: variable user of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RegistroController.java:[46,95] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getEmail()
+[[1;31mERROR[m]   location: variable usuario of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RegistroController.java:[52,32] cannot find symbol
+[[1;31mERROR[m]   symbol:   method setRol(<nulltype>)
+[[1;31mERROR[m]   location: variable usuario of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RegistroController.java:[55,24] cannot find symbol
+[[1;31mERROR[m]   symbol:   method setRol(com.flerchante.sabor.model.entity.Rol)
+[[1;31mERROR[m]   location: variable usuario of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/controller/RegistroController.java:[56,70] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getContrasenia()
+[[1;31mERROR[m]   location: variable usuario of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/security/SecurityConfig.java:[40,52] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getEmail()
+[[1;31mERROR[m]   location: variable u of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/security/SecurityConfig.java:[41,52] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getContrasenia()
+[[1;31mERROR[m]   location: variable u of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/security/SecurityConfig.java:[42,49] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getRol()
+[[1;31mERROR[m]   location: variable u of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/security/SecurityConfig.java:[42,71] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getRol()
+[[1;31mERROR[m]   location: variable u of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] /home/eduardo/Documents/Programacion/Java/SABOR/src/main/java/com/flerchante/sabor/security/SecurityConfig.java:[42,104] cannot find symbol
+[[1;31mERROR[m]   symbol:   method getRol()
+[[1;31mERROR[m]   location: variable u of type com.flerchante.sabor.model.entity.Usuario
+[[1;31mERROR[m] -> [1m[Help 1][m
+[[1;31mERROR[m] 
+[[1;31mERROR[m] To see the full stack trace of the errors, re-run Maven with the [1m-e[m switch.
+[[1;31mERROR[m] Re-run Maven using the [1m-X[m switch to enable full debug logging.
+[[1;31mERROR[m] 
+[[1;31mERROR[m] For more information about the errors and possible solutions, please read the following articles:
+[[1;31mERROR[m] [1m[Help 1][m http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
