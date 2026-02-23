@@ -8,11 +8,11 @@
 		<version>3.5.10</version>
 		<relativePath/>
 	</parent>
-	<groupId>com.ejbs</groupId>
-	<artifactId>recetario</artifactId>
+	<groupId>com.flerchante</groupId>
+	<artifactId>sabor</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>recetario</name>
-	<description>Proyecto FIS recetario</description>
+	<name>sabor</name>
+	<description>Proyecto FIS-IS SABOR</description>
 	<url/>
 	<licenses>
 		<license/>
