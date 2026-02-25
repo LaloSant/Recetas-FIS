@@ -16,8 +16,8 @@
 							<div class="input-group mb-2">
 								<span class="input-group-text"><i class="bi bi-file-text"></i></span>
 								<span class="input-group-text" th:text="'NOMBRE'"></span>
-								<input class="form-control" th:field="*{receta.nombre}" th:value="${dto.receta.nombre}"
-									type="text" required minlength="3" maxlength="50">
+								<input class="form-control" th:field="*{receta.nombre}" th:value="${dto.receta.nombre}" type="text" required
+									minlength="3" maxlength="50">
 							</div>
 							<div class="input-group">
 								<!-- <span class="input-group-text"><i class="bi bi-hash"></i></span>
@@ -31,12 +31,28 @@
 								<span class="input-group-text"><i class="bi bi-star-half"></i></span>
 								<span class="input-group-text" th:text="'CALIFICACION (X/5)'"></span>
 								<span class="input-group-text" th:text="${dto.receta.calificacion}"></span>
-								<input hidden th:field="*{receta.calificacion}" th:value="${dto.receta.calificacion}"
-									type="text">
-								<input hidden th:field="*{receta.visitasTotales}"
-									th:value="${dto.receta.visitasTotales}" readonly>
-								<input hidden th:field="*{receta.visitasSemanales}"
-									th:value="${dto.receta.visitasSemanales}" readonly>
+								<input hidden th:field="*{receta.calificacion}" th:value="${dto.receta.calificacion}" type="text">
+								<input hidden th:field="*{receta.visitasTotales}" th:value="${dto.receta.visitasTotales}" readonly>
+								<input hidden th:field="*{receta.visitasSemanales}" th:value="${dto.receta.visitasSemanales}" readonly>
+							</div>
+							<div class="container text-center">
+								<div class="row p-0 d-flex align-items-center">
+									<div class="col col-4 p-0">
+										<div class="input-group my-2 mx-0">
+											<span class="input-group-text"><i class="bi bi-image"></i></span>
+											<span class="input-group-text">Cambiar imagen</span>
+											<input type="file" th:field="*{imagen}" class="form-control" accept=".jpg,image/jpeg"
+											onchange="previewImage(event)" />
+										</div>
+									</div>
+									<div class="col col-8 d-flex align-items-end">
+										<div class="text-center my-2 ">
+											<img th:src="@{/recetas/imagen/{id}(id=${dto.receta.idReceta})}" id="image-preview" class="img-thumbnail"
+												style="max-width: 300px;" alt="Imagen de la receta no encontrada" accept=".jpg,image/jpeg" />
+										</div>
+									</div>
+								</div>
+
 							</div>
 						</div>
 						<div class="my-2 border p-2">
@@ -49,23 +65,17 @@
 										<div class="input-group">
 											<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
 											<span class="input-group-text">Detalle</span>
-											<input type="hidden"
-												th:field="*{detalles[__${iterStat.index}__].idDetalle}" />
-											<input type="number" step="0.1" min="0" max="1000"
-												th:field="*{detalles[__${iterStat.index}__].cantidad}"
+											<input type="hidden" th:field="*{detalles[__${iterStat.index}__].idDetalle}" />
+											<input type="number" step="0.1" min="0" max="1000" th:field="*{detalles[__${iterStat.index}__].cantidad}"
 												class="form-control" />
-											<select
-												th:field="*{detalles[__${iterStat.index}__].ingrediente.idIngrediente}"
-												class="form-select">
+											<select th:field="*{detalles[__${iterStat.index}__].ingrediente.idIngrediente}" class="form-select">
 												<option value="">Seleccionar ingrediente</option>
-												<option th:each="ingrediente : ${ingredientes}"
-													th:value="${ingrediente.idIngrediente}"
+												<option th:each="ingrediente : ${ingredientes}" th:value="${ingrediente.idIngrediente}"
 													th:text="${ingrediente.nombre} + ' (' + ${ingrediente.magnitud} + ')'"
 													th:selected="${ingrediente.idIngrediente == detalle.ingrediente.idIngrediente}">
 												</option>
 											</select>
-											<span class="input-group-text"
-												th:text="'Costo total: ' + ${detalle.costo}"></span>
+											<span class="input-group-text" th:text="'Costo total: ' + ${detalle.costo}"></span>
 											<input type="hidden" th:field="*{detalles[__${iterStat.index}__].costo}" />
 										</div>
 									</div>
@@ -88,36 +98,18 @@
 									<div class="mb-3 mt-1 ms-2">
 										<div class="input-group">
 											<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
-											<span class="input-group-text"
-												th:text="'Paso ' + ${paso.indicePaso}"></span>
+											<span class="input-group-text" th:text="'Paso ' + ${paso.indicePaso}"></span>
 											<input type="hidden" th:field="*{pasos[__${iterStat.index}__].idPaso}" />
-											<input type="text" th:field="*{pasos[__${iterStat.index}__].notas}"
-												class="form-control" required minlength="10" maxlength="200" />
-											<input type="file" th:field="*{pasoDTOs[__${iterStat.index}__].imagen}"
-												class="form-control" accept=".jpg,image/jpeg"
-												onchange="previewImage(event)" />
+											<input type="text" th:field="*{pasos[__${iterStat.index}__].notas}" class="form-control" required
+												minlength="10" maxlength="200" />
+											<input type="file" th:field="*{pasoDTOs[__${iterStat.index}__].imagen}" class="form-control"
+												accept=".jpg,image/jpeg" />
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="d-flex justify-content-center mt-2">
 								<button type="button" class="btn btn-info" onclick="agregarPaso()">Agregar Paso</button>
-							</div>
-						</div>
-						<div class="mb-2 mt-2 border p-2">
-							<div class="d-flex justify-content-center mt-2">
-								<h4 class="text-center">IMAGEN:</h4>
-							</div>
-							<div class="text-center my-2">
-								<img th:src="@{/recetas/imagen/{id}(id=${dto.receta.idReceta})}" id="preview"
-									class="img-thumbnail" style="max-width: 300px;"
-									alt="Imagen de la receta no encontrada" accept=".jpg,image/jpeg" />
-							</div>
-							<div class="input-group my-2">
-								<span class="input-group-text"><i class="bi bi-image"></i></span>
-								<span class="input-group-text">Cambiar imagen</span>
-								<input type="file" th:field="*{imagen}" class="form-control" accept=".jpg,image/jpeg"
-									onchange="previewImage(event)" />
 							</div>
 						</div>
 						<div class="box-footer d-flex justify-content-center">
@@ -183,6 +175,22 @@
 			detalleDiv.appendChild(inputGroup);
 			container.appendChild(detalleDiv);
 			detalleIndex++;
+		}
+
+		function previewImage(event) {
+			const input = event.target;
+			const imagePreview = document.getElementById('image-preview');
+
+			if (input.files && input.files[0]) {
+				const reader = new FileReader();
+				reader.onload = function (e) {
+					imagePreview.src = e.target.result;
+					imagePreview.style.display = 'block';
+					if (currentImage) currentImage.style.display = 'none';
+					submitButton.disabled = false;
+				};
+				reader.readAsDataURL(input.files[0]);
+			}
 		}
 
 	</script>

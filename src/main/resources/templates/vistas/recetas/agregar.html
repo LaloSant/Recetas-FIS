@@ -20,9 +20,14 @@
 							</div> -->
 							<div class="input-group">
 								<span class="input-group-text"><i class="bi bi-file-text"></i></span>
-								<span class="input-group-text" th:text="'NOMBRE'"></span>
+								<span class="input-group-text">NOMBRE</span>
 								<input class="form-control" th:field="*{receta.nombre}" placeholder="Ingrese nombre de receta " type="text" required
 									minlength="3" maxlength="255">
+							</div>
+							<div class="input-group my-3">
+								<span class="input-group-text"><i class="bi bi-image"></i></span>
+								<span class="input-group-text">IMAGEN DE RECETA</span>
+								<input type="file" th:field="*{imagen}" class="form-control" accept=".jpg,image/jpeg" />
 							</div>
 							<!-- <div class="input-group mt-2">
 								<span class="input-group-text"><i class="bi bi-person-circle"></i></span>
@@ -52,16 +57,6 @@
 								<button type="button" class="btn btn-info" onclick="agregarPaso()">Agregar Paso</button>
 							</div>
 						</div>
-						<div class="my-2 border px-2">
-							<div class="d-flex justify-content-center mt-2">
-								<h4 class="text-center">IMAGEN:</h4>
-							</div>
-							<div class="input-group my-3">
-								<span class="input-group-text"><i class="bi bi-image"></i></span>
-								<span class="input-group-text">Imagen</span>
-								<input type="file" th:field="*{imagen}" class="form-control" accept=".jpg,image/jpeg" />
-							</div>
-						</div>
 						<div class="box-footer d-flex justify-content-center my-2">
 							<button class="btn btn-success btn-lg">Guardar Receta</button>
 						</div>
@@ -89,7 +84,7 @@
 			inputGroup.className = 'input-group';
 
 			inputGroup.innerHTML = `
-				<div class="input-group mb-1">
+				<div class="input-group mb-2">
 					<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
 					<span class="input-group-text paso-number">${pasoIndex + 1}:</span>
 					<span class="input-group-text remove-paso" role="button" tabindex="0" title="Quitar paso" style="cursor:pointer"><i class="bi bi-x"></i></span>
@@ -157,7 +152,7 @@
 
 			inputGroup.innerHTML = `
 				<span class="input-group-text"><i class="bi bi-chevron-right"></i></span>
-				<span class="input-group-text remove-detalle" role="button" tabindex="0" title="Quitar ingrediente" style="cursor:pointer"><i class="bi bi-x-octagon"></i></span>
+				<span class="input-group-text remove-detalle" role="button" tabindex="0" title="Quitar ingrediente" style="cursor:pointer"><i class="bi bi-x"></i></span>
 				<input type="number" step="0.1" min="0" max="1000" name="detalles[${detalleIndex}].cantidad" class="form-control" placeholder="Cantidad" required/>
 				<select name="detalles[${detalleIndex}].ingrediente.idIngrediente" class="form-select" required>
 					${optionsHtml}
