@@ -25,7 +25,7 @@ public class IngredienteServiceImpl implements IngredienteService {
 	@Override
 	public List<Ingrediente> listarTodo() {
 		return repositorio.findAll().stream()
-				.sorted(Comparator.comparing(Ingrediente::getNombre))
+				.sorted(Comparator.comparing(Ingrediente::getIdIngrediente))
 				.toList();
 	}
 
