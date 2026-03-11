@@ -14,7 +14,6 @@ public class SaborApplication {
 	private static final Logger LOGGER = LogManager.getLogger();
 
 	public static void main(String[] args) {
-		IO.println();
 		/* ApplicationContext context = SpringApplication.run(recetarioApplication.class, args); */
 		SpringApplication.run(SaborApplication.class, args);
 	}
