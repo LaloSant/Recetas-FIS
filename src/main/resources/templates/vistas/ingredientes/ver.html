@@ -5,8 +5,11 @@
 
 <body>
 	<header th:replace="~{template :: header (${nomUser}, ${rol})}"></header>
-	<h1>Esta es bista ver</h1>
-	<h1 th:text="${idIngrediente}"></h1>
+	<h1 class="text-start">Esta es bista ver</h1>
+	<h1 th:text="${nombreIngrediente}"></h1>
+	<h1 th:text = "${costoIngrediente}"></h1>
+	<h1 th:text = "${nombrePatrocinador}" ></h1>
+	<h1 th:text = "${link}" ></h1>
 	<footer th:replace="~{template :: footer}"></footer>
 </body>
 

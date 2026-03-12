@@ -9,14 +9,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.flerchante.recetario.model.entity.Ingrediente;
-import com.flerchante.recetario.model.entity.Usuario;
 import com.flerchante.recetario.service.ingrediente.IngredienteServiceImpl;
+import com.flerchante.recetario.service.usuario.UserUtils;
 import com.flerchante.recetario.service.usuario.UsuarioServiceImpl;
 
 @Controller
 public class IngredienteController {
 
-	@Autowired
+	private final UserUtils userUtils;
+
+    @Autowired
 	private UsuarioServiceImpl usuarioRepositorio;
 
 	@Autowired
@@ -24,11 +26,13 @@ public class IngredienteController {
 
 	private static final String RUTA_VISTA = "/vistas/ingredientes/";
 
+    IngredienteController(UserUtils userUtils) {
+        this.userUtils = userUtils;
+    }
+
 	@GetMapping("/ingredientes")
 	public String getListaIngredientes(Model modelo) {
-		Usuario user = usuarioRepositorio.getUsuarioSesion();
-		modelo.addAttribute("rol", user.getRol().getNombre());
-		modelo.addAttribute("nomUser", user.getNombre());
+		userUtils.setUserSession(modelo);
 		List<Ingrediente> lista = ingredienteRepositorio.listarTodo();
 		modelo.addAttribute("ingredientes", lista);
 		return RUTA_VISTA + "lista";
@@ -36,12 +40,21 @@ public class IngredienteController {
 
 	@GetMapping("/ingredientes/id")
 	public String getIngrediente(Model modelo, @RequestParam(required = true, defaultValue = "1") Long idIngrediente) {
-		Usuario user = usuarioRepositorio.getUsuarioSesion();
-		modelo.addAttribute("rol", user.getRol().getNombre());
-		modelo.addAttribute("nomUser", user.getNombre());
+		userUtils.setUserSession(modelo);
 		Ingrediente i = ingredienteRepositorio.obtener(idIngrediente);
+		modelo.addAttribute("nombreIngrediente", i.getNombre());
+		modelo.addAttribute("costoIngrediente",i.getCostoUnitario());
+		if(i.getImagen() != null){
+	
+		}
+		if(i.getPatrocinador()!=null){		
+			modelo.addAttribute("nombrePatrocinador",i.getPatrocinador().getNombre());
+			modelo.addAttribute("link",i.getPatrocinador().getEnlace());
+		}else{
+			modelo.addAttribute("nombrePatrocinador","Sin patrocinador oficial");
+			modelo.addAttribute("link","");
+		}
 
-		modelo.addAttribute("idIngrediente", i.getNombre());
 
 		return RUTA_VISTA + "ver";
 	}

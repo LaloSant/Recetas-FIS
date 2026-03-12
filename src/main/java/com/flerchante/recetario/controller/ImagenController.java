@@ -1,5 +1,6 @@
 package com.flerchante.recetario.controller;
 
+import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
 
@@ -70,16 +71,40 @@ public class ImagenController {
 				.body(bytes);
 	}
 
+@GetMapping("/ingredientes/imagen/{id}")
+	@ResponseBody
+	public ResponseEntity<byte[]> obtenerImagenIngrediente(@PathVariable("id") Long pasoId) {
+		Blob img = pasoService.obtenerPaso(pasoId).getImagen();
+		if (img == null) {
+			return ResponseEntity.status(404).build();
+		}
+		byte[] bytes = null;
+		try {
+			bytes = img.getBytes(1, (int) img.length());
+		} catch (SQLException ex) {
+		}
+		String mimeType = "image/jpeg";
+		if (bytes == null || bytes.length == 0) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity
+				.ok()
+				.contentType(MediaType.parseMediaType(mimeType))
+				.body(bytes);
+	}
+
 	public static Blob mpfTBlob(MultipartFile mpf){
 		if (mpf != null && !mpf.isEmpty()) {
 			try {
 				byte[] bytes = mpf.getBytes();
 				Blob blob = new SerialBlob(bytes);
 				return blob;
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (IOException | SQLException e) {
+				System.out.println(e.getMessage());
 			}
 		}
 		return null;
 	}
+
+	
 }
