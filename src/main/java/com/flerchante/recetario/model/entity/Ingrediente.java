@@ -1,6 +1,8 @@
 package com.flerchante.recetario.model.entity;
 
 import java.sql.Blob;
+import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -54,8 +57,26 @@ public class Ingrediente {
 	@JoinColumn(name = "ID_PATROCINADOR")
 	private Patrocinador patrocinador;
 
+	@Getter
+	@Setter
+	@OneToMany(mappedBy = "ingrediente")
+	private List<Detalle> detalles;
+
 	@Override
 	public String toString() {
 		return "Ingrediente [idIngrediente=" + idIngrediente + ", nombre=" + nombre + "]";
 	}
+
+	public String calcularVecesUsado() {
+		int aparicion = 0;
+		String formateado = "0";
+		for (Detalle detalle : detalles) {
+			if(Objects.equals(detalle.getIngrediente().getIdIngrediente(), idIngrediente)){
+			aparicion += 1;
+			formateado = String.valueOf(aparicion);
+			}
+		}
+		return formateado;
+	}
+
 }

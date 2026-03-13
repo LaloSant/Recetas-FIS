@@ -5,7 +5,29 @@
 
 <body>
 	<header th:replace="~{template :: header (${nomUser}, ${rol})}"></header>
-	<h1>HOLa</h1>
+	<div class="d-flex justify-content-between align-items-center">
+		<h1>Lista completa de ingredientes</h1>
+		<form class="d-flex" onsubmit="return buscarIngrediente();">
+			<input id="busqueda" class="form-control me-2" type="search" placeholder="Buscar ingrediente"
+				aria-label="Buscar">
+			<button class="btn btn-outline-success" type="submit">Buscar</button>
+		</form>
+	</div>
+	<script>
+		function buscarIngrediente() {
+			const busqueda = document.getElementById('busqueda').value.toLowerCase();
+			const filas = document.querySelectorAll('tbody tr');
+			filas.forEach(fila => {
+				const nombre = fila.querySelector('td:nth-child(2)').textContent.toLowerCase();
+				if (nombre.includes(busqueda)) {
+					fila.style.display = '';
+				} else {
+					fila.style.display = 'none';
+				}
+			});
+			return false; 
+		}
+	</script>
 	<table class="table table-success table-striped">
 		<thead>
 			<tr>

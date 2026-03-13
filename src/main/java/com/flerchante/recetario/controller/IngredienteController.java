@@ -42,8 +42,10 @@ public class IngredienteController {
 	public String getIngrediente(Model modelo, @RequestParam(required = true, defaultValue = "1") Long idIngrediente) {
 		userUtils.setUserSession(modelo);
 		Ingrediente i = ingredienteRepositorio.obtener(idIngrediente);
+		modelo.addAttribute("idIngrediente",i.getIdIngrediente());
 		modelo.addAttribute("nombreIngrediente", i.getNombre());
-		modelo.addAttribute("costoIngrediente",i.getCostoUnitario());
+		modelo.addAttribute("costo",i.getCostoUnitario());
+		modelo.addAttribute("utilizado",i.calcularVecesUsado());
 		if(i.getImagen() != null){
 	
 		}
