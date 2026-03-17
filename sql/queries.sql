@@ -477,27 +477,6 @@ INSERT INTO PETICION_IA (
 	,DESCRIPCION
 ) VALUES ( 'PEN'
           ,'Generar imagen para pollo con tomate' );
-INSERT INTO PETICION_IA (
-	ESTATUS
-	,DESCRIPCION
-) VALUES ( 'ENT'
-          ,'Generar imagen de arroz blanco esponjoso' );
-INSERT INTO PETICION_IA (
-	ESTATUS
-	,DESCRIPCION
-) VALUES ( 'PEN'
-          ,'Sugerir pasos para sopa de cebolla' );
-INSERT INTO PETICION_IA (
-	ESTATUS
-	,DESCRIPCION
-) VALUES ( 'ENT'
-          ,'Imagen para ensalada de verano' );
-INSERT INTO PETICION_IA (
-	ESTATUS
-	,DESCRIPCION
-) VALUES ( 'PEN'
-          ,'Generar imagen de pechuga a la plancha jugosa' );
-COMMIT;
 
 -- PASOS
 -- Para Receta 1: Pollo en Salsa de Tomate
@@ -557,7 +536,7 @@ INSERT INTO PASOS (
           ,2
           ,'En una olla, calentar el aceite y sofreír el arroz por 2 minutos.'
           ,NULL
-          ,2 );
+          ,NULL );
 INSERT INTO PASOS (
 	ID_RECETA
 	,INDICE_PASO
@@ -592,7 +571,7 @@ INSERT INTO PASOS (
           ,2
           ,'Calentar una plancha o sartén a fuego medio-alto con un poco de aceite.'
           ,NULL
-          ,5 );
+          ,NULL );
 INSERT INTO PASOS (
 	ID_RECETA
 	,INDICE_PASO
@@ -604,3 +583,5 @@ INSERT INTO PASOS (
           ,'Cocinar la pechuga por 4-5 minutos por cada lado, hasta que esté dorada y cocida por dentro.'
           ,NULL
           ,NULL );
+
+commit;
