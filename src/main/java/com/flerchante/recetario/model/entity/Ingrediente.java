@@ -4,6 +4,9 @@ import java.sql.Blob;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,6 +47,7 @@ public class Ingrediente {
 	@Getter
 	@Setter
 	@Column(name = "IMAGEN")
+	@JsonIgnore
 	private Blob imagen;
 
 	@Getter
@@ -55,11 +59,13 @@ public class Ingrediente {
 	@Setter
 	@ManyToOne
 	@JoinColumn(name = "ID_PATROCINADOR")
+	@JsonBackReference
 	private Patrocinador patrocinador;
 
 	@Getter
 	@Setter
 	@OneToMany(mappedBy = "ingrediente")
+	@JsonIgnore
 	private List<Detalle> detalles;
 
 	@Override

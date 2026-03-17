@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.flerchante.recetario.service.ingrediente.IngredienteServiceImpl;
 import com.flerchante.recetario.service.paso.PasoServiceImpl;
 import com.flerchante.recetario.service.receta.RecetaServiceImpl;
 
@@ -22,15 +23,18 @@ import com.flerchante.recetario.service.receta.RecetaServiceImpl;
 public class ImagenController {
 
 	@Autowired
-	private RecetaServiceImpl recetaService;
+	private RecetaServiceImpl recetaRepository;
 
 	@Autowired
-	private PasoServiceImpl pasoService;
+	private PasoServiceImpl pasoRepository;
+
+	@Autowired
+	private IngredienteServiceImpl ingredienteRepository;
 
 	@GetMapping("/recetas/imagen/{id}")
 	@ResponseBody
 	public ResponseEntity<byte[]> obtenerImagen(@PathVariable("id") Long recetaId) {
-		Blob img = recetaService.obtenerRecetaPorID(recetaId).get().getImagen();
+		Blob img = recetaRepository.obtenerRecetaPorID(recetaId).get().getImagen();
 		if (img == null) {
 			return ResponseEntity.status(404).build();
 		}
@@ -52,7 +56,7 @@ public class ImagenController {
 	@GetMapping("/pasos/imagen/{id}")
 	@ResponseBody
 	public ResponseEntity<byte[]> obtenerImagenPaso(@PathVariable("id") Long pasoId) {
-		Blob img = pasoService.obtenerPaso(pasoId).getImagen();
+		Blob img = pasoRepository.obtenerPaso(pasoId).getImagen();
 		if (img == null) {
 			return ResponseEntity.status(404).build();
 		}
@@ -71,10 +75,10 @@ public class ImagenController {
 				.body(bytes);
 	}
 
-@GetMapping("/ingredientes/imagen/{id}")
+	@GetMapping("/ingredientes/imagen/{id}")
 	@ResponseBody
-	public ResponseEntity<byte[]> obtenerImagenIngrediente(@PathVariable("id") Long pasoId) {
-		Blob img = pasoService.obtenerPaso(pasoId).getImagen();
+	public ResponseEntity<byte[]> obtenerImagenIngrediente(@PathVariable("id") Long idIngrediente) {
+		Blob img = ingredienteRepository.obtener(idIngrediente).getImagen();
 		if (img == null) {
 			return ResponseEntity.status(404).build();
 		}
@@ -93,7 +97,7 @@ public class ImagenController {
 				.body(bytes);
 	}
 
-	public static Blob mpfTBlob(MultipartFile mpf){
+	public static Blob mpfTBlob(MultipartFile mpf) {
 		if (mpf != null && !mpf.isEmpty()) {
 			try {
 				byte[] bytes = mpf.getBytes();
@@ -106,5 +110,4 @@ public class ImagenController {
 		return null;
 	}
 
-	
 }

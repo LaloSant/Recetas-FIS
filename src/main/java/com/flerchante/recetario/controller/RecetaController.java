@@ -75,12 +75,6 @@ public class RecetaController {
 			@RequestParam(required = false) String nombreReceta,
 			@RequestParam(required = false) List<Long> ingredientes,
 			@RequestParam(required = false) Integer exclusivo) {
-		// Usuario user = usuarioRepositorio.getUsuarioSesion();
-		// if (user != null) {
-		// 	modelo.addAttribute("nomUser", user.getNombre());
-		// 	modelo.addAttribute("rol", user.getRol().getNombre());
-		// 	modelo.addAttribute("usuarioSesion", user);
-		// }
 		userUtils.setUserSession(modelo);
 		modelo.addAttribute("ingredientes", ingredienteRepositorio.listarTodo());
 		List<Receta> recetas;
@@ -136,11 +130,8 @@ public class RecetaController {
 
 	@GetMapping("/recetas/ver")
 	public String ver(Model modelo, @RequestParam(required = false, defaultValue = "1") Long idReceta) {
+		userUtils.setUserSession(modelo);
 		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(idReceta);
-		Usuario user = usuarioRepositorio.getUsuarioSesion();
-		if (user != null) {
-			modelo.addAttribute("nomUser", user.getNombre());
-		}
 		if (!recetaOpt.isPresent()) {
 			return "redirect:/recetas";
 		}
@@ -153,11 +144,6 @@ public class RecetaController {
 
 	@GetMapping("/recetas/editar")
 	public String editar(Model modelo, @RequestParam(required = false) Long idReceta) {
-		// Usuario user = usuarioRepositorio.getUsuarioSesion();
-		// if (user != null) {
-		// 	modelo.addAttribute("rol", user.getRol().getNombre());
-		// 	modelo.addAttribute("nomUser", user.getNombre());
-		// }
 		userUtils.setUserSession(modelo);
 		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(idReceta);
 		if (!recetaOpt.isPresent()) {
@@ -232,11 +218,6 @@ public class RecetaController {
 	public String agregarVista(Model modelo) {
 		RecetaCompDTO dto = new RecetaCompDTO();
 		PasoDTO pdto = new PasoDTO();
-		// Usuario user = usuarioRepositorio.getUsuarioSesion();
-		// if (user != null) {
-		// 	modelo.addAttribute("rol", user.getRol().getNombre());
-		// 	modelo.addAttribute("nomUser", user.getNombre());
-		// }
 		userUtils.setUserSession(modelo);
 		modelo.addAttribute("dto", dto);
 		modelo.addAttribute("pdto", pdto);

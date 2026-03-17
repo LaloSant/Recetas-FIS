@@ -2,6 +2,8 @@ package com.flerchante.recetario.model.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -45,6 +47,7 @@ public class Patrocinador {
 	@Getter
 	@Setter
 	@OneToMany(mappedBy="patrocinador")
+	@JsonManagedReference
 	private List<Ingrediente> ingredientes;
 
 }

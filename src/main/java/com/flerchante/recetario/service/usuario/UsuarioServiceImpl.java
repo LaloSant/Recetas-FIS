@@ -14,50 +14,50 @@ import com.flerchante.recetario.repository.UsuarioRepository;
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
-    @Autowired
-    private UsuarioRepository repositorio;
+	@Autowired
+	private UsuarioRepository repositorio;
 
-    @Override
-    public List<Usuario> listarTodoUsuario() {
-        return (List<Usuario>) repositorio.findAll();
-    }
+	@Override
+	public List<Usuario> listarTodoUsuario() {
+		return (List<Usuario>) repositorio.findAll();
+	}
 
-    @Override
-    public Usuario guardarUsuario(Usuario usuario) {
+	@Override
+	public Usuario guardarUsuario(Usuario usuario) {
 		if (usuario == null) {
 			return null;
 		}
-        return repositorio.save(usuario);
-    }
+		return repositorio.save(usuario);
+	}
 
-    @Override
-    public Optional<Usuario> obtenerUsuario(Long idUsuario) {
+	@Override
+	public Optional<Usuario> obtenerUsuario(Long idUsuario) {
 		if (idUsuario == null) {
 			return null;
 		}
-        return repositorio.findById(idUsuario);
-    }
+		return repositorio.findById(idUsuario);
+	}
 
-    @Override
-    public Optional<Usuario> obtenerUsuario(String email) {
-        return repositorio.findByEmail(email);
-    }
+	@Override
+	public Optional<Usuario> obtenerUsuario(String email) {
+		return repositorio.findByEmail(email);
+	}
 
-    @Override
-    public Usuario actualizarUsuario(Usuario usuario) {
+	@Override
+	public Usuario actualizarUsuario(Usuario usuario) {
 		if (usuario == null) {
 			return null;
 		}
-        return repositorio.save(usuario);
-    }
+		return repositorio.save(usuario);
+	}
 
-    @Override
-    public void eliminarUsuario(Long idUsuario) {
+	@Override
+	public void eliminarUsuario(Long idUsuario) {
 		if (idUsuario == null) {
 			return;
 		}
-        repositorio.deleteById(idUsuario);
-    }
+		repositorio.deleteById(idUsuario);
+	}
 
 	public Usuario getUsuarioSesion() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

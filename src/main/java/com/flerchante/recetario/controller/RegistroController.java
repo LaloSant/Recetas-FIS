@@ -14,10 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.flerchante.recetario.model.entity.Rol;
 import com.flerchante.recetario.model.entity.Usuario;
 import com.flerchante.recetario.service.rol.RolServiceImpl;
+import com.flerchante.recetario.service.usuario.UserUtils;
 import com.flerchante.recetario.service.usuario.UsuarioServiceImpl;
 
 @Controller
 public class RegistroController {
+
+	@Autowired
+	private UserUtils userUtils;
 
 	@Autowired
 	private UsuarioServiceImpl repositorioUsuario;
@@ -34,10 +38,7 @@ public class RegistroController {
 			model.addAttribute("error", error);
 		}
 		model.addAttribute("usuario", new Usuario());
-		Usuario user = repositorioUsuario.getUsuarioSesion();
-		if (user != null) {
-			model.addAttribute("nomUser", user.getNombre());
-		}
+		userUtils.setUserSession(model);
 		return "registro";
 	}
 

@@ -5,6 +5,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,6 +42,7 @@ public class Receta {
 	@Getter
 	@Setter
 	@Column(name = "IMAGEN")
+	@JsonIgnore
 	private Blob imagen;
 
 	@Getter
