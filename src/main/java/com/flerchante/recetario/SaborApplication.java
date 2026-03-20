@@ -15,6 +15,7 @@ public class SaborApplication {
 
 	public static void main(String[] args) {
 		/* ApplicationContext context = SpringApplication.run(recetarioApplication.class, args); */
+		System.out.println("si");
 		SpringApplication.run(SaborApplication.class, args);
 	}
 
