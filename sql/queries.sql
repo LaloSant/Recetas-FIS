@@ -42,7 +42,7 @@ INSERT INTO USUARIOS (ID_ROL, NOMBRE, EMAIL, CONTRASENIA) VALUES(
     'ADMIN',
     'eduardo',
     'eduardo@mail.com',
-    '$2a$10$ZvRsNwfnOsqWt2L5B5ddk.AEo6CPYNCD.oVjLl3B3aSY8Jd9els0i'
+    '$2a$10$bTFF6XbbAbwG6r6o376/jeYjbaefS8mPFREsQkO5aLF1W.kFX9ebW'
 );
 
 commit;
