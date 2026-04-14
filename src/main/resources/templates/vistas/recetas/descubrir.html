@@ -11,27 +11,30 @@
 				<h1><u>BIENVENIDO A S.A.B.O.R.</u></h1>
 			</div>
 			<div class="col col-lg-2 d-flex justify-content-end m-2">
-				<form th:action="@{/recetas}" method="get">
+				<form th:action="${tipoVista == 'misRecetas'} ? @{/recetas/misRecetas} 
+							: (${tipoVista == 'misFavoritas'} ? @{/recetas/misFavoritas} 
+							: @{/recetas})" method="get">
 					<div class="dropdown z-3">
-						<button class="btn btn-dark dropdown-toggle" type="button" id="dropdownIngredientes" data-bs-toggle="dropdown"
-							aria-expanded="false">
+						<button class="btn btn-dark dropdown-toggle" type="button" id="dropdownIngredientes"
+							data-bs-toggle="dropdown" aria-expanded="false">
 							Buscar por ingredientes
 						</button>
 						<ul class="dropdown-menu p-2 z-3" aria-labelledby="dropdownIngredientes">
 							<li th:each="ing : ${ingredientes}">
 								<div class="form-check">
-									<input class="form-check-input" type="checkbox" th:id="'ing_' + ${ing.nombre}" th:name="ingredientes"
-										th:value="${ing.idIngrediente}"
+									<input class="form-check-input" type="checkbox" th:id="'ing_' + ${ing.nombre}"
+										th:name="ingredientes" th:value="${ing.idIngrediente}"
 										th:checked="${ingredientesSel != null and #lists.contains(ingredientesSel, ing.idIngrediente)}">
-									<label class="form-check-label" th:for="'ing_' + ${ing.nombre}" th:text="${ing.nombre}"></label>
+									<label class="form-check-label" th:for="'ing_' + ${ing.nombre}"
+										th:text="${ing.nombre}"></label>
 								</div>
 							</li>
 							<li>
 								<hr class="dropdown-divider">
 							</li>
 							<li>
-								<input class="form-check-input" type="checkbox" id="chkExclusivo" th:name="exclusivo" value="1"
-									th:checked="${exclusivo == 1}">
+								<input class="form-check-input" type="checkbox" id="chkExclusivo" th:name="exclusivo"
+									value="1" th:checked="${exclusivo == 1}">
 								<label class="form-check-label" for="chkExclusivo">Buscar exclusivamente</label>
 							</li>
 							<li>
@@ -43,13 +46,14 @@
 			</div>
 			<div th:if="${textoOrden != null}" class="col d-flex justify-content-end m-2 z-1">
 				<div class="dropdown">
-					<button th:text=" 'Ordenar: ' + ${textoOrden}" class="btn btn-dark dropdown-toggle sticky-top" type="button"
-						data-bs-toggle="dropdown" aria-expanded="false">
+					<button th:text=" 'Ordenar: ' + ${textoOrden}" class="btn btn-dark dropdown-toggle sticky-top"
+						type="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Ordenar por
 					</button>
 					<ul class="dropdown-menu">
 						<li><a class="dropdown-item" th:href="@{/recetas(ordenarPor='total')}">Visitas totales</a></li>
-						<li><a class="dropdown-item" th:href="@{/recetas(ordenarPor='semana')}">Visitas semanales</a></li>
+						<li><a class="dropdown-item" th:href="@{/recetas(ordenarPor='semana')}">Visitas semanales</a>
+						</li>
 					</ul>
 				</div>
 			</div>

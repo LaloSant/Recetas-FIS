@@ -1,12 +1,15 @@
 package com.flerchante.recetario.model.entity;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.flerchante.recetario.controller.AccionUsuario;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,67 +24,52 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
-@AllArgsConstructor
-
 @Entity
 @Table(name = "RECETAS")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Receta {
 
-	@Getter
-	@Setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idReceta;
 
-	@Getter
-	@Setter
 	@Column(name = "NOMBRE", length = 50, nullable = false)
 	private String nombre;
 
-	@Getter
-	@Setter
 	@Column(name = "IMAGEN")
 	@JsonIgnore
 	private Blob imagen;
 
-	@Getter
-	@Setter
 	@Column(name = "VISITAS_TOTALES")
 	private Long visitasTotales;
-
-	@Getter
-	@Setter
 	@Column(name = "VISITAS_SEMANALES")
 	private Long visitasSemanales;
 
-	@Getter
-	@Setter
 	@Column(name = "CALIFICACIONES_TOTALES")
 	private Long calificacionesTotales;
 
-	@Getter
-	@Setter
 	@Column(name = "CALIFICACION", columnDefinition = "NUMBER CHECK (CALIFICACION >= 0 AND CALIFICACION <= 5)")
 	private Double calificacion;
 
-	@Getter
-	@Setter
 	@ManyToOne
 	@JoinColumn(name = "ID_USUARIO")
 	private Usuario usuario;
 
-	@Getter
-	@Setter
 	@OneToMany(mappedBy = "receta")
 	private List<Detalle> detalles;
+
+	@OneToMany(mappedBy = "receta", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<AccionUsuario> acciones = new ArrayList<>();
 
 	@Setter
 	@OneToMany(mappedBy = "receta")
 	private List<Paso> pasos;
 
-	public List<Paso> getPasos(){
-		return pasos.stream().sorted(Comparator.comparing(Paso :: getIdPaso)).collect(Collectors.toList());
+	public List<Paso> getPasos() {
+		return pasos.stream().sorted(Comparator.comparing(Paso::getIdPaso)).collect(Collectors.toList());
 	}
 
 	public String calcularCosto() {
@@ -98,6 +86,13 @@ public class Receta {
 		double mult = calificacion * calificacionesTotales;
 		mult += calificacionNueva;
 		calificacionesTotales++;
+		calificacion = roundAvoid(mult / calificacionesTotales, 2);
+		return calificacion;
+	}
+
+	public Double actualizarCalificacion(int calificacionNueva, int calificacionVieja) {
+		double mult = calificacion * calificacionesTotales;
+		mult += (calificacionNueva - calificacionVieja);
 		calificacion = roundAvoid(mult / calificacionesTotales, 2);
 		return calificacion;
 	}

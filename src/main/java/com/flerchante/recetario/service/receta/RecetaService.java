@@ -31,5 +31,5 @@ public interface RecetaService {
 
 	public void actualizarNombre(Long idReceta, String nombre);
 
-	public void actualizarCalificacion(Long idReceta, Double calificacion);
+	public void actualizarCalificacion(Long idReceta, Double calificacion, Long calificacionesTotales);
 }

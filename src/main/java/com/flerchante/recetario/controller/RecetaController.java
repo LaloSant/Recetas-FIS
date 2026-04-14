@@ -3,10 +3,8 @@ package com.flerchante.recetario.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.flerchante.recetario.controller.AccionUsuario.Interaccion;
 import com.flerchante.recetario.model.dto.PasoDTO;
 import com.flerchante.recetario.model.dto.RecetaCompDTO;
 import com.flerchante.recetario.model.entity.Detalle;
@@ -23,6 +22,7 @@ import com.flerchante.recetario.model.entity.Paso;
 import com.flerchante.recetario.model.entity.PeticionIA;
 import com.flerchante.recetario.model.entity.Receta;
 import com.flerchante.recetario.model.entity.Usuario;
+import com.flerchante.recetario.service.accionusuario.AccionUsuarioImpl;
 import com.flerchante.recetario.service.detalle.DetalleServiceImpl;
 import com.flerchante.recetario.service.ingrediente.IngredienteServiceImpl;
 import com.flerchante.recetario.service.paso.PasoServiceImpl;
@@ -57,16 +57,72 @@ public class RecetaController {
 	@Autowired
 	private PeticionesServiceImpl peticionRepositorio;
 
+	@Autowired
+	private AccionUsuarioImpl accionUsuarioRepositorio;
+
 	@GetMapping("/recetas/misRecetas")
-	public String getMisRecetas(Model modelo) {
+	public String getMisRecetas(Model modelo,
+			@RequestParam(required = false) List<Long> ingredientes,
+			@RequestParam(required = false) Integer exclusivo) {
 		Usuario user = usuarioRepositorio.getUsuarioSesion();
 		userUtils.setUserSession(modelo);
-		List<Receta> recetas = recetaRepositorio.listarTodaReceta().stream()
-				.filter(r -> r.getUsuario().equals(user))
-				.toList();
-		modelo.addAttribute("recetas", recetas);
 
+		modelo.addAttribute("ingredientes", ingredienteRepositorio.listarTodo());
+		modelo.addAttribute("ingredientesSel", ingredientes);
+		modelo.addAttribute("tipoVista", "misRecetas");
+		List<Receta> recetas = recetaRepositorio.listarTodaReceta().stream()
+				.filter(r -> r.getUsuario().equals(user)).toList();
+		if (ingredientes == null) {
+			modelo.addAttribute("recetas", recetas);
+			return RUTA_VISTA + "descubrir";
+		}
+		filtroIngrediente(modelo, ingredientes, exclusivo == null ? 0 : exclusivo, recetas);
 		return RUTA_VISTA + "descubrir";
+	}
+
+	@GetMapping("/recetas/misFavoritas")
+	public String getMisRecetasFavoritas(Model modelo,
+			@RequestParam(required = false) List<Long> ingredientes,
+			@RequestParam(required = false, defaultValue = "0") Integer exclusivo) {
+
+		Usuario user = usuarioRepositorio.getUsuarioSesion();
+		userUtils.setUserSession(modelo);
+		modelo.addAttribute("ingredientes", ingredienteRepositorio.listarTodo());
+		modelo.addAttribute("ingredientesSel", ingredientes);
+		modelo.addAttribute("tipoVista", "misFavoritas");
+
+		List<AccionUsuario> acciones = accionUsuarioRepositorio.obtenerAcciones(user.getIdUsuario(), Interaccion.FAV);
+		List<Receta> recetas = new ArrayList<>(acciones.stream().map(AccionUsuario::getReceta).toList());
+		if (ingredientes == null) {
+			modelo.addAttribute("recetas", recetas);
+			return RUTA_VISTA + "descubrir";
+		}
+		filtroIngrediente(modelo, ingredientes, exclusivo == null ? 0 : exclusivo, recetas);
+		return RUTA_VISTA + "descubrir";
+	}
+
+	private void filtroIngrediente(Model modelo, List<Long> ingredientes, int exclusivo, List<Receta> recetas) {
+		List<Receta> listaExclusivo = new ArrayList<>();
+		List<Receta> listaNoExclusivo = new ArrayList<>();
+		for (Receta receta : recetas) {
+			boolean hitNoExclusivo = false;
+			int hitExclusivo = 0;
+			List<Detalle> detalles = receta.getDetalles();
+			for (Detalle detalle : detalles) {
+				if (ingredientes.contains(detalle.getIngrediente().getIdIngrediente())) {
+					hitNoExclusivo = true;
+					hitExclusivo++;
+				}
+			}
+			if (hitNoExclusivo) {
+				listaNoExclusivo.add(receta);
+			}
+			if (hitExclusivo >= ingredientes.size()) {
+				listaExclusivo.add(receta);
+			}
+		}
+		modelo.addAttribute("recetas", exclusivo == 1 ? listaExclusivo : listaNoExclusivo);
+		modelo.addAttribute("exclusivo", exclusivo);
 	}
 
 	@GetMapping({ "/recetas", "/" })
@@ -75,35 +131,38 @@ public class RecetaController {
 			@RequestParam(required = false) String nombreReceta,
 			@RequestParam(required = false) List<Long> ingredientes,
 			@RequestParam(required = false) Integer exclusivo) {
+
 		userUtils.setUserSession(modelo);
 		modelo.addAttribute("ingredientes", ingredienteRepositorio.listarTodo());
+		modelo.addAttribute("ingredientesSel", ingredientes);
 		List<Receta> recetas;
 		if (nombreReceta != null && !nombreReceta.isBlank()) {
 			recetas = recetaRepositorio.obtenerTodoPor(nombreReceta);
 			modelo.addAttribute("recetas", recetas);
 			return RUTA_VISTA + "descubrir";
 		}
-		if (ingredientes != null) {
-			if (exclusivo != null && exclusivo == 1) {
-				modelo.addAttribute("exclusivo", 1);
-				List<Long> recetasIds = detalleRepositorio.buscarPorIngredientes(
-						ingredientes, (long) ingredientes.size());
-				recetas = recetaRepositorio.obtenerTodoPor(recetasIds);
-				modelo.addAttribute("recetas", recetas);
-				modelo.addAttribute("ingredientesSel", ingredientes);
-				return RUTA_VISTA + "descubrir";
-			}
-			List<Detalle> detalles = detalleRepositorio.buscarPorIngredientes(ingredientes);
-			Set<Receta> set = new HashSet<>();
-			for (Detalle detalle : detalles) {
-				set.add(detalle.getReceta());
-			}
-			recetas = new ArrayList<>(set);
-			modelo.addAttribute("exclusivo", 0);
-			modelo.addAttribute("recetas", recetas);
-			modelo.addAttribute("ingredientesSel", ingredientes);
-			return RUTA_VISTA + "descubrir";
-		}
+
+		//if (ingredientes != null) {
+		// if (exclusivo != null && exclusivo == 1) {
+		// 	modelo.addAttribute("exclusivo", 1);
+		// 	List<Long> recetasIds = detalleRepositorio.buscarPorIngredientes(
+		// 			ingredientes, (long) ingredientes.size());
+		// 	recetas = recetaRepositorio.obtenerTodoPor(recetasIds);
+		// 	modelo.addAttribute("recetas", recetas);
+		// 	modelo.addAttribute("ingredientesSel", ingredientes);
+		// 	return RUTA_VISTA + "descubrir";
+		// }
+		// List<Detalle> detalles = detalleRepositorio.buscarPorIngredientes(ingredientes);
+		// Set<Receta> set = new HashSet<>();
+		// for (Detalle detalle : detalles) {
+		// 	set.add(detalle.getReceta());
+		// }
+		// recetas = new ArrayList<>(set);
+		// modelo.addAttribute("exclusivo", 0);
+		// modelo.addAttribute("recetas", recetas);
+		// modelo.addAttribute("ingredientesSel", ingredientes);
+		// return RUTA_VISTA + "descubrir";
+		//}
 		if ("semana".equals(ordenarPor)) {
 			recetas = recetaRepositorio.obtenerTopSemana();
 			modelo.addAttribute("textoOrden", "Visitas semanales");
@@ -111,8 +170,14 @@ public class RecetaController {
 			recetas = recetaRepositorio.obtenerTopTotal();
 			modelo.addAttribute("textoOrden", "Visitas totales");
 		}
+		if (ingredientes != null) {
+			filtroIngrediente(modelo, ingredientes, exclusivo == null ? 0 : exclusivo, recetas);
+			return RUTA_VISTA + "descubrir";
+		}
+
 		// recetas = recetas.stream().limit(10).toList();
 		modelo.addAttribute("recetas", recetas);
+
 		return RUTA_VISTA + "descubrir";
 	}
 
@@ -120,10 +185,40 @@ public class RecetaController {
 	public String calificarReceta(@RequestParam Long idReceta,
 			@RequestParam("calificacion") int calificacionNueva) {
 		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(idReceta);
+		Usuario user = usuarioRepositorio.getUsuarioSesion();
 		if (recetaOpt.isPresent()) {
 			Receta receta = recetaOpt.get();
-			receta.actualizarCalificacion(calificacionNueva);
-			recetaRepositorio.actualizarCalificacion(idReceta, receta.getCalificacion());
+			Optional<AccionUsuario> auCalifOpt = accionUsuarioRepositorio
+					.obtener(usuarioRepositorio.getUsuarioSesion().getIdUsuario(), idReceta, Interaccion.CAL);
+			AccionUsuario au = null;
+			if (!auCalifOpt.isPresent()) {
+				au = new AccionUsuario(user, receta, calificacionNueva);
+				receta.actualizarCalificacion(calificacionNueva);
+			} else {
+				au = auCalifOpt.get();
+				receta.actualizarCalificacion(calificacionNueva, au.getDetalle());
+				au.setDetalle(calificacionNueva);
+			}
+			accionUsuarioRepositorio.guardar(au);
+			recetaRepositorio.actualizarCalificacion(idReceta, receta.getCalificacion(),
+					receta.getCalificacionesTotales());
+		}
+		return String.format("redirect:/recetas/ver?idReceta=%d", idReceta);
+	}
+
+	@PostMapping("/recetas/favorita")
+	public String favoritaReceta(@RequestParam Long idReceta) {
+		Optional<Receta> recetaOpt = recetaRepositorio.obtenerRecetaPorID(idReceta);
+		Usuario user = usuarioRepositorio.getUsuarioSesion();
+		if (recetaOpt.isPresent() && user != null) {
+			Optional<AccionUsuario> auFavOpt = accionUsuarioRepositorio
+					.obtener(usuarioRepositorio.getUsuarioSesion().getIdUsuario(), idReceta, Interaccion.FAV);
+			if (!auFavOpt.isPresent()) {
+				AccionUsuario au = new AccionUsuario(user, recetaOpt.get());
+				accionUsuarioRepositorio.guardar(au);
+			} else {
+				accionUsuarioRepositorio.borrar(auFavOpt.get());
+			}
 		}
 		return String.format("redirect:/recetas/ver?idReceta=%d", idReceta);
 	}
@@ -137,8 +232,14 @@ public class RecetaController {
 		}
 		Receta receta = recetaOpt.get();
 		recetaRepositorio.aumentarVisita(idReceta);
+		Optional<AccionUsuario> auCalifOpt = accionUsuarioRepositorio
+				.obtener(usuarioRepositorio.getUsuarioSesion().getIdUsuario(), idReceta, Interaccion.CAL);
+		Optional<AccionUsuario> auFavOpt = accionUsuarioRepositorio
+				.obtener(usuarioRepositorio.getUsuarioSesion().getIdUsuario(), idReceta, Interaccion.FAV);
 		modelo.addAttribute("receta", receta);
 		modelo.addAttribute("costo", receta.calcularCosto());
+		modelo.addAttribute("auCalifOpt", auCalifOpt.isPresent() ? auCalifOpt.get() : null);
+		modelo.addAttribute("auFavOpt", auFavOpt.isPresent() ? auFavOpt.get() : null);
 		return RUTA_VISTA + "ver";
 	}
 

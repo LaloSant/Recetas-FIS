@@ -97,8 +97,8 @@ public class RecetaServiceImpl implements RecetaService {
 
 	@Override
 	@Transactional
-	public void actualizarCalificacion(Long idReceta, Double calificacion) {
-		repositorio.actualizarCalificacion(idReceta, calificacion);
+	public void actualizarCalificacion(Long idReceta, Double calificacion, Long calificacionesTotales) {
+		repositorio.actualizarCalificacion(idReceta, calificacion, calificacionesTotales);
 	}
 
 }

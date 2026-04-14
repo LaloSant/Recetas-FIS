@@ -9,7 +9,7 @@
 		<h1 class="text-center mb-2"><u>VER RECETA</u></h1>
 		<div class="container my-3 bg-success-subtle rounded border border-success border-2 rounded">
 			<div class="row align-items-center">
-				<div class="col-lg-4 col-md-8">
+				<div class="col-lg-4 col-md-12">
 					<div class="row py-2">
 						<h2 class="text-body" th:text="${receta.nombre}"></h2>
 					</div>
@@ -37,22 +37,54 @@
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-12 text-center">
-					<img th:src="@{/recetas/imagen/{id}(id=${receta.idReceta})}" class="card-img-top border border-2 border-dark rounded p-1"
-						alt="Imagen de receta no encontrada" style="max-width: 300px; max-height: 300px; min-width: 250px; min-height: 250px;">
+					<img th:src="@{/recetas/imagen/{id}(id=${receta.idReceta})}"
+						class="card-img-top border border-2 border-dark rounded p-1"
+						alt="Imagen de receta no encontrada"
+						style="max-width: 300px; max-height: 300px; min-width: 250px; min-height: 250px;">
 				</div>
-				<div th:if="${nomUser != null}" class="class= col-lg-4 col-md-12 my-3 text-center">
+				<div th:if="${nomUser != null}" class="col-lg-4 col-md-12 my-3 text-center">
+
 					<form th:action="@{/recetas/calificar}" method="post">
 						<input type="hidden" name="idReceta" th:value="${receta.idReceta}" />
-						<h5>Calificar esta receta:</h5>
 						<div class="rating">
-							<input type="radio" id="star5" name="calificacion" value="5" /><label for="star5">☆</label>
-							<input type="radio" id="star4" name="calificacion" value="4" /><label for="star4">☆</label>
-							<input type="radio" id="star3" name="calificacion" value="3" /><label for="star3">☆</label>
-							<input type="radio" id="star2" name="calificacion" value="2" /><label for="star2">☆</label>
-							<input type="radio" id="star1" name="calificacion" value="1" /><label for="star1">☆</label>
+							<input type="radio" id="star5" name="calificacion" value="5"
+								th:checked="${auCalifOpt != null and auCalifOpt.detalle == 5}" />
+							<label for="star5"><i class="bi bi-star"></i></label>
+
+							<input type="radio" id="star4" name="calificacion" value="4"
+								th:checked="${auCalifOpt != null and auCalifOpt.detalle == 4}" />
+							<label for="star4"><i class="bi bi-star"></i></label>
+
+							<input type="radio" id="star3" name="calificacion" value="3"
+								th:checked="${auCalifOpt != null and auCalifOpt.detalle == 3}" />
+							<label for="star3"><i class="bi bi-star"></i></label>
+
+							<input type="radio" id="star2" name="calificacion" value="2"
+								th:checked="${auCalifOpt != null and auCalifOpt.detalle == 2}" />
+							<label for="star2"><i class="bi bi-star"></i></label>
+
+							<input type="radio" id="star1" name="calificacion" value="1"
+								th:checked="${auCalifOpt != null and auCalifOpt.detalle == 1}" />
+							<label for="star1"><i class="bi bi-star"></i></label>
 						</div>
 						<div>
-							<button type="submit" id="submit-calificacion" class="btn btn-success btn-lg mt-2" disabled>Enviar Calificación</button>
+							<button type="submit" id="submit-calificacion" class="btn btn-success" disabled>
+								<i class="bi bi-pencil-square"></i> Calificar receta
+							</button>
+						</div>
+					</form>
+					<form th:action="@{/recetas/favorita}" method="post">
+						<input type="hidden" name="idReceta" th:value="${receta.idReceta}" />
+						<div class="row border-top border-dark border-1 my-2">
+							<div class="p-4">
+								<button type="submit" class="btn btn-info" th:if="${auFavOpt == null}">
+									<i class="bi bi-bookmark-check"></i> Marcar como favorita
+								</button>
+
+								<button type="submit" class="btn btn-danger" th:if="${auFavOpt != null}">
+									<i class="bi bi-bookmark-x"></i> Quitar favorita
+								</button>
+							</div>
 						</div>
 					</form>
 				</div>
@@ -66,8 +98,8 @@
 					</div>
 					<ul class="list-group">
 						<li class="list-group-item my-1 " th:each="detalle : ${receta.detalles}">
-							<input class="form-check-input m-1 p-2" type="checkbox" value="" th:id="${detalle.idDetalle}"
-								style="transform: scale(1.2);">
+							<input class="form-check-input m-1 p-2" type="checkbox" value=""
+								th:id="${detalle.idDetalle}" style="transform: scale(1.2);">
 							<label class="form-check-label stretched-link fs-6 mx-4" th:for="${detalle.idDetalle}"
 								th:text="${detalle.cantidad} + ' ' + ${detalle.ingrediente.magnitud} +' '+ ' de ' + ${detalle.ingrediente.nombre}"></label>
 						</li>
@@ -80,16 +112,18 @@
 					<div class="accordion">
 						<div class="accordion-item" th:each="paso : ${receta.pasos}">
 							<h2 class="accordion-header text-center">
-								<button class="accordion-button collapsed fs-6 text-center" type="button" data-bs-toggle="collapse"
-									th:data-bs-target="'#collapse' + ${paso.idPaso}" aria-expanded="false"
-									th:aria-controls="'collapse' + ${paso.idPaso}" th:text="'Paso ' + ${paso.indicePaso}">
+								<button class="accordion-button collapsed fs-6 text-center" type="button"
+									data-bs-toggle="collapse" th:data-bs-target="'#collapse' + ${paso.idPaso}"
+									aria-expanded="false" th:aria-controls="'collapse' + ${paso.idPaso}"
+									th:text="'Paso ' + ${paso.indicePaso}">
 								</button>
 							</h2>
 							<div th:id="'collapse' + ${paso.idPaso}" class="accordion-collapse collapse fs-6">
 								<div class="accordion-body text-center">
 									<p th:text="${paso.notas}"></p>
-									<img th:if="${paso.imagen != null}" th:src="@{/pasos/imagen/{id}(id=${paso.idPaso})}" class="card-img-top " alt="Sin imagen de paso"
-										style="width: 200px; height: 200px;">
+									<img th:if="${paso.imagen != null}"
+										th:src="@{/pasos/imagen/{id}(id=${paso.idPaso})}" class="card-img-top "
+										alt="Sin imagen de paso" style="width: 200px; height: 200px;">
 								</div>
 							</div>
 						</div>

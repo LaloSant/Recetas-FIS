@@ -1,7 +1,11 @@
 package com.flerchante.recetario.model.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.flerchante.recetario.controller.AccionUsuario;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,53 +27,56 @@ import lombok.Setter;
 @Table(name = "USUARIOS")
 public class Usuario {
 
-    @Getter
-    @Setter
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUsuario;
+	@Getter
+	@Setter
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idUsuario;
 
-    @Getter
-    @Setter
-    @Column(name = "NOMBRE", nullable = false)
-    private String nombre;
+	@Getter
+	@Setter
+	@Column(name = "NOMBRE", nullable = false)
+	private String nombre;
 
-    @Getter
-    @Setter
-    @Column(name = "EMAIL", nullable = false)
-    private String email;
+	@Getter
+	@Setter
+	@Column(name = "EMAIL", nullable = false)
+	private String email;
 
-    @Getter
-    @Setter
-    @Column(name = "CONTRASENIA", nullable = false)
-    private String contrasenia;
+	@Getter
+	@Setter
+	@Column(name = "CONTRASENIA", nullable = false)
+	private String contrasenia;
 
-    @Getter
-    @Setter
-    @ManyToOne
-    @JoinColumn(name = "ID_ROL")
-    private Rol rol;
-	
+	@Getter
+	@Setter
+	@ManyToOne
+	@JoinColumn(name = "ID_ROL")
+	private Rol rol;
+
 	@Getter
 	@Setter
 	@OneToMany(mappedBy = "usuario")
 	private List<Receta> recetas;
 
-    /*     @Getter
-    @Setter
-    @OneToMany(mappedBy = "idUsuario")
-    private List<Receta> recetas; */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Usuario{");
-        sb.append("idUsuario=").append(idUsuario);
-        sb.append(", nombre=").append(nombre);
-        sb.append(", contrasenia=").append("[PROTEGIDO]");
-        sb.append(", email=").append(email);
-        sb.append(", rol=").append(rol.getIdRol());
-        sb.append('}');
-        return sb.toString();
-    }
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<AccionUsuario> acciones = new ArrayList<>();
+
+	/*     @Getter
+	@Setter
+	@OneToMany(mappedBy = "idUsuario")
+	private List<Receta> recetas; */
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Usuario{");
+		sb.append("idUsuario=").append(idUsuario);
+		sb.append(", nombre=").append(nombre);
+		sb.append(", contrasenia=").append("[PROTEGIDO]");
+		sb.append(", email=").append(email);
+		sb.append(", rol=").append(rol.getIdRol());
+		sb.append('}');
+		return sb.toString();
+	}
 
 }
