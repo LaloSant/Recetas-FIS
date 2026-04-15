@@ -17,12 +17,6 @@ public class AccionUsuarioImpl implements AccionUsuarioService {
 	private AccionUsuarioRepository accionUsuarioRepository;
 
 	@Override
-	public AccionUsuario obtener(Long idAccionUsuario) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'obtener'");
-	}
-
-	@Override
 	public AccionUsuario guardar(AccionUsuario accionUsuario) {
 		return accionUsuarioRepository.save(accionUsuario);
 	}

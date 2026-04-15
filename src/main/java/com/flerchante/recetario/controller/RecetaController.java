@@ -64,6 +64,7 @@ public class RecetaController {
 	public String getMisRecetas(Model modelo,
 			@RequestParam(required = false) List<Long> ingredientes,
 			@RequestParam(required = false) Integer exclusivo) {
+
 		Usuario user = usuarioRepositorio.getUsuarioSesion();
 		userUtils.setUserSession(modelo);
 

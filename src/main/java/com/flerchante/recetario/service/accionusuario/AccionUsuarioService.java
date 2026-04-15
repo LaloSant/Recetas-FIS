@@ -8,8 +8,6 @@ import com.flerchante.recetario.controller.AccionUsuario.Interaccion;
 
 public interface AccionUsuarioService {
 
-	public AccionUsuario obtener(Long idAccionUsuario);
-
 	public AccionUsuario guardar(AccionUsuario accionUsuario);
 
 	public void borrar(AccionUsuario accionUsuario);

@@ -16,14 +16,13 @@
 								<div class="input-group mb-2">
 									<span class="input-group-text"><i class="bi bi-file-text"></i></span>
 									<span class="input-group-text" th:text="'NOMBRE'"></span>
-									<input class="form-control" th:field="*{receta.nombre}" th:value="${dto.receta.nombre}" type="text" required
+									<input class="form-control" th:field="*{receta.nombre}" th:value="${dto.receta.nombre}" type="hidden" required
 										minlength="3" maxlength="50">
 								</div>
+								<input class="form-control bg-light" th:field="*{receta.idReceta}" th:value="${dto.receta.idReceta}" type="text" readonly>
 								<div class="input-group">
 									<!-- <span class="input-group-text"><i class="bi bi-hash"></i></span>
-										<span class="input-group-text" th:text="'ID RECETA'"></span>
-										<input class="form-control bg-light" th:field="*{receta.idReceta}" th:value="${dto.receta.idReceta}" type="text"
-											readonly> -->
+									<span class="input-group-text" th:text="'ID RECETA'"></span>-->
 									<span class="input-group-text"><i class="bi bi-person-circle"></i></span>
 									<span class="input-group-text" th:text="'USUARIO'"></span>
 									<span class="input-group-text" th:text="*{receta.usuario.nombre}"></span>

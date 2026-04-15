@@ -7,7 +7,7 @@ import com.flerchante.recetario.model.entity.Receta;
 
 public interface DetalleService {
 
-	public List<Detalle> listarTodoDetalle();
+	public List<Detalle> listarTodo();
 
 	public List<Detalle> buscarPorIngredientes(List<Long> ids);
 
@@ -22,5 +22,7 @@ public interface DetalleService {
 	public void actualizarDetalle(Long idDetalle, Double cantidad, Long idIngrediente);
 
 	public void eliminarDetalle(Detalle detalle);
+
+	public void actualizarDetalles();
 
 }

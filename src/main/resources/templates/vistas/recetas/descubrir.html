@@ -16,10 +16,11 @@
 							: @{/recetas})" method="get">
 					<div class="dropdown z-3">
 						<button class="btn btn-dark dropdown-toggle" type="button" id="dropdownIngredientes"
-							data-bs-toggle="dropdown" aria-expanded="false">
+							data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
 							Buscar por ingredientes
 						</button>
-						<ul class="dropdown-menu p-2 z-3" aria-labelledby="dropdownIngredientes">
+						<ul class="dropdown-menu p-2 z-3" aria-labelledby="dropdownIngredientes"
+							style="max-height: 300px; overflow-y: auto;">
 							<li th:each="ing : ${ingredientes}">
 								<div class="form-check">
 									<input class="form-check-input" type="checkbox" th:id="'ing_' + ${ing.nombre}"

@@ -2,6 +2,9 @@ SELECT * FROM USUARIOS;
 
 SELECT * FROM INGREDIENTES;
 
+SELECT * FROM DETALLES;
+
+
 -------------------------------------------------------------------------------
 -- INSERTS
 -------------------------------------------------------------------------------
@@ -256,6 +259,51 @@ INSERT INTO INGREDIENTES (
           ,0.50
           ,'cucharadita'
           ,NULL );
+          
+          
+UPDATE ingredientes SET COSTO_UNITARIO = 120 WHERE NOMBRE = 'Pechuga de Pollo';      -- kg
+UPDATE ingredientes SET COSTO_UNITARIO = 28 WHERE NOMBRE = 'Tomate Saladet';         -- kg
+UPDATE ingredientes SET COSTO_UNITARIO = 8 WHERE NOMBRE = 'Cebolla Blanca';          -- pza
+UPDATE ingredientes SET COSTO_UNITARIO = 28 WHERE NOMBRE = 'Arroz Blanco';           -- kg
+UPDATE ingredientes SET COSTO_UNITARIO = 6 WHERE NOMBRE = 'Aceite de Oliva';         -- cucharada
+UPDATE ingredientes SET COSTO_UNITARIO = 12 WHERE NOMBRE = 'Sal';                    -- kg
+UPDATE ingredientes SET COSTO_UNITARIO = 0.15 WHERE NOMBRE = 'Pimienta Negra';       -- g
+UPDATE ingredientes SET COSTO_UNITARIO = 1.5 WHERE NOMBRE = 'Ajo';                   -- diente
+UPDATE ingredientes SET COSTO_UNITARIO = 3.5 WHERE NOMBRE = 'Huevo';                 -- pza
+UPDATE ingredientes SET COSTO_UNITARIO = 25 WHERE NOMBRE = 'Leche';                  -- litro
+UPDATE ingredientes SET COSTO_UNITARIO = 22 WHERE NOMBRE = 'Harina de Trigo';        -- kg
+UPDATE ingredientes SET COSTO_UNITARIO = 28 WHERE NOMBRE = 'Azúcar';                 -- kg
+UPDATE ingredientes SET COSTO_UNITARIO = 0.12 WHERE NOMBRE = 'Mantequilla';          -- g
+UPDATE ingredientes SET COSTO_UNITARIO = 20 WHERE NOMBRE = 'Papa';                   -- kg
+UPDATE ingredientes SET COSTO_UNITARIO = 18 WHERE NOMBRE = 'Zanahoria';              -- kg
+UPDATE ingredientes SET COSTO_UNITARIO = 5 WHERE NOMBRE = 'Limón';                   -- pza
+UPDATE ingredientes SET COSTO_UNITARIO = 25 WHERE NOMBRE = 'Queso Mozzarella';       -- 100g
+UPDATE ingredientes SET COSTO_UNITARIO = 0.09 WHERE NOMBRE = 'Jamón';                -- g
+UPDATE ingredientes SET COSTO_UNITARIO = 40 WHERE NOMBRE = 'Pan de Molde';           -- paquete
+UPDATE ingredientes SET COSTO_UNITARIO = 150 WHERE NOMBRE = 'Carne Molida de Res';   -- kg
+UPDATE ingredientes SET COSTO_UNITARIO = 12 WHERE NOMBRE = 'Pimiento Verde';         -- pza
+UPDATE ingredientes SET COSTO_UNITARIO = 0.08 WHERE NOMBRE = 'Champiñones';          -- g
+UPDATE ingredientes SET COSTO_UNITARIO = 3 WHERE NOMBRE = 'Vainilla';                -- cucharadita
+UPDATE ingredientes SET COSTO_UNITARIO = 5 WHERE NOMBRE = 'Epazote';                 -- rama
+UPDATE ingredientes SET COSTO_UNITARIO = 6 WHERE NOMBRE = 'Chile';                   -- pza
+UPDATE ingredientes SET COSTO_UNITARIO = 8 WHERE NOMBRE = 'Cilantro';                -- ramo
+UPDATE ingredientes SET COSTO_UNITARIO = 280 WHERE NOMBRE = 'Mole';                  -- kg
+UPDATE ingredientes SET COSTO_UNITARIO = 28 WHERE NOMBRE = 'Tortilla';               -- kg
+UPDATE ingredientes SET COSTO_UNITARIO = 45 WHERE NOMBRE = 'Crema';                  -- litro
+
+
+INSERT INTO ingredientes (NOMBRE, COSTO_UNITARIO, MAGNITUD)
+VALUES ('Harina de Maíz Nixtamalizada', 20, 'kg');
+
+INSERT INTO ingredientes (NOMBRE, COSTO_UNITARIO, MAGNITUD)
+VALUES ('Agua', 0.02, 'litro');
+
+INSERT INTO ingredientes (NOMBRE, COSTO_UNITARIO, MAGNITUD)
+VALUES ('Lechuga', 15, 'pza');
+
+INSERT INTO ingredientes (NOMBRE, COSTO_UNITARIO, MAGNITUD)
+VALUES ('Frijoles Refritos', 32, 'kg');
+
 
 COMMIT;
 

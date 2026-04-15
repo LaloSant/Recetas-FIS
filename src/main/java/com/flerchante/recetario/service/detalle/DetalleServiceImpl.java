@@ -22,7 +22,7 @@ public class DetalleServiceImpl implements DetalleService {
 	IngredienteServiceImpl ingredienteRepositorio;
 
 	@Override
-	public List<Detalle> listarTodoDetalle() {
+	public List<Detalle> listarTodo() {
 		return repositorio.findAll();
 	}
 
@@ -60,6 +60,7 @@ public class DetalleServiceImpl implements DetalleService {
 		if (detalles != null) {
 			for (Detalle detalle : detalles) {
 				Ingrediente ing = ingredienteRepositorio.obtener(detalle.getIngrediente().getIdIngrediente());
+				//Ingrediente ing = detalle.getIngrediente();
 				detalle.setReceta(receta);
 				detalle.setCosto(ing.getCostoUnitario() * detalle.getCantidad());
 				repositorio.save(detalle);
@@ -73,6 +74,16 @@ public class DetalleServiceImpl implements DetalleService {
 			return;
 		}
 		repositorio.delete(detalle);
+	}
+
+	@Override
+	public void actualizarDetalles() {
+		List<Detalle> detalles = repositorio.findAll();
+		for (Detalle detalle : detalles) {
+			Ingrediente ing = detalle.getIngrediente();
+			detalle.setCosto(ing.getCostoUnitario() * detalle.getCantidad());
+			repositorio.save(detalle);
+		}
 	}
 
 }
