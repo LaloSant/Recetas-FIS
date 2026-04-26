@@ -21,31 +21,25 @@ import lombok.ToString;
 @AllArgsConstructor
 // @ToString(exclude = "peticionIA")
 @ToString
+@Getter
+@Setter
 
 @Entity
 @Table(name = "PATROCINADOR")
 public class Patrocinador {
 
 
-	@Getter
-	@Setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idPatrocinador;
 
-	@Getter
-	@Setter
 	@Column(name = "NOMBRE", nullable = false, length = 100)
 	private String nombre;
 
 
-	@Getter
-	@Setter
 	@Column(name = "ENLACE", nullable = true, length = 100)
 	private String enlace;
 
-	@Getter
-	@Setter
 	@OneToMany(mappedBy="patrocinador")
 	@JsonManagedReference
 	private List<Ingrediente> ingredientes;

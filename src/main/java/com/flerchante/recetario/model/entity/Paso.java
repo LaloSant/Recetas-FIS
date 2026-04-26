@@ -22,47 +22,34 @@ import lombok.ToString;
 @AllArgsConstructor
 // @ToString(exclude = "peticionIA")
 @ToString
+@Getter
+@Setter
 
 @Entity
 @Table(name = "PASOS")
 public class Paso {
 
-
-	@Getter
-	@Setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idPaso;
 
-	@Getter
-	@Setter
 	@ManyToOne
 	@JoinColumn(name = "ID_RECETA")
 	private Receta receta;
 
-	@Getter
-	@Setter
 	@Column(name = "INDICE_PASO", nullable = false)
 	private Long indicePaso;
 
-	@Getter
-	@Setter
 	@Column(name = "NOTAS", nullable = false, length = 300)
 	private String notas;
 
-	@Getter
-	@Setter
 	@Column(name = "IMAGEN", nullable = true)
 	private Blob imagen;
 
-	@Getter
-	@Setter
 	@OneToOne
 	@JoinColumn(name = "ID_PET_IA", referencedColumnName = "ID_PETICION_IA")
 	private PeticionIA peticionIA;
 
-	@Getter
-	@Setter
 	@Transient
 	private boolean generarPeticion;
 }

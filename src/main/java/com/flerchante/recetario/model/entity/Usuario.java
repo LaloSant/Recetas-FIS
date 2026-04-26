@@ -20,50 +20,36 @@ import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 
 @Entity
 @Table(name = "USUARIOS")
 public class Usuario {
 
-	@Getter
-	@Setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idUsuario;
 
-	@Getter
-	@Setter
 	@Column(name = "NOMBRE", nullable = false)
 	private String nombre;
 
-	@Getter
-	@Setter
 	@Column(name = "EMAIL", nullable = false)
 	private String email;
 
-	@Getter
-	@Setter
 	@Column(name = "CONTRASENIA", nullable = false)
 	private String contrasenia;
 
-	@Getter
-	@Setter
 	@ManyToOne
 	@JoinColumn(name = "ID_ROL")
 	private Rol rol;
 
-	@Getter
-	@Setter
 	@OneToMany(mappedBy = "usuario")
 	private List<Receta> recetas;
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<AccionUsuario> acciones = new ArrayList<>();
 
-	/*     @Getter
-	@Setter
-	@OneToMany(mappedBy = "idUsuario")
-	private List<Receta> recetas; */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

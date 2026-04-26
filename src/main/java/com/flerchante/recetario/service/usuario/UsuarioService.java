@@ -7,16 +7,16 @@ import com.flerchante.recetario.model.entity.Usuario;
 
 public interface UsuarioService {
 
-    public List<Usuario> listarTodoUsuario();
+	public List<Usuario> listarTodoUsuario();
 
-    public Usuario guardarUsuario(Usuario usuario);
+	public Usuario guardarUsuario(Usuario usuario);
 
-    public Optional<Usuario> obtenerUsuario(Long idUsuario);
-    
-    public Optional<Usuario> obtenerUsuario(String email);
+	public Optional<Usuario> obtenerUsuario(Long idUsuario);
 
-    public Usuario actualizarUsuario(Usuario usuario);
+	public Optional<Usuario> obtenerUsuario(String email);
 
-    public void eliminarUsuario(Long idUsuario);
+	public Usuario actualizarUsuario(Usuario usuario);
+
+	public void eliminarUsuario(Long idUsuario);
 
 }

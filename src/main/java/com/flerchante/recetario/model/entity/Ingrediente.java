@@ -23,47 +23,35 @@ import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 
 @Entity
 @Table(name = "INGREDIENTES")
 public class Ingrediente {
 
-	@Getter
-	@Setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idIngrediente;
 
-	@Getter
-	@Setter
 	@Column(name = "NOMBRE", length = 50, nullable = false)
 	private String nombre;
 
-	@Getter
-	@Setter
 	@Column(name = "COSTO_UNITARIO")
 	private Double costoUnitario;
 
-	@Getter
-	@Setter
 	@Column(name = "IMAGEN")
 	@JsonIgnore
 	private Blob imagen;
 
-	@Getter
-	@Setter
 	@Column(name = "MAGNITUD", length = 200, nullable = false)
 	private String magnitud;
 
-	@Getter
-	@Setter
 	@ManyToOne
 	@JoinColumn(name = "ID_PATROCINADOR")
 	@JsonBackReference
 	private Patrocinador patrocinador;
 
-	@Getter
-	@Setter
 	@OneToMany(mappedBy = "ingrediente")
 	@JsonIgnore
 	private List<Detalle> detalles;
@@ -77,9 +65,9 @@ public class Ingrediente {
 		int aparicion = 0;
 		String formateado = "0";
 		for (Detalle detalle : detalles) {
-			if(Objects.equals(detalle.getIngrediente().getIdIngrediente(), idIngrediente)){
-			aparicion += 1;
-			formateado = String.valueOf(aparicion);
+			if (Objects.equals(detalle.getIngrediente().getIdIngrediente(), idIngrediente)) {
+				aparicion += 1;
+				formateado = String.valueOf(aparicion);
 			}
 		}
 		return formateado;
