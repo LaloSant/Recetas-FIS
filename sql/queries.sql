@@ -304,10 +304,35 @@ VALUES ('Lechuga', 15, 'pza');
 INSERT INTO ingredientes (NOMBRE, COSTO_UNITARIO, MAGNITUD)
 VALUES ('Frijoles Refritos', 32, 'kg');
 
+INSERT INTO ingredientes (NOMBRE, COSTO_UNITARIO, MAGNITUD)
+VALUES ('Queso Oaxaca', 28, '100g');
+
+INSERT INTO ingredientes (NOMBRE, COSTO_UNITARIO, MAGNITUD)
+VALUES ('Tomate Verde', 32, 'kg');
+
+INSERT INTO ingredientes (NOMBRE, COSTO_UNITARIO, MAGNITUD)
+VALUES ('Poro', 25, 'pza');
+
+INSERT INTO ingredientes (NOMBRE, COSTO_UNITARIO, MAGNITUD)
+VALUES ('Bistec', 160, 'kg');
+
+INSERT INTO ingredientes (NOMBRE, COSTO_UNITARIO, MAGNITUD)
+VALUES ('Nopales', 25, 'kg');
+
+INSERT INTO ingredientes (NOMBRE, COSTO_UNITARIO, MAGNITUD)
+VALUES ('Knorr Suiza', 2.5, 'cubito');
+
+INSERT INTO ingredientes (NOMBRE, COSTO_UNITARIO, MAGNITUD)
+VALUES ('Jugo Maggi', 35, 'botella 100ml');
+
 
 COMMIT;
 
 INSERT INTO PATROCINADOR(NOMBRE,ENLACE) VALUES('BACHOCO','https://bachoco.com/');
+
+INSERT INTO PATROCINADOR(NOMBRE,ENLACE) VALUES('KNORR','https://www.knorr.com/es/home.html');
+
+INSERT INTO PATROCINADOR(NOMBRE,ENLACE) VALUES('MAGGI','https://www.recetasnestle.com.mx/marcas/maggi');
 
 UPDATE INGREDIENTES
 SET ID_PATROCINADOR=1

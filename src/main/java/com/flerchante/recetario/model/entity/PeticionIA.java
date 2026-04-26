@@ -22,30 +22,30 @@ import lombok.ToString;
 @Table(name = "PETICION_IA")
 public class PeticionIA {
 
-	public PeticionIA(String descripcion){
+	public PeticionIA(String descripcion) {
 		this.descripcion = descripcion;
 		this.estatus = "PEN";
 	}
 
-    @Getter
-    @Setter
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_PETICION_IA")
-    private Long idPeticionIA;
-
-    @Getter
-    @Setter
-    @Column(name = "ESTATUS", nullable = false, length = 3)
-    private String estatus;
-
-    @Getter
-    @Setter
-    @Column(name = "DESCRIPCION", nullable = false, length = 50)
-    private String descripcion;
+	@Getter
+	@Setter
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_PETICION_IA")
+	private Long idPeticionIA;
 
 	@Getter
 	@Setter
-	@OneToOne(mappedBy="peticionIA")
+	@Column(name = "ESTATUS", nullable = false, length = 3)
+	private String estatus;
+
+	@Getter
+	@Setter
+	@Column(name = "DESCRIPCION", nullable = false, length = 200)
+	private String descripcion;
+
+	@Getter
+	@Setter
+	@OneToOne(mappedBy = "peticionIA")
 	private Paso paso;
 }

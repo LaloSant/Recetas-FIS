@@ -3,6 +3,7 @@ package com.flerchante.recetario.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -128,7 +129,7 @@ public class RecetaController {
 
 	@GetMapping({ "/recetas", "/" })
 	public String listarRecetas(Model modelo,
-			@RequestParam(required = false, defaultValue = "semana") String ordenarPor,
+			@RequestParam(required = false, defaultValue = "calificacion") String ordenarPor,
 			@RequestParam(required = false) String nombreReceta,
 			@RequestParam(required = false) List<Long> ingredientes,
 			@RequestParam(required = false) Integer exclusivo) {
@@ -167,9 +168,13 @@ public class RecetaController {
 		if ("semana".equals(ordenarPor)) {
 			recetas = recetaRepositorio.obtenerTopSemana();
 			modelo.addAttribute("textoOrden", "Visitas semanales");
-		} else {
+		} else if ("total".equals(ordenarPor)) {
 			recetas = recetaRepositorio.obtenerTopTotal();
 			modelo.addAttribute("textoOrden", "Visitas totales");
+		} else {
+			recetas = recetaRepositorio.listarTodaReceta().stream()
+					.sorted(Comparator.comparing(Receta::getCalificacion).reversed()).limit(10).toList();
+			modelo.addAttribute("textoOrden", "Calificacion");
 		}
 		if (ingredientes != null) {
 			filtroIngrediente(modelo, ingredientes, exclusivo == null ? 0 : exclusivo, recetas);
@@ -233,14 +238,16 @@ public class RecetaController {
 		}
 		Receta receta = recetaOpt.get();
 		recetaRepositorio.aumentarVisita(idReceta);
-		Optional<AccionUsuario> auCalifOpt = accionUsuarioRepositorio
-				.obtener(usuarioRepositorio.getUsuarioSesion().getIdUsuario(), idReceta, Interaccion.CAL);
-		Optional<AccionUsuario> auFavOpt = accionUsuarioRepositorio
-				.obtener(usuarioRepositorio.getUsuarioSesion().getIdUsuario(), idReceta, Interaccion.FAV);
+		if (usuarioRepositorio.getUsuarioSesion() != null) {
+			Optional<AccionUsuario> auCalifOpt = accionUsuarioRepositorio
+					.obtener(usuarioRepositorio.getUsuarioSesion().getIdUsuario(), idReceta, Interaccion.CAL);
+			Optional<AccionUsuario> auFavOpt = accionUsuarioRepositorio
+					.obtener(usuarioRepositorio.getUsuarioSesion().getIdUsuario(), idReceta, Interaccion.FAV);
+			modelo.addAttribute("auCalifOpt", auCalifOpt.isPresent() ? auCalifOpt.get() : null);
+			modelo.addAttribute("auFavOpt", auFavOpt.isPresent() ? auFavOpt.get() : null);
+		}
 		modelo.addAttribute("receta", receta);
 		modelo.addAttribute("costo", receta.calcularCosto());
-		modelo.addAttribute("auCalifOpt", auCalifOpt.isPresent() ? auCalifOpt.get() : null);
-		modelo.addAttribute("auFavOpt", auFavOpt.isPresent() ? auFavOpt.get() : null);
 		return RUTA_VISTA + "ver";
 	}
 

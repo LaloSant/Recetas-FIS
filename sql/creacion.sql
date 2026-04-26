@@ -99,7 +99,7 @@ CREATE TABLE PETICION_IA (
 		                                          ,'ENT'
 		                                          ,'DEN' ) )
 		CONSTRAINT PET_EST_NN NOT NULL
-	,DESCRIPCION    VARCHAR2(50)
+	,DESCRIPCION    VARCHAR2(300)
 		CONSTRAINT PET_DESC_NN NOT NULL
 );
 

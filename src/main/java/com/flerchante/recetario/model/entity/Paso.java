@@ -47,7 +47,7 @@ public class Paso {
 
 	@Getter
 	@Setter
-	@Column(name = "NOTAS", nullable = false, length = 200)
+	@Column(name = "NOTAS", nullable = false, length = 300)
 	private String notas;
 
 	@Getter
