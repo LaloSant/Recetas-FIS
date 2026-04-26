@@ -3,8 +3,6 @@ package com.flerchante.recetario.model.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.flerchante.recetario.controller.AccionUsuario;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

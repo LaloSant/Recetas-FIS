@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.flerchante.recetario.controller.AccionUsuario;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

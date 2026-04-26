@@ -15,14 +15,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.flerchante.recetario.controller.AccionUsuario.Interaccion;
 import com.flerchante.recetario.model.dto.PasoDTO;
 import com.flerchante.recetario.model.dto.RecetaCompDTO;
+import com.flerchante.recetario.model.entity.AccionUsuario;
 import com.flerchante.recetario.model.entity.Detalle;
 import com.flerchante.recetario.model.entity.Paso;
 import com.flerchante.recetario.model.entity.PeticionIA;
 import com.flerchante.recetario.model.entity.Receta;
 import com.flerchante.recetario.model.entity.Usuario;
+import com.flerchante.recetario.model.entity.AccionUsuario.Interaccion;
 import com.flerchante.recetario.service.accionusuario.AccionUsuarioImpl;
 import com.flerchante.recetario.service.detalle.DetalleServiceImpl;
 import com.flerchante.recetario.service.ingrediente.IngredienteServiceImpl;

@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.flerchante.recetario.controller.AccionUsuario;
-import com.flerchante.recetario.controller.AccionUsuario.Interaccion;
+import com.flerchante.recetario.model.entity.AccionUsuario;
+import com.flerchante.recetario.model.entity.AccionUsuario.Interaccion;
 
 @Repository
 public interface AccionUsuarioRepository extends JpaRepository<AccionUsuario, Long> {

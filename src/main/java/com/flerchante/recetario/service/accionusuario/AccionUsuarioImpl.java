@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.flerchante.recetario.controller.AccionUsuario;
-import com.flerchante.recetario.controller.AccionUsuario.Interaccion;
+import com.flerchante.recetario.model.entity.AccionUsuario;
+import com.flerchante.recetario.model.entity.AccionUsuario.Interaccion;
 import com.flerchante.recetario.repository.AccionUsuarioRepository;
 
 @Service

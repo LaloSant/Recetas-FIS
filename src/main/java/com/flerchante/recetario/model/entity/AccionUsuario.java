@@ -1,7 +1,4 @@
-package com.flerchante.recetario.controller;
-
-import com.flerchante.recetario.model.entity.Receta;
-import com.flerchante.recetario.model.entity.Usuario;
+package com.flerchante.recetario.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

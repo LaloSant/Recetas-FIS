@@ -3,8 +3,8 @@ package com.flerchante.recetario.service.accionusuario;
 import java.util.List;
 import java.util.Optional;
 
-import com.flerchante.recetario.controller.AccionUsuario;
-import com.flerchante.recetario.controller.AccionUsuario.Interaccion;
+import com.flerchante.recetario.model.entity.AccionUsuario;
+import com.flerchante.recetario.model.entity.AccionUsuario.Interaccion;
 
 public interface AccionUsuarioService {
 
